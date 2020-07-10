@@ -1,0 +1,279 @@
+
+.dialog.library {
+  width: 80%;
+  margin-top: 50px;
+  max-height: calc(100vh - 85px);
+  text-align: left;
+  overflow-y: hidden;
+  color: #555;
+  padding: 0.5em 1.5em;
+  --filter-color: #403A60;
+}
+
+.dialog.library .columns {
+  display: flex;
+}
+
+.dialog.library .left-col {
+  flex: 1 1 30%;
+  margin: 15px 0;
+}
+
+.dialog.library .right-col {
+  flex: 1 1 70%;
+  margin: 15px 0;
+}
+
+.dialog.library .search-container {
+  border-bottom: 1px solid #0003;
+  margin-right: 50px;
+  margin-bottom: 25px;
+}
+
+.dialog.library .search-container i.fas {
+  font-size: 60%;
+  color: #999;
+}
+
+.dialog.library .search-container input {
+  height: 2em;
+  border: none;
+  width: 80%;
+  background-color: transparent;
+  outline: none;
+  font-family: var(--main-font);
+}
+
+.dialog.library .search-container input::placeholder {
+  color: #aaa;
+}
+
+.dialog.library .result-header {
+  display: flex;
+  margin-bottom: 0.3em;
+}
+
+.dialog.library .track-count {
+  flex: 1;
+}
+
+.dialog.library .sort-menu {
+  text-align: right;
+  font-size: 13px;
+  font-weight: normal;
+  color: #999;
+  line-height: 2em;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+}
+
+.dialog.library .sort-menu:hover {
+  text-decoration: underline;
+}
+
+.dialog.library .sort-menu i {
+  margin-left: 4px;
+}
+
+.dialog.library .sort-menu .context-menu {
+  left: unset;
+  right: 0;
+  top: 15px;
+}
+
+.dialog.library .columns h2 {
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0;
+  line-height: 2em;
+  color: #999;
+}
+
+.dialog.library .search-results {
+  overflow-y: auto;
+  height: 45vh;
+}
+
+.dialog.library .filters {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+  line-height: 3.5em;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.dialog.library .filters i {
+  font-size: 25px;
+  margin-right: 20px;
+  color: var(--filter-color);
+  position: relative;
+  top: 5px;
+}
+
+.dialog.library .filters li:hover { text-decoration: underline; }
+.dialog.library .filters i:active { opacity: 0.6; }
+
+.dialog.library .library-tabs {
+  list-style: none;
+  padding: 0;
+  height: 2em;
+  font-size: 15px;
+  line-height: 2em;
+  display: flex;
+  margin-bottom: 26px;
+}
+
+.dialog.library .library-tab {
+  padding: 0 1em;
+  margin-right: 2em;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: normal;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.dialog.library .library-tab.selected {
+  background-color: var(--filter-color);
+  color: white;
+}
+
+.dialog.library .library-tab:hover {
+  background-color: var(--filter-color);
+  color: white;
+  opacity: 0.6;
+}
+
+
+.track-list {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: var(--main-font);
+  color: #777;
+}
+.track-item {
+  position: relative;
+  margin-bottom: 1.5em;
+}
+.track-summary {
+  display: flex;
+  line-height: 35px;
+  white-space: nowrap;
+}
+.track-item .gadget-icon {
+  min-width: 35px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 0 1em 0 0;
+  color: transparent;
+  padding-left: 3px;
+  padding-top: 1px;
+  text-align: center;
+  box-sizing: border-box;
+}
+@keyframes spin {
+  from { transform:rotate(0deg); }
+  to { transform:rotate(360deg); }
+}
+.track-item .gadget-icon.loading {
+  background-image: none;
+  padding-left: 0;
+  color: white;
+  animation: spin 1s infinite;
+}
+.track-item .gadget-icon.playing { padding-left: 0; background-image: none; color: white; }
+.track-item:hover .gadget-icon { background-image: none; color: white; }
+.track-item:hover .gadget-icon:hover { color: #fffb; }
+.track-item:hover .gadget-icon:active { color: #fff9; }
+
+.track-item .track-title {
+  font-weight: bold;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 0.3em;
+  user-select: none;
+}
+.track-item .track-id {
+  flex: 1;
+  font-weight: normal;
+  color: #333;
+  user-select: none;
+}
+
+.track-item .track-title:hover { text-decoration: underline; }
+.track-item .track-duration {
+  width: 5em;
+  font-size: 14px;
+  text-align: right;
+  margin-right: 0.8em;
+}
+.track-item .track-details {
+  display: block;
+  list-style: none;
+  margin-left: calc(35px + 1em);
+  padding: 0;
+  width: unset;
+}
+.track-item .track-details.hidden { display: none; }
+
+.track-details li {
+  line-height: 150%;
+}
+
+.track-details li.description {
+  font-weight: bold;
+}
+
+.track-details li a { text-decoration: underline; color: #555; }
+.track-details li a:hover { text-decoration: underline; color: black; }
+
+.track-details li.modified {
+  font-size: 12px;
+  text-align: right;
+}
+
+.dialog.library .track-summary button {
+  height: 35px;
+  background-color: transparent;
+  color: #888;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  margin: 0 0.3em;
+}
+.dialog.library .track-summary button:hover {
+  color: black;
+}
+
+.dialog.library .track-summary button.star-button {
+  min-width: 3em;
+  text-align: left;
+}
+
+.dialog.library .star-count { font-size: 12px; margin-left: 5px; }
+.dialog.library .like-button i.fas { color: tomato; }
+.dialog.library .star-button i.fas { color: orange; }
+
+.dialog.library .track-summary button.add-button {
+  border: 1px solid #888;
+  width: 75px;
+}
+
+.dialog.library .add-button .fas {
+  margin-right: 0.5em;
+}
+
+.dialog.library .add-button:hover { background-color: #eee; }
+.dialog.library .add-button:active { background-color: #ddd; }

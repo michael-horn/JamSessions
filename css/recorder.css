@@ -1,0 +1,432 @@
+/*
+ * TunePad
+ *
+ * Michael S. Horn
+ * Northwestern University
+ * michael-horn@northwestern.edu
+ * Copyright 2020, Michael S. Horn
+ *
+ * This project was funded by the National Science Foundation (grant DRL-1612619).
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the National Science Foundation (NSF).
+ */
+*, *:after, *:before {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.recording-studio.dialog {
+  margin-top: 65px;
+  padding: 15px 40px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.recorder {
+  background-color: #535562;
+  margin: 30px 0;
+  width: 700px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 5px 5px 5px #0003;
+}
+
+.recorder.hidden {
+  display: none;
+}
+
+.recorder .left-column {
+  padding: 20px 25px 10px 25px;
+  border-right: 1px solid #444;
+  display: flex;
+  flex-direction: column;
+}
+
+.recorder .right-column {
+  padding: 20px 25px 10px 25px;
+  border-left: 1px solid #888;
+  display: flex;
+  flex-direction: column;
+}
+
+.recorder .button-row {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.expander {
+  flex: 1;
+}
+
+.dialog.recording-studio .recorder button {
+  background-color: #fff1;
+  font-size: 12px;
+  color: #d2d3d6;
+  border: 1px solid #fff5;
+  border-radius: 4px;
+  outline: none;
+  width: 17%;
+  height: 33px;
+  font-weight: normal;
+  font-family: var(--main-font);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  margin: 0;
+}
+
+.dialog.recording-studio .recorder button:hover {
+  background-color: #778;
+}
+
+.dialog.recording-studio .recorder button:active {
+  background-color: #aaa;
+}
+
+.dialog.recording-studio .recorder button:disabled {
+  color: #889;
+}
+
+.dialog.recording-studio .recorder button .fas {
+  margin-right: 8px;
+}
+
+.dialog.recording-studio .recorder button.hidden {
+  display: none;
+}
+
+#record-button, #upload-button, #stop-button {
+  width: 125px;
+  margin: 0 0 10px 0;
+}
+
+#reset-button {
+  margin-left: 10px;
+}
+
+#eq-container {
+  height: 125px;
+  margin-bottom: 15px;
+}
+
+#waveform-container {
+  background-color: #414251;
+  height: 125px;
+  margin-bottom: 15px;
+}
+
+#waveform-container .info-text {
+  font: 14px monospace;
+  fill: white;
+  text-anchor: end;
+  user-select: none;
+  border: 1px solid #777;
+}
+
+#waveform-container .playhead {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#waveform-container.playing .playhead {
+  opacity: 1;
+}
+
+#waveform-container.recording .playhead {
+  opacity: 1;
+}
+
+#waveform-container .clip-handle {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#waveform-container:hover .clip-handle {
+  opacity: 1;
+}
+
+#waveform-container .clip-handle:active circle {
+  fill: white;
+}
+
+#effects-container {
+  display: flex;
+  overflow-y: hidden;
+  height: 110px;
+  margin-top: 10px;
+}
+
+#effects-container.hidden {
+  display: none;
+}
+
+#effects-container .ui-dial {
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  margin: 4px;
+}
+
+#effects-container .ui-dial .dial-track,
+#effects-container .ui-dial .dial-track-fill {
+  stroke: #f0c229;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  fill: none;
+}
+
+#effects-container .ui-dial .label,
+#effects-container .ui-dial .value {
+  color: #fff6;
+  font-family: var(--main-font);
+  font-weight: 400;
+  font-size: 12px;
+  user-select: none;
+  line-height: 1.2em;
+}
+
+#effects-container .ui-dial .label { order: 2; }
+#effects-container .ui-dial .value { order: 3; }
+
+#effects-container .ui-dial .dial-pointer {
+  stroke: #fff9;
+  stroke-width: 4px;
+}
+
+#effects-container #crush-dial {
+  display: none;
+}
+
+#stop-button .fa-circle {
+  color: #c00;
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+#loop-button {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  width: 100px;
+}
+
+#loop-button:active {
+  color: white;
+}
+
+#loop-button.checked .fa-square {
+  display: none;
+}
+
+#loop-button .fa-check-square {
+  display: none;
+}
+
+#loop-button.checked .fa-check-square {
+  display: inline;
+}
+
+#loop-button i.fas {
+  position: relative;
+  top: 2px;
+}
+
+#play-button {
+  width: 80px;
+}
+
+#pause-button {
+  width: 80px;
+}
+
+#edit-name {
+  background-color: #414251;
+  color: white;
+  font-size: 15px;
+  height: 35px;
+  outline: none;
+  padding-left: 10px;
+  border: 1px solid #fff7;
+  width: 70%;
+}
+
+#edit-name:hover {
+  border: 1px solid white;
+}
+
+
+
+.recording-studio .sample-list {
+  padding: 0;
+  list-style: none;
+}
+
+.recording-studio h2.dialog-title { font-size: 20px; }
+
+.recording-studio .sample-item {
+  display: flex;
+  flex-direction: column;
+  color: #446;
+}
+
+.recording-studio .sample-item .sample-summary {
+  padding: 0 0 0 25px;
+  display: flex;
+  height: 55px;
+  line-height: 55px;
+  font-size: 13px;
+  border-top: 1px solid #e7e7e7;
+}
+
+.recording-studio .sample-item .use-it {
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  text-align: left;
+  line-height: 1.2em;
+  padding: 1em 0 2em 75px;
+}
+
+.recording-studio .sample-item .use-it .code-snippet {
+  font-family: monospace;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #0001;
+  padding: 1.2em;
+  line-height: 1.5em;
+  margin: 1em;
+  max-width: 440px;
+}
+
+.recording-studio .sample-item .use-it.hidden {
+  display: none;
+}
+
+.recording-studio .sample-item:hover {
+  background-color: #f2f2f2;
+}
+
+.recording-studio .sample-item.selected {
+  background-color: #ddd;
+}
+
+.recording-studio .sample-name {
+  margin: 0 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.recording-studio .sample-id {
+  flex: 1;
+  text-align: left;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.recording-studio .sample-duration {
+  color: #888;
+  margin-right: 12px;
+  font-weight: normal;
+}
+
+.recording-studio .sample-item button {
+  height: 100%;
+  background-color: transparent;
+  width: 45px;
+  height: 42px;
+  border: none;
+  outline: none;
+}
+
+.recording-studio .sample-item .sample-name {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.recording-studio .sample-badge {
+  margin-top: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: lightseagreen;
+  background-image: url("../images/instruments/sampler.svg");
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent;
+  font-size: 125%;
+  line-height: 38px;
+}
+
+.recording-studio .sample-badge i.fa-play { margin-left: 2px; }
+
+.recording-studio .sample-badge.loading {
+  background-image: none;
+  padding-left: 0;
+  color: white;
+  animation: spin 1s infinite;
+}
+.recording-studio .sample-badge.playing { padding-left: 0; background-image: none; color: white; }
+.recording-studio .sample-item:hover .sample-badge { background-image: none; color: white; }
+.recording-studio .sample-item:hover .sample-badge:hover { color: #fffb; }
+.recording-studio .sample-item:hover .sample-badge:active { color: #fff9; }
+
+
+.recording-studio .zero-sound-message {
+  color: #888;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.recording-studio .sample-item .sample-menu-button {
+  width: 30px;
+  margin: 0;
+  position: relative;
+}
+
+.recording-studio .sample-item .sample-menu-button:hover {
+  color: #2f9aef;
+}
+
+.recording-studio .sample-item .add-sample-button {
+  width: 130px;
+  color: #888;
+  border: 1px solid #888;
+  height: 35px;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.recording-studio .sample-item .add-sample-button:hover {
+  background-color: #0001;
+}
+
+.recording-studio .sample-item .add-sample-button:active {
+  background-color: #0002;
+}
+
+.recording-studio .sample-item .context-menu {
+  top: 10px;
+  right: 30px;
+  width: 200px;
+  left: unset;
+}

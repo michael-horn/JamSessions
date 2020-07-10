@@ -1,0 +1,299 @@
+<html>
+  <head>
+    <style>
+      body {
+        padding: 50px;
+        font-family: sans-serif;
+      }
+
+      .help-tab {
+        font-family: $project-light-font;
+      }
+
+      .help-function-name {
+        margin-bottom: 0.5em;
+        border-top: 1px solid #aaa;
+        padding-top: 1em;
+      }
+
+      .help-summary {
+        padding-left: 1.0em;
+        color: #555;
+        line-height: 150%;
+      }
+
+      .help-param-name {
+        font-weight: bold;
+        color: green;
+      }
+
+      .help-examples {
+        line-height: 150%;
+        padding: 1.0em;
+        margin: 1.0em;
+        background-color: #eee;
+        color: #555;
+        border-radius: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+<h2>TunePad Programming Reference</h2>
+
+<h3 class="help-function-name">playNote(note, beats = 1.0, velocity = 100)</h3>
+<div class="help-summary">
+  Play a note with a pitch value greater than 0. You can also
+  call <span class="help-param-name">playNote</span> with a list of
+  notes that will be played at the same time. The optional parameter
+  <span class="help-param-name">beats</span> sets how long the will note last,
+  and the optional parameter <span class="help-param-name">velocity</span> sets
+  how hard/loud the will note sounds. Velocity can be any number between 0 and 127.
+</div>
+<pre class="help-examples">
+playNote(32)
+playNote(55, beats = 0.5, velocity = 20)
+playNote(0, beats = 2, velocity = 80)
+playNote([36, 40, 43])
+playNote([36, 40, 43], beats = 2)</pre>
+
+
+<h3 class="help-function-name">playSound(sound, beats = 1.0, pitch = 0, velocity = 100)</h3>
+<div class="help-summary">
+  Play a custom sound using its ID number. You can also
+  call <span class="help-param-name">playSound</span> with a list of
+  sounds that will be played at the same time. The optional parameter
+  <span class="help-param-name">beats</span> sets how long the will note last,
+  and the optional parameter <span class="help-param-name">velocity</span> sets
+  how hard/loud the will note sounds. Velocity can be any number between 0 and 127.
+  The optional <span class="help-param-name">pitch</span> parameter changes the
+  pitch of the sound by the given number of semi-tones. For example, a pitch value of
+  3.0 would be the same as the difference from a C to a D&sharp; on the piano keyboard.
+</div>
+<pre class="help-examples">
+playSound(1203)
+playSound(1203, beats = 0.5, velocity = 20)
+playSound(1203, beats = 2, pitch = 3, velocity = 80)
+playSound([1203, 559, 43])</pre>
+
+
+
+
+<h3 class="help-function-name">rest(beats = 1)</h3>
+<div class="help-summary">
+  Add a pause between notes. The length of the pause can be set using the
+  optional <span class="help-param-name">beats</span> parameter.
+</div>
+<pre class="help-examples">
+rest()
+rest(2)
+rest(beats = 1.5)</pre>
+
+
+
+
+<h3 class="help-function-name">for loop</h3>
+<div class="help-summary">
+  You can repeat something over and over using a <span class="help-param-name">for</span>
+  loop. In the first example, the <span class="help-param-name">variable</span> called
+  <code>i</code> counts from 0 to 7. In the second example, <code>i</code> counts from 36
+  to 45.
+</div>
+<pre class="help-examples">
+for i in range(0, 8):
+   playNote(50)
+   rest()
+
+for i in range(36, 46):
+   playNote(i)
+   rest()</pre>
+
+
+<!--
+<h3 class="help-function-name">with pitch(0.8):</h3>
+<div class="help-summary">
+  You can change the playback rate of notes using the <span class="help-param-name">pitch</span>
+  command. This typically takes a value between 0.3 and 2.0.
+</div>
+<pre class="help-examples">
+with pitch(1.2):
+  playNote(24)</pre>
+-->
+<!--
+<h3 class="help-function-name">setVoice(<span class="help-param-name"><i>name</i></span>)</h3>
+<div class="help-summary">
+  You can change the way an instrument sounds using the <span class="help-param-name">setVoice</span>
+  command. The following voices are supported:
+  <ul>
+    <li>bass</li>
+    <li>drumkit</li>
+    <li>electric</li>
+    <li>fatbass</li>
+    <li>marimba</li>
+    <li>steeldrum</li>
+    <li>synth</li>
+</div>
+<pre class="help-examples">
+setVoice('fatbass')
+playNote(42)
+playNote(45)
+setVoice('marimba')
+playNote(42)
+playNote(45)
+</pre>
+-->
+
+
+
+<h3 class="help-function-name">with bend(cents = 0, beats = -1, start = 0):</h3>
+<div class="help-summary">
+  Adds a pitch bend effect that changes the value of notes over time.
+  The <span class="help-param-name">cents</span> parameter represents the total
+  change in pitch. One cent is equal to 1/100 of a semitone (the distance between
+  two adjacent notes). Using a value of 500 for the <span class="help-param-name">cents</span>
+  parameter would bend the note by five semitones (the same as the distance from a C to an F
+  on the piano keyboard). The <span class="help-param-name">beats</span> parameter specifies
+  how long it takes for the note to bend. If you don't provide the <span class="help-param-name">beats</span>
+  parameter, the effect will be constant. An optional <span class="help-param-name">start</span>
+  parameter specifies how long to wait (in beats) before starting the effect. You can also
+  provide an list of values instead of a single number for the
+  <span class="help-param-name">cents</span> parameter. These values represent the change
+  in cents over time. Each number will be evenly distributed over the duration of the effect.
+</div>
+<pre class="help-examples">
+# apply a constant pitch bend
+with bend(cents = 100):
+    playNote(36)
+
+# bend a note from 48 to 53 over one beat
+with bend(cents = 500, beats = 1):
+    playNote(48)
+
+# bouncy spring effect
+with bend(cents = [0, 500, -500, 500, -500, 500, 0], beats = 1):
+    playNote(42, beats = 2)</pre>
+
+
+
+<h3 class="help-function-name">with gain(value = 0, beats = 1, start = 0):</h3>
+<div class="help-summary">
+  Changes the volume of notes. The <span class="help-param-name">value</span> parameter
+  represents the change in volume (for example a value of 0.5 would reduce the volume by 50%).
+  If a single number is provided, a constant change in volume will be applied&mdash;there will
+  be no change over time. You can also pass a list of numbers to create a change over time.
+  Each number will be evenly distributed over the duration of the effect given by the
+  <span class="help-param-name">beats</span> parameter.
+  An optional <span class="help-param-name">start</span> parameter specifies how long to wait
+  (in beats) before starting the effect.
+</div>
+<pre class="help-examples">
+# cut the volume by half
+with gain(value = 0.5):
+    playNote(48)
+
+# fade in
+with gain(value = [ 0, 1 ], beats = 2):
+    playNote(48, beats = 2)
+
+# fade out after one beat
+with gain(value = [ 1, 0 ], beats = 2, start = 1)
+    playNote(42, beats = 3)</pre>
+
+
+
+<h3 class="help-function-name">with pan(value = 0, beats = 1, start = 0):</h3>
+<div class="help-summary">
+  Applies a stereo pan effect, shifting the sound more towards the left or right speaker.
+  The <span class="help-param-name">value</span> parameter ranges from -1.0 (full left speaker) to
+  1.0 (full right speaker). A value of 0.0 evenly splits the sound.
+  If a single number is provided, the effect will be constant&mdash;there will
+  be no change over time. You can also pass a list of numbers to create a change over time.
+  Each number will be evenly distributed over the duration of the effect given by the
+  <span class="help-param-name">beats</span> parameter.
+  An optional <span class="help-param-name">start</span> parameter specifies how long to wait
+  (in beats) before starting the effect.
+</div>
+<pre class="help-examples">
+# slowly pan from the left speaker to the right over three beats
+with pan(value = [-1.0, 1.0], beats = 3):
+    playNote(35, beats = 3)</pre>
+
+
+
+<h3 class="help-function-name">with lowpass(frequency = 1000, beats = 1, start = 0):</h3>
+<div class="help-summary">
+  Applies a lowpass filter effect that reduces the energy of high frequency sounds while leaving
+  low frequency sounds below a cutoff point unaffected. The <span class="help-param-name">frequency</span>
+  parameter specifies the cutoff frequency for the effect (between 10 Hz and 22 kHz).
+  You can also pass a list of numbers to create a change over time.
+  Each number will be evenly distributed over the duration of the effect given by the
+  <span class="help-param-name">beats</span> parameter.
+  An optional <span class="help-param-name">start</span> parameter specifies how long to wait
+  (in beats) before starting the effect.
+</div>
+<pre class="help-examples">
+# creates a wha-wha effect after one beat by quickly changing
+# the frequency cutoff of a lowpass filter between 200 and 800hz
+with lowpass(frequency = [200, 800, 200, 800, 200, 800], beats=1):
+    playNote(47, beats=3)
+
+
+# adds a rhythmic pulse to piano notes
+for i in range(0, 4):
+    with lowpass(frequency = [ 50, 800, 50 ], beats = 0.25, start = 1):
+        playNote(33, 2) </pre>
+
+
+<h3 class="help-function-name">with highpass(frequency = 1000, beats = 1, start = 0):</h3>
+<div class="help-summary">
+  The <span class="help-param-name">highpass</span> filter reduces the energy of low frequency
+  sounds while allowing freqencies above the cutoff point to pass through unaltered.
+
+  The <span class="help-param-name">frequency</span> parameter specifies the cutoff
+  frequency for the effect (between 10 Hz and 22 kHz).
+
+  You can also pass a list of numbers to create a change over time.
+  Each number will be evenly distributed over the duration of the effect specified by the
+  <span class="help-param-name">beats</span> parameter.
+  An optional <span class="help-param-name">start</span> parameter specifies how long to wait
+  (in beats) before starting the effect.
+</div>
+
+<h3 class="help-function-name">with bandpass(frequency = 1000, beats = 1, start = 0):</h3>
+<div class="help-summary">
+  The <span class="help-param-name">bandpass</span> filter allows frequencies near the
+  cutoff point to pass through unaltered while reducing the energy of frequencies above and
+  below.
+
+  The <span class="help-param-name">frequency</span> parameter specifies the cutoff
+  frequency for the effect (between 10 Hz and 22 kHz).
+
+  You can also pass a list of numbers to create a change over time.
+  Each number will be evenly distributed over the duration of the effect specified by the
+  <span class="help-param-name">beats</span> parameter.
+  An optional <span class="help-param-name">start</span> parameter specifies how long to wait
+  (in beats) before starting the effect.
+</div>
+<pre class="help-examples">
+# carving out frequencies for a clap sound in the drums
+clap = 10
+with bandpass(frequency = [100, 11000], beats=4):
+    for i in range(0, 16):
+        playNote(10, beats = 0.25)</pre>
+
+
+<h3 class="help-function-name">with notch(frequency = 1000, beats = 1, start = 0):</h3>
+<div class="help-summary">
+  The <span class="help-param-name">notch</span> filter reduces the energy of sounds
+  near the cutoff frequency, while allowing higher and lower frequencies to pass through
+  unaltered.
+  The <span class="help-param-name">frequency</span> parameter specifies the cutoff
+  frequency for the effect (between 10 Hz and 22 kHz).
+
+  You can also pass a list of numbers to create a change over time.
+  Each number will be evenly distributed over the duration of the effect specified by the
+  <span class="help-param-name">beats</span> parameter.
+  An optional <span class="help-param-name">start</span> parameter specifies how long to wait
+  (in beats) before starting the effect.
+</div>
+  </body>
+</html>

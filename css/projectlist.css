@@ -1,0 +1,301 @@
+
+.dialog.project-list {
+  width: 80%;
+  min-width: 500px;
+  max-height: calc(100vh - 30px);
+  min-height: 450px;
+  text-align: left;
+  overflow-y: hidden;
+  color: #555;
+  padding: 0.5em 1.5em;
+  --filter-color: #403A60;
+  margin: 75px 40px 0 40px;
+}
+
+.dialog.project-list h1.dialog-title {
+  font-size: 20px;
+}
+
+.dialog.project-list .header-row {
+  display: flex;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #ccc;
+}
+
+.dialog.project-list .dialog-button-row {
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px solid #ccc;
+}
+
+.dialog.project-list .project-count {
+  flex: 1;
+}
+
+.dialog.project-list .sort-menu {
+  text-align: right;
+  font-size: 13px;
+  font-weight: normal;
+  color: #999;
+  line-height: 2em;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+}
+
+.dialog.project-list .sort-menu:hover {
+  text-decoration: underline;
+}
+
+.dialog.project-list .sort-menu i {
+  margin-left: 4px;
+}
+
+.dialog.project-list .sort-menu .context-menu {
+  left: unset;
+  right: 0;
+  top: 15px;
+}
+
+.dialog.project-list .header-row h2 {
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0;
+  line-height: 2em;
+  color: #999;
+}
+
+.dialog.project-list .search-results {
+  overflow-y: auto;
+  height: 55vh;
+}
+
+.project-listing {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: var(--main-font);
+  color: #777;
+}
+.project-item {
+  position: relative;
+  margin-bottom: 1.5em;
+}
+.project-summary {
+  display: flex;
+  line-height: 30px;
+  white-space: nowrap;
+  margin-right: 10px;
+  padding: 3px;
+}
+.project-summary:hover {
+  background-color: #ececec;
+}
+.project-item .project-icon {
+  min-width: 35px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  margin: 0 1em 0 0;
+  line-height: 50px;
+  font-size: 120%;
+  color: transparent;
+  padding-left: 3px;
+  padding-top: 1px;
+  text-align: center;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url('../images/project_art.svg');
+}
+.project-item .project-icon .play-icon.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  from { transform:rotate(0deg); }
+  to { transform:rotate(360deg); }
+}
+.project-item .project-icon.loading {
+  background-image: none;
+  padding-left: 0;
+  color: white;
+  animation: spin 1s infinite;
+}
+.project-item .project-icon.playable.playing { padding-left: 0; background-image: none; color: white; }
+.project-item:hover .project-icon.playable { background-image: none; color: white; }
+.project-item:hover .project-icon.playable:hover { color: #fffb; }
+.project-item:hover .project-icon.playable:active { color: #fff9; }
+
+.project-item .project-name {
+  font-weight: bold;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 0.3em;
+  user-select: none;
+  flex: 1;
+}
+
+.project-item .project-name { text-decoration: none; }
+.project-item .project-name:hover { text-decoration: underline; }
+
+.project-item .project-public {
+  position: absolute;
+  color: var(--piano-color);
+  font-weight: bold;
+  font-size: 75%;
+  margin-left: 2em;
+  top: 22px;
+  left: 49px;
+}
+.project-item .project-public.private {
+  color: var(--bass-color);
+}
+
+.project-item .project-public.hidden { display: none; }
+
+.project-item .sort-criteria {
+  width: 5em;
+  font-size: 12px;
+  text-align: right;
+  margin-right: 0.8em;
+  flex: 1;
+}
+.project-item .project-details {
+  display: block;
+  list-style: none;
+  padding: 0;
+}
+.project-item .project-details.hidden { display: none; }
+
+.project-details li {
+  line-height: 150%;
+}
+
+.project-details li.description {
+  font-weight: bold;
+}
+
+.project-details li a { text-decoration: underline; color: #555; }
+.project-details li a:hover { text-decoration: underline; color: black; }
+
+.dialog .project-summary button {
+  height: 32px;
+  background-color: transparent;
+  color: #888;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  margin: 0 0.3em;
+}
+.dialog .project-summary button:hover {
+  color: black;
+}
+
+
+.dialog .project-summary button.edit-button {
+  border: 1px solid #888;
+  width: 75px;
+}
+.dialog .edit-button:hover { background-color: #eee; }
+.dialog .edit-button:active { background-color: #ddd; }
+
+
+.project-badge {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 50px;
+  color: #333;
+  font-size: 16px;
+  text-align: left;
+}
+
+.project-badge .left-column {
+  margin-right: 20px;
+}
+.project-badge .right-column {
+  flex: 1;
+}
+.project-badge h1.name {
+  margin: 0;
+  line-height: 120%;
+  font-size: 1.2em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 98%;
+}
+.project-badge h3.author {
+  margin: 0;
+  line-height: 120%;
+  font-size: 0.9em;
+  font-weight: normal;
+}
+.project-badge p.summary {
+  font-size: 0.9em;
+  max-height: 105px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+.project-badge .artwork {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url('../images/project_art.svg');
+}
+.project-badge .music-info {
+  line-height: 100%;
+  font-size: 14px;
+  margin: 8px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: normal;
+}
+.project-badge .created {
+  line-height: 120%;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+.project-badge ul.tags {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.project-badge ul.tags li {
+  display: inline;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: var(--bass-color);
+  padding: 0.1em 0.5em;
+  margin: 0 10px 10px 0;
+  line-height: 150%;
+}
+.project-toolbar {
+  position: absolute;
+  right: 5px;
+  bottom: 25px;
+}
+.dialog .project-toolbar button {
+  font-size: 12px;
+  padding: 0.8em;
+  color: #333;
+  height: auto;
+  width: 6em;
+  margin: 1px;
+  background-color: #ccc;
+}
+.dialog .project-toolbar button:hover { background-color: #bbb; }
+.dialog .project-toolbar button:active { background-color: #ddd; }

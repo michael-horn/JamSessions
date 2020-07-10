@@ -1,0 +1,51 @@
+<template id="drums-template">
+  <style>
+    .instrument {
+      width: 100%;
+      height: 140px;
+      position: relative;
+      box-sizing: border-box;
+    }
+    .backdrop { fill: #535563; }
+    .container {
+      width: 100%;
+      height: 100%;
+    }
+    .drum-pad {
+      fill: #fff2;
+      stroke: #fff5;
+      stroke-width: 1.5;
+      rx: 1.5;
+      filter: url(#drop-shadow);
+    }
+    .drum-pad:hover { fill: #fff4; }
+    .drum-pad.pressed { fill: #fff8; filter: none; }
+    .drum-name, .key-hint, .midi-hint {
+      font: 9pt sans-serif;
+      fill: #fffc;
+      text-anchor: middle;
+      pointer-events: none;
+      dominant-baseline: central;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+    }
+    .midi-hint, .key-hint { opacity: 0; }
+    .key-hint { font: 11pt sans-serif; fill: #fff6; }
+    .show { opacity: 1.0; }
+  </style>
+  <div class="instrument">
+    <svg class="container" version="1.1" viewBox="0 0 900 230">
+      <defs>
+        <filter id="drop-shadow">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="6" />
+          <feOffset dx="0" dy="0" />
+          <feMerge>
+            <feMergeNode />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+</template>

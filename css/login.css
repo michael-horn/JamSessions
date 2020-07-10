@@ -1,0 +1,136 @@
+/*
+ * TunePad
+ *
+ * Michael S. Horn
+ * Northwestern University
+ * michael-horn@northwestern.edu
+ * Copyright 2020, Michael S. Horn
+ *
+ * This project was funded by the National Science Foundation (grant DRL-1612619).
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the National Science Foundation (NSF).
+ */
+
+ @keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.dialog.login {
+  text-align: left;
+  padding: 8px 30px 15px 30px;
+}
+
+.dialog.login input {
+  height: 40px;
+  width: 100%;
+  margin: 10px 0;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  font-family: var(--main-font: Nunito, sans-serif);
+  font-size: 17px;
+  padding: .375rem .5rem;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.dialog.login .dialog-button-row {
+  margin-top: 5px;
+}
+
+.dialog.login #google-button {
+  background-image: url("../images/sign_in_blue.svg");
+  width: 45%;
+  height: 2.5em;
+  border-radius: 0;
+  padding: 0;
+  background-color: transparent;
+  margin: 2em 0 1em 0;
+  text-align: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-origin: content-box;
+}
+
+.dialog.login #google-button:hover {
+  background-image: url("../images/sign_in_light.svg");
+}
+
+.dialog.login .divider {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dialog.login .divider span {
+  flex: 0;
+  min-width: 60px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1em;
+}
+
+.dialog.login .divider .line {
+  flex: 1;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
+.dialog.login #login-button {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.dialog.login #login-button i.fa {
+  margin-left: 10px;
+  animation: spin 2s linear infinite;
+  visibility: hidden;
+}
+
+.dialog.login #login-button.loading i.fa {
+  visibility: visible;
+}
+
+.dialog.login .btn.loading {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.dialog.login #forgot-link {
+  display: block;
+  width: 100%;
+  text-align: right;
+  font-size: 80%;
+  color: #334857 !important;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 2em;
+  margin-top: 8px;
+}
+
+.dialog.login #forgot-link:hover {
+  text-decoration: underline;
+}
+
+.dialog.login .info {
+  font-weight: normal;
+  font-size: 19px;
+}
+
+.dialog.login .message {
+  color: red;
+  font-size: 15px;
+  line-height: 1em;
+  margin-bottom: 1em;
+}
+
+.dialog.login button.secondary {
+  flex: 1;
+}

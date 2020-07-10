@@ -1,0 +1,134 @@
+
+/* MIXER TAB */
+#mixer-tab {
+  display: inline-block;
+  margin: 20px 80px;
+}
+
+#mixer-container {
+  display: flex;
+  padding: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #535563;
+}
+
+.mixer-track {
+  width: 100px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  border-left: 1px solid #fff3;
+  border-right: 2px solid #0003;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--mixer-track-pad);
+}
+
+.mixer-header {
+  background-color: var(--header-bg-color);
+  padding: 10px var(--mixer-track-pad) 5px var(--mixer-track-pad);
+  border-bottom: 5px solid #2f9aef;
+}
+.mixer-track.guitar .mixer-header { border-bottom-color: var(--guitar-color); }
+.mixer-track.bass .mixer-header { border-bottom-color: var(--bass-color); }
+.mixer-track.marimba .mixer-header { border-bottom-color: var(--marimba-color); }
+.mixer-track.piano .mixer-header { border-bottom-color: var(--piano-color); }
+.mixer-track.drumkit .mixer-header { border-bottom-color: var(--drum-color); }
+.mixer-track.drums .mixer-header { border-bottom-color: var(--drum-color); }
+
+
+
+.mixer-cell-name {
+  color: white;
+  font-weight: 400;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.mixer-beats {
+  color: #fff8;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+.mixer-track.error .mixer-beats {
+  color: var(--error-color);
+}
+
+.mixer-track .toolbar {
+  padding: 5px var(--mixer-track-pad);
+  border: none;
+  background-color: transparent;
+}
+
+.mixer-dial { margin: 0 17px; height: 52px; }
+.mixer-dial .dial-track,
+.mixer-dial .dial-track-fill {
+  stroke: transparent;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-opacity: 0.5;
+  fill: none;
+}
+
+.mixer-dial .dial-track-fill {
+  stroke: none;
+  stroke-opacity: 1.0;
+}
+
+.mixer-track.guitar .mixer-dial .dial-track { stroke: var(--guitar-color); }
+.mixer-track.bass .mixer-dial .dial-track { stroke: var(--bass-color); }
+.mixer-track.marimba .mixer-dial .dial-track { stroke: var(--marimba-color); }
+.mixer-track.piano .mixer-dial .dial-track { stroke: var(--piano-color); }
+.mixer-track.drums .mixer-dial .dial-track { stroke: var(--drum-color); }
+.mixer-track.drumkit .mixer-dial .dial-track { stroke: var(--drum-color); }
+
+.mixer-dial .dial-pointer {
+  stroke: #fff8;
+  stroke-width: 4;
+}
+
+.mixer-dial-label,
+.mixer-slider-label {
+  color: #fffa;
+  font-family: Nunito, sans-serif;
+  font-size: 11px;
+  text-align: center;
+}
+
+.mixer-slider {
+  height: 300px;
+  margin-top: 5px;
+}
+.mixer-slider .slider-track {
+  stroke: #0006;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.mixer-slider .slider-knob {
+  fill: #fff6;
+  stroke: #fff3;
+  stroke-width: 2;
+}
+.mixer-track .slider-knob.dragging {
+  fill: #fff !important;
+}
+.mixer-track.guitar .slider-knob { fill: var(--guitar-color); }
+.mixer-track.bass .slider-knob { fill: var(--bass-color); }
+.mixer-track.marimba .slider-knob { fill: var(--marimba-color); }
+.mixer-track.piano .slider-knob { fill: var(--piano-color); }
+.mixer-track.drums .slider-knob { fill: var(--drum-color); }
+.mixer-track.drumkit .slider-knob { fill: var(--drum-color); }
+
+.mixer-slider .slider-tick-label {
+  fill: #fffa;
+  font: 11px sans-serif;
+  font-weight: 500;
+  text-anchor: end;
+  dominant-baseline: middle;
+}

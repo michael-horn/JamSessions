@@ -1,0 +1,116 @@
+
+<template id="piano-template">
+  <style>
+    @keyframes fade-out {
+      0% { opacity: 1.0; }
+      100% { opacity: 0.0; }
+    }
+    .instrument {
+      width: 100%;
+      height: 140px;
+      position: relative;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
+    }
+    .backdrop {
+      fill: #30303f;
+    }
+    .container {
+      width: 100%;
+      height: 136px;
+    }
+    .piano-key.black {
+      fill: #556;
+      stroke: #222;
+      stroke-width: 1.5;
+      rx: 1.5;
+      filter: url(#drop-shadow);
+    }
+    .piano-key.black:hover { fill: #777; }
+    .piano-key.black.pressed {
+      fill: #222;
+      filter: none;
+    }
+    .piano-key.white {
+      fill: #f9f9f9;
+      stroke: white;
+      stroke-width: 1.5;
+      rx: 1.4;
+      filter: url(#drop-shadow);
+    }
+    .piano-key.white:hover { fill: #eee; }
+    .piano-key.white.pressed {
+      fill: #aaa;
+      stroke: #777;
+    }
+    .note-hint, .midi-hint, .key-hint {
+      font: 9pt sans-serif;
+      fill: #666;
+      text-anchor: middle;
+      opacity: 0.0;
+      pointer-events: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+    }
+    .key-hint.black { fill: #aaa; }
+    .midi-hint { font: 9pt sans-serif; }
+    .key-hint { font: 10pt sans-serif; }
+    .note-hint.show, .midi-hint.show, .key-hint.show { opacity: 1.0; }
+    .note-hint.always-show { opacity: 1.0; }
+    .felt {
+      /*fill : #a00;*/
+      fill: #222;
+      stroke : #222;
+      stroke-width : 1;
+    }
+    .animated-slide {
+      transition: transform 0.5s ease-in-out;
+    }
+    .mini-piano {
+      opacity: 0.0;
+      transition: opacity 0.25s;
+    }
+    .mini-piano.show { opacity: 1.0; }
+    .button-row button {
+      top: 0;
+      position: absolute;
+      font-size: 20px;
+      width: 26px;
+      height: 134px;
+      border: none;
+      border-radius: 13px;
+      background-color: transparent;
+      color: rgba(255, 255, 255, 0.5);
+      outline: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+    }
+    #up-octave { right: -26px; }
+    #down-octave { left: -26px; }
+    .button-row button:hover { color: rgba(255, 255, 255, 0.75); }
+    .button-row button:active { color: rgba(255, 255, 255, 1); }
+    .button-set { margin: 0 10px; }
+    .button-set.slide { flex: 1; }
+  </style>
+  <div class="instrument">
+    <div class="button-row">
+      <div class="button-set slide">
+        <button id="down-octave">❮</button><button id="up-octave">❯</button>
+      </div>
+    </div>
+    <svg class="container" version="1.1" viewBox="0 0 900 230">
+      <defs>
+        <filter id="drop-shadow">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+          <feOffset dx="1" dy="2" />
+          <feMerge>
+            <feMergeNode />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+</template>
