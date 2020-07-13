@@ -38,6 +38,13 @@
   <link href="packages/editor/codemirror/addon/dialog/dialog.css" rel="stylesheet">
   <link href="packages/editor/codemirror/addon/fold/foldgutter.css" rel="stylesheet">
 
+  <!-- QUILL -->
+  <script src="packages/editor/quill/quill.js"></script>
+  <script src="packages/editor/quill/image-resize.min.js"></script>
+  <script src="packages/editor/quill/video-resize.min.js"></script>
+  <script src="packages/editor/js/quill-helper.js"></script>
+  <link href="packages/editor/quill/quill.snow.css" rel="stylesheet">
+  <link href="packages/editor/css/tunepad-quill-theme.css" rel="stylesheet">
 
   <!-- FIREPAD -->
   <!--
@@ -78,8 +85,6 @@
 
   <input id="project-name">
 
-  <div class="expander"></div>
-
   <div class="tabs">
     <button id="about-tab-button">About</button>
     <button id="tracks-tab-button">Tracks</button>
@@ -88,7 +93,6 @@
     <!-- <button id="help-tab-button">Help</button> -->
   </div>
 
-  <div class="expander"></div>
 
   <div id="change-bpm" class="menu-button">
     <span id="bpm"></span> bpm
@@ -246,14 +250,14 @@
   <div class="dialog add-track">
     <button class="close-button"><i class="fas fa-times"></i></button>
     <h1 class="dialog-title">Add Track</h1>
-    <button class="add-button" data-instrument="bass"><div class="badge"></div>Bass</button>
-    <button class="add-button" data-instrument="drums"><div class="badge"></div>Drums</button>
-    <button class="add-button" data-instrument="guitar"><div class="badge"></div>Guitar</button>
-    <button class="add-button" data-instrument="piano"><div class="badge"></div>Keys</button>
-    <button class="add-button" data-instrument="sequencer"><div class="badge"></div>Sequencer</button>
-    <button class="add-button" data-instrument="text"><div class="badge"></div>Text</button>
+    <button class="add-button" data-instrument="bass" data-name="New Bass"><div class="badge"></div>Bass</button>
+    <button class="add-button" data-instrument="drums" data-name="New Drums"><div class="badge"></div>Drums</button>
+    <button class="add-button" data-instrument="guitar" data-name="New Guitar"><div class="badge"></div>Guitar</button>
+    <button class="add-button" data-instrument="piano" data-name="New Keyboard"><div class="badge"></div>Keys</button>
+    <button class="add-button" data-instrument="sequencer" data-name="New Sequencer"><div class="badge"></div>Sequencer</button>
+    <button class="add-button" data-instrument="text" data-name="New Text Cell"><div class="badge"></div>Text</button>
     <!-- <button class="add-button" data-instrument="lyrics"><div class="badge"></div>Lyrics</button>-->
-    <button class="add-button" data-instrument="definitions"><div class="badge"></div>Code</button>
+    <button class="add-button" data-instrument="definitions" data-name="New Code Cell"><div class="badge"></div>Code</button>
   </div>
 </template>
 
@@ -386,6 +390,7 @@
           <li class="filter-option" data-filter="piano"><i class="fas fa-check-square"></i>Keys</li>
           <li class="filter-option" data-filter="marimba"><i class="fas fa-check-square"></i>Marimba</li>
           <li class="filter-option" data-filter="sequencer"><i class="fas fa-check-square"></i>Sequencer</li>
+          <li class="filter-option" data-filter="definitions"><i class="fas fa-check-square"></i>Code</li>
         </ul>
         <ul class="filters hidden" data-tab="sounds">
           <li class="filter-option" data-filter="bass"><i class="fas fa-check-square"></i>Bass</li>
@@ -399,7 +404,6 @@
         <ul class="library-tabs">
           <li class="library-tab selected" data-tab="tracks">Tracks</li>
           <li class="library-tab" data-tab="sounds">Sounds</li>
-          <!-- <li class="library-tab" data-tab="code">Code</li> -->
         </ul>
         <div class="result-header">
           <h2 class="track-count"></h2>
@@ -441,10 +445,11 @@
     </div>
     <ul class="track-details hidden">
       <li class="author"></li>
-      <li class="code hidden"></li>
+      <li class="line-count hidden"></li>
       <li class="music hidden"></li>
       <li class="description"></li>
       <li class="modified"></li>
+      <li class="code hidden"></li>
     </ul>
   </li>
 </template>
@@ -642,13 +647,12 @@
     <div class="collaborators"></div>
   </div>
 
-
   <!-- BUTTON TOOLBAR -->
   <div class="toolbar">
     <button class="play-button" title="Play"><i class="fas fa-play"></i></button>
     <button class="pause-button hidden" title="Pause"><i class="fas fa-pause"></i></button>
     <button class="record-button" title="Start Recording"><i class="fas fa-circle"></i></button>
-<!-- <button class="stop-button" title="Stop Recording"><i class="fas fa-stop"></i></button> -->
+    <!-- <button class="stop-button" title="Stop Recording"><i class="fas fa-stop"></i></button> -->
     <button class="step-button" title="Step Forward"><i class="fas fa-step-forward"></i></button>
     <div class="voice-selector">
       <span class="voice-name"></span>
@@ -697,62 +701,150 @@
         <li class='menu-item' data-command="export-wav"><i class="fas fa-download"></i>Export WAV</li>
         <li class='menu-item' data-command="export-midi"><i class="fas fa-download"></i>Export MIDI</li>
         <li class="menu-separator">
-        <li class='menu-item' data-command="share"><i class="fas fa-share-alt"></i>Share This Track</li>
-        <!--
-        <li class='menu-item'><i class="fas fa-code-branch"></i>Remix</li>
+          <li class='menu-item' data-command="share"><i class="fas fa-share-alt"></i>Share This Track</li>
+          <!--
+          <li class='menu-item'><i class="fas fa-code-branch"></i>Remix</li>
         -->
       </ul>
     </div>
+
+    <button class="expand-cell-button hidden" title="Expand all"><i class="fas fa-chevron-down"></i></button>
+    <button class="collapse-cell-button" title="Collapse all"><i class="fas fa-chevron-up"></i></button>
+
   </div>
 
-
-  <!-- PIANO ROLL TIMELINE -->
-  <div class="timeline-container hidden"></div>
+  <div class="cell-contents">
 
 
-  <!-- PYTHON CODEMIRROR EDITOR -->
-  <div class="editor-container hidden">
-    <div class="python-editor"></div>
-    <button class="output-hint">PYTHON OUTPUT<div class="output-count">10</div></button>
-  </div>
+    <!-- PIANO ROLL TIMELINE -->
+    <div class="timeline-container hidden"></div>
 
-  <!-- PYTHON OUTPUT -->
-  <div class="output-container hidden">
-    <button class="close-button fas fa-times"></button>
-    <pre class="output"></pre>
-  </div>
 
-  <!-- PYTHON ERROR MESSAGE -->
-  <div class="error-container hidden">
-    <div class="error-message">
-      <div class="error-name-container">
-        <i class="fas fa-exclamation-circle"></i>
-        <span class="error-name">Python Error</span>
+    <!-- PYTHON CODEMIRROR EDITOR -->
+    <div class="editor-container hidden">
+      <div class="python-editor"></div>
+      <button class="output-hint">PYTHON OUTPUT<div class="output-count">10</div></button>
+    </div>
+
+    <!-- PYTHON OUTPUT -->
+    <div class="output-container hidden">
+      <button class="close-button fas fa-times"></button>
+      <pre class="output"></pre>
+    </div>
+
+    <!-- PYTHON ERROR MESSAGE -->
+    <div class="error-container hidden">
+      <div class="error-message">
+        <div class="error-name-container">
+          <i class="fas fa-exclamation-circle"></i>
+          <span class="error-name">Python Error</span>
+        </div>
+        <div class="error-description"></div>
       </div>
-      <div class="error-description"></div>
     </div>
+
+    <!-- RECORDING OUTPUT -->
+    <div class="recording-container hidden">
+      <div class="toolbar">
+        <button class="record-button" title="Start Recording"><i class="fas fa-circle"></i></button>
+        <button class="stop-button" title="Stop Recording"><i class="fas fa-circle"></i></button>
+        <button class="metronome-button" title="Metronome"></button>
+        <button class="clear-button">Clear</button>
+        <button class="quant-button"><i class="fas fa-check"></i>&nbsp;Quantize</button>
+        <button class="copy-button"><i class="far fa-copy"></i>&nbsp;Copy to Clipboard</button>
+        <div class="expander"></div>
+        <button class="record-close-button fas fa-times"></button>
+      </div>
+      <pre class="recording-pad">
+        # RECORDING PAD
+
+      </pre>
+    </div>
+
+    <!-- MUSICAL INSTRUMENT -->
+    <div class="instrument-container hidden" tabindex="3"></div>
+  </div>
+</template>
+
+
+<template id="definitions-gadget-template">
+
+  <!-- HEADER BAR -->
+  <div class="header-bar">
+    <div class="gadget-icon"></div>
+    <div>
+      <input class="gadget-name" value="New Python Definitions">
+      <div class="gadget-info"></div>
+      <div class="gadget-error">ERROR</div>
+    </div>
+    <div class="expander"></div>
+    <div class="collaborators"></div>
   </div>
 
-  <!-- RECORDING OUTPUT -->
-  <div class="recording-container hidden">
-    <div class="toolbar">
-      <button class="record-button" title="Start Recording"><i class="fas fa-circle"></i></button>
-      <button class="stop-button" title="Stop Recording"><i class="fas fa-circle"></i></button>
-      <button class="metronome-button" title="Metronome"></button>
-      <button class="clear-button">Clear</button>
-      <button class="quant-button"><i class="fas fa-check"></i>&nbsp;Quantize</button>
-      <button class="copy-button"><i class="far fa-copy"></i>&nbsp;Copy to Clipboard</button>
-      <div class="expander"></div>
-      <button class="record-close-button fas fa-times"></button>
+  <!-- BUTTON TOOLBAR -->
+  <div class="toolbar">
+    <div class="module-name expander">Module:</div>
+    <div class="menu-button">
+      <i class="fas fa-ellipsis-h"></i>
+      <ul class='options-menu context-menu hidden'>
+        <li class='menu-item' data-command="clone-track"><i class="fas fa-clone"></i>Clone Cell</li>
+        <li class='menu-item' data-command="delete-track"><i class="fas fa-trash"></i>Delete Cell</li>
+        <li class='menu-item' data-command="share"><i class="fas fa-share-alt"></i>Share Code</li>
+      </ul>
     </div>
-    <pre class="recording-pad">
-# RECORDING PAD
-
-    </pre>
+    <button class="expand-cell-button hidden" title="Expand all"><i class="fas fa-chevron-down"></i></button>
+    <button class="collapse-cell-button" title="Collapse all"><i class="fas fa-chevron-up"></i></button>
   </div>
 
-  <!-- MUSICAL INSTRUMENT -->
-  <div class="instrument-container hidden" tabindex="3"></div>
+  <div class="cell-contents">
+
+    <!-- PYTHON CODEMIRROR EDITOR -->
+    <div class="editor-container">
+      <div class="python-editor"></div>
+      <button class="output-hint">PYTHON OUTPUT<div class="output-count">10</div></button>
+    </div>
+
+    <!-- PYTHON OUTPUT -->
+    <div class="output-container hidden">
+      <button class="close-button fas fa-times"></button>
+      <pre class="output"></pre>
+    </div>
+
+    <!-- PYTHON ERROR MESSAGE -->
+    <div class="error-container hidden">
+      <div class="error-message">
+        <div class="error-name-container">
+          <i class="fas fa-exclamation-circle"></i>
+          <span class="error-name">Python Error</span>
+        </div>
+        <div class="error-description"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template id="text-gadget-template">
+  <div class="header-bar">
+    <div class="gadget-icon"></div>
+    <div>
+      <input class="gadget-name" value="New Text Cell">
+    </div>
+    <div class="expander"></div>
+    <div class="collaborators"></div>
+    <div class="menu-button">
+      <i class="fas fa-ellipsis-h"></i>
+      <ul class='options-menu context-menu hidden'>
+        <li class='menu-item' data-command="clone-track"><i class="fas fa-clone"></i>Clone Track</li>
+        <li class='menu-item' data-command="delete-track"><i class="fas fa-trash"></i>Delete Track</li>
+      </ul>
+    </div>
+    <button class="expand-cell-button hidden" title="Expand all"><i class="fas fa-chevron-down"></i></button>
+    <button class="collapse-cell-button" title="Collapse all"><i class="fas fa-chevron-up"></i></button>
+  </div>
+
+  <!-- TEXT EDITOR -->
+  <div class="cell-contents"><div class="text-editor"></div></div>
 </template>
 
 

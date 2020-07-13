@@ -152,7 +152,6 @@
   opacity: 0.6;
 }
 
-
 .track-list {
   list-style: none;
   padding: 0;
@@ -196,7 +195,10 @@
 .track-item:hover .gadget-icon { background-image: none; color: white; }
 .track-item:hover .gadget-icon:hover { color: #fffb; }
 .track-item:hover .gadget-icon:active { color: #fff9; }
-
+.track-item.definitions .gadget-icon {
+  color: transparent !important;
+  background-image: url(../images/instruments/definitions.svg) !important;
+}
 .track-item .track-title {
   font-weight: bold;
   color: #333;
@@ -239,11 +241,24 @@
 .track-details li a { text-decoration: underline; color: #555; }
 .track-details li a:hover { text-decoration: underline; color: black; }
 
-.track-details li.modified {
-  font-size: 12px;
-  text-align: right;
+.track-item.definitions .track-details li.music {
+  display: none;
 }
-
+.track-item .track-details li.code {
+  display: none;
+}
+.track-item.definitions .track-details li.code {
+  display: list-item;
+  font-family: monospace;
+  white-space: pre;
+  font-size: 90%;
+  background-color: #555;
+  padding: 2em;
+  color: #efefef;
+  max-height: 15em;
+  overflow: auto;
+  margin: 1em;
+}
 .dialog.library .track-summary button {
   height: 35px;
   background-color: transparent;

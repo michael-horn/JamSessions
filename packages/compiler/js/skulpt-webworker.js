@@ -11,12 +11,12 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the National Science Foundation (NSF).
  */
- importScripts('skulpt.js', 'skulpt-stdlib.js');
+importScripts('skulpt.min.js', 'skulpt-stdlib.js');
 
 
- // output buffer 
- var outputs = [ ];
-
+// output buffer
+var outputs = [ ];
+var modules = { };
 
 //----------------------------------------------------------
 // generate python error message callback
@@ -43,7 +43,7 @@ function pythonError(err) {
   if (err.traceback && err.traceback.length !== 0) {
     line = err.traceback[0].lineno;
   }
-  
+
   postMessage( [ "error", name, message, details, line ] );
 }
 
@@ -77,8 +77,18 @@ function pythonDone() {
 // loads python libraries
 //----------------------------------------------------------
 function builtinRead(x) {
-  if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+  if (x.startsWith('./tunepad') && x.endsWith('.py')) {
+    let module = x.substring(2, x.length - 3);
+    if (module in modules) {
+      return modules[module];
+    } else {
+      postMessage( [ "import", module ] );
+      return '';
+    }
+  }
+  else if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined) {
     throw "File not found: '" + x + "'";
+  }
   return Sk.builtinFiles["files"][x];
 }
 
@@ -97,7 +107,7 @@ function pythonRun(code) {
   myPromise.then(
     function(mod) {
       pythonDone();
-    }, 
+    },
 
     function(err) {
       pythonError(err);
@@ -108,9 +118,10 @@ function pythonRun(code) {
 
 
 //----------------------------------------------------------
-// when we receive a message from the main thread, kick off 
+// when we receive a message from the main thread, kick off
 // the compile process...
 //----------------------------------------------------------
 onmessage = function(e) {
+  modules = e.data[1];
   pythonRun(e.data[0]);
 }

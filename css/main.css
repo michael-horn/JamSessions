@@ -144,6 +144,8 @@ section.hidden {
 }
 
 .top-nav #project-name {
+  flex: 1;
+  min-width: 200px;
   font-family: var(--main-font);
   font-size: 16px;
   font-weight: 700;
@@ -300,6 +302,7 @@ nav.side-nav .side-button.hidden { display: none; }
 
 .top-nav .tabs {
   display: flex;
+  margin: 0 50px;
 }
 
 .top-nav .tabs button {
@@ -428,12 +431,12 @@ nav.cell-nav {
   border-top-left-radius: 8px;
   border-bottom: 1px solid #0002;
   padding-left: 20px;
-  font-size: 13px;
+  font-size: 12px;
   color: #666;
   box-sizing: content-box;
 }
 #add-cell-button .fas { font-size: 16px; margin-right: 0.7em; }
-#add-cell-button:hover { background-color: #ddd; }
+#add-cell-button:hover { background-color: #efefef; }
 #add-cell-button:active { color: #2f9af0; }
 #add-cell-button.insertion { border-bottom: 1em solid #ddd; }
 
@@ -455,6 +458,7 @@ nav.cell-nav {
   -webkit-user-select: none;
   -moz-user-select: none;
   box-sizing: content-box;
+  position: relative;
 }
 .cell-list li.dragging {
   position: absolute;
@@ -494,12 +498,14 @@ nav.cell-nav {
   text-overflow: ellipsis;
   overflow-y: hidden;
 }
-.shortcut-cell-name.guitar { border-left-color: #f0c229; }
-.shortcut-cell-name.bass { border-left-color: #ec5eb2; }
-.shortcut-cell-name.marimba { border-left-color: #f6843f; }
+.shortcut-cell-name.guitar { border-left-color: var(--guitar-color); }
+.shortcut-cell-name.bass { border-left-color: var(--bass-color); }
+.shortcut-cell-name.marimba { border-left-color: var(--marimba-color); }
 .shortcut-cell-name.piano { border-left-color: var(--piano-color); }
 .shortcut-cell-name.drums,
-.shortcut-cell-name.drumkit { border-left-color: #86c44e; }
+.shortcut-cell-name.drumkit { border-left-color: var(--drum-color); }
+.shortcut-cell-name.text { border-left-color: var(--text-color); }
+.shortcut-cell-name.definitions { border-left-color: var(--definitions-color); }
 .shortcut-cell-name:hover { text-decoration: underline; }
 .shortcut-cell-name:active { color: #2f9aef; }
 
@@ -509,8 +515,21 @@ nav.cell-nav {
   outline: none;
   background-color: transparent;
 }
-.shortcut-play-button:hover, .shortcut-pause-button:hover { color: #888; }
-.shortcut-play-button:active, .shortcut-pause-button:active { color: #2f9aef; }
+.shortcut-play-button:hover,
+.shortcut-pause-button:hover {
+  color: #888;
+}
+.shortcut-play-button:active,
+.shortcut-pause-button:active {
+  color: #2f9aef;
+}
+.cell-nav-item.text .shortcut-play-button,
+.cell-nav-item.text .shortcut-pause-button,
+.cell-nav-item.definitions .shortcut-play-button,
+.cell-nav-item.definitions .shortcut-pause-button {
+  display: none;
+}
+
 
 .shortcut-error {
   font-size: 20px;
@@ -539,7 +558,7 @@ nav.cell-nav {
   color: #333;
   background-color: #e8e8e8;
   border: 1px solid #aaa;
-  box-shadow: 4px 4px 8px #0002 inset;
+  box-shadow: 0px 0px 8px #0002 inset;
 }
 .welcome-dialog .project-badge .music-info {
   font-size: 13px;

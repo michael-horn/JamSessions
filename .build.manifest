@@ -61,7 +61,9 @@ packages/build_runner/src/server/graph_viz_main.dart.js
 packages/build_web_compilers/src/dev_compiler_stack_trace/stack_trace_mapper.dart.js
 packages/compiler/js/skulpt-stdlib.js
 packages/compiler/js/skulpt-webworker.js
+packages/compiler/js/skulpt.es5.min.js
 packages/compiler/js/skulpt.js
+packages/compiler/js/skulpt.min.js
 packages/compiler/python/boilerplate.py
 packages/editor/codemirror/.editorconfig
 packages/editor/codemirror/.gitattributes
@@ -620,6 +622,7 @@ packages/editor/codemirror/theme/xq-dark.css
 packages/editor/codemirror/theme/xq-light.css
 packages/editor/codemirror/theme/yeti.css
 packages/editor/codemirror/theme/zenburn.css
+packages/editor/css/tunepad-quill-theme.css
 packages/editor/css/tunepad-theme-dark.css
 packages/editor/js/codemirror-helper.js
 packages/editor/js/quill-helper.js

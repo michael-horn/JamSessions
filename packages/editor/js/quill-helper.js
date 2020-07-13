@@ -16,21 +16,20 @@ var _quillEditors = { };
 
 
 function initQuillEditor(selector, placeholderText) {
-  let Font = Quill.import('formats/font');
-  Font.whitelist = ['bold', 'monospace'];
-  Quill.register(Font, true);
+  //Quill.register(Font, true);
 
   var quill = new Quill(selector, {
     modules: {
       imageResize: {modules: [ 'Resize', 'DisplaySize']},
       videoResize: {modules: [ 'Resize', 'DisplaySize', 'Toolbar']},
       toolbar: [
-        [{ 'font': ['', 'bold', 'monospace'] }],
+        [{ 'font': [] }],
         [{ header: [1, 2, 3, false] }],
+        [ 'bold', 'italic', 'underline', 'strike', 'link' ],
+        [{ 'script': 'sub'}, { 'script': 'super' }],
+        [{ 'align': [] }, { 'list' : 'ordered' }, { 'list' : 'bullet' } ],
         [{ 'color': [] }, { 'background': [] }],
-        [{ 'align': [] }, 'bold', 'italic', 'link'],
-        [{ 'list' : 'ordered' }, { 'list' : 'bullet' } ],
-        ['image', 'video', 'code-block'],
+        ['blockquote', 'code-block', 'image', 'video' ],
         ['clean']
       ],
     },
@@ -40,7 +39,7 @@ function initQuillEditor(selector, placeholderText) {
   });
 
   quill.on('text-change', function(delta, oldDelta, source) {
-    onEditorUpdate(selector, JSON.stringify(delta));
+    onQuillUpdate(selector, JSON.stringify(delta));
   });
 
   _quillEditors[selector] = quill;

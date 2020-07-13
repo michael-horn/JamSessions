@@ -4568,7 +4568,7 @@
       throw H.wrapException(t1);
     },
     print: function(object) {
-      H.printString(H.S(object));
+      H.printString(object);
     },
     _symbolMapToStringMap_closure: function _symbolMapToStringMap_closure(t0) {
       this.result = t0;
@@ -14123,11 +14123,11 @@
               // returning from await.
               data = $async$result;
               J.$indexSet$ax(data, "type", type);
-              P.print(data);
               result = S.DataModel_DataModel$fromJson(type$.Map_dynamic_dynamic._as(data));
-              P.print(result.save$0(0));
-              $async$self._created_stream.add$1(0, new S.DatastoreEvent(result, "created", false));
-              $async$self._broadcastEvent$1(new S.DatastoreEvent(result, "created", true));
+              if (result != null) {
+                $async$self._created_stream.add$1(0, new S.DatastoreEvent(result, "created", false));
+                $async$self._broadcastEvent$1(new S.DatastoreEvent(result, "created", true));
+              }
               $async$returnValue = result;
               // goto return
               $async$goto = 1;
@@ -14658,8 +14658,10 @@
       _this.deleted = B.toBool(t1.$index(data, "deleted"), false);
       _this.created = B.toDateTime(t1.$index(data, "created"));
       _this.modified = B.toDateTime(t1.$index(data, "modified"));
+      t2 = _this.tags;
+      C.JSArray_methods.set$length(t2, 0);
       if (type$.List_dynamic._is(t1.$index(data, "tags")))
-        for (t1 = J.get$iterator$ax(type$.Iterable_dynamic._as(t1.$index(data, "tags"))), t2 = _this.tags; t1.moveNext$0();)
+        for (t1 = J.get$iterator$ax(type$.Iterable_dynamic._as(t1.$index(data, "tags"))); t1.moveNext$0();)
           C.JSArray_methods.add$1(t2, H.S(t1.get$current()));
     }
   };

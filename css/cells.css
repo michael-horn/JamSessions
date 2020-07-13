@@ -11,7 +11,7 @@
 }
 
 .track-container {
-  width: calc(100vw - 400px);
+  width: calc(100vw - 300px);
   display: flex;
   flex-wrap: wrap;
 }
@@ -23,7 +23,7 @@
   min-width: 250px;
   */
   margin: 35px 80px;
-  width: calc(100vw - 435px);
+  width: calc(100vw - 300px);
   min-width: 350px;
   max-width: 750px;
   padding: 0 10px;
@@ -31,6 +31,13 @@
   position: relative;
   background-color: #946161;
   align-self: flex-start;
+}
+
+.cell-contents {
+  padding: 0 15px;
+  border-left: 2px solid #414252;
+  border-right: 2px solid #414252;
+  background-color: #535563;
 }
 
 .toolbar,
@@ -41,10 +48,7 @@
 .recording-container,
 .error-container {
   position: relative;
-  padding: 0 20px 15px 20px;
-  border-left: 2px solid #414252;
-  border-right: 2px solid #414252;
-  background-color: #535563;
+  padding: 0 0 15px 0;
 }
 
 .timeline-container { }
@@ -80,28 +84,27 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.gadget-icon.guitar {
+.guitar .gadget-icon {
   background-color: var(--guitar-color);
   background-image: url('../images/instruments/bass.svg');
 }
-.gadget-icon.bass {
+.bass .gadget-icon {
   background-color: var(--bass-color);
   background-image: url('../images/instruments/bass.svg');
 }
-.gadget-icon.marimba {
+.marimba .gadget-icon {
   background-color: var(--marimba-color);
   background-image: url('../images/instruments/marimba.svg');
 }
-.gadget-icon.piano {
+.piano .gadget-icon {
   background-color: var(--piano-color);
   background-image: url('../images/instruments/synth.svg');
 }
-.gadget-icon.drums,
-.gadget-icon.drumkit {
+.drums .gadget-icon, .drumkit .gadget-icon {
   background-color: var(--drum-color);
   background-image: url('../images/instruments/drumkit.svg');
 }
-.gadget-icon.definitions {
+.definitions .gadget-icon {
   background-color: var(--definitions-color);
   background-image: url('../images/instruments/definitions.svg');
 }
@@ -154,8 +157,6 @@
 
 
 /* PYTHON EDITOR */
-.editor-container { }
-
 .python-editor {
   min-height: 200px;
   max-height: 600px;
@@ -171,7 +172,15 @@
 /* BUTTON TOOLBAR */
 .toolbar {
   display: flex;
-  padding: 5px 20px 8px 20px;
+  padding: 8px 15px;
+  background-color: #535563;
+  border-left: 2px solid #414252;
+  border-right: 2px solid #414252;
+  color: #fffc;
+  line-height: 34px;
+}
+.gadget-container.definitions .toolbar .module-name {
+  font-weight: bold;
 }
 .toolbar button,
 .toolbar .voice-selector,
@@ -502,4 +511,67 @@ main.authenticated .logged-in-only { display: inherit; }
 .collaborators .collaborator i.fas {
   font-size: 25px;
   line-height: 35px;
+}
+
+
+.gadget-container.text {
+  padding: 0;
+  background-color: white;
+  border-radius: 0;
+  box-shadow: 0px 0px 5px #0002;
+}
+.gadget-container.text .cell-contents {
+  padding: 0;
+  border: none;
+  background-color: white;
+}
+
+.gadget-container.text .header-bar {
+  background-color: white;
+  border: none;
+  border-top: 9px solid var(--text-color);
+  border-bottom: 1px solid #ccc;
+  padding: 1em 2em;
+  height: 80px;
+}
+.gadget-container.text .header-bar .gadget-name {
+  color: #535563;
+  font-size: 18px;
+  margin-left: 8px;
+  margin-top: 5px;
+}
+.gadget-container.text .header-bar .gadget-name:hover {
+  border: 1px solid #ddd;
+}
+.gadget-container.text .header-bar .menu-button {
+  background-color: #e4e4e6;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 5px;
+  color: #555;
+  margin-left: 15px;
+}
+.gadget-container.text .expand-cell-button,
+.gadget-container.text .collapse-cell-button {
+  width: 35px;
+  height: 35px;
+  background-color: #e4e4e6;
+  color: #555;
+  border: none;
+  outline: none;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+.gadget-container.text .menu-button:hover,
+.gadget-container.text .expand-cell-button:hover,
+.gadget-container.text .collapse-cell-button:hover {
+  background-color: #ccc;
+}
+
+.gadget-container.text .gadget-icon {
+  background-color: var(--text-color) !important;
+  background-image: url(../images/instruments/text.svg);
+  background-color: white;
 }
