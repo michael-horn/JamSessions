@@ -4502,12 +4502,10 @@
     Function_apply: function($function, positionalArguments, namedArguments) {
       return H.Primitives_applyFunction($function, positionalArguments, namedArguments == null ? null : P._symbolMapToStringMap(namedArguments));
     },
-    int_parse: function(source, onError) {
+    int_parse: function(source) {
       var value = H.Primitives_parseInt(source, null);
       if (value != null)
         return value;
-      if (onError != null)
-        return onError.call$1(source);
       throw H.wrapException(P.FormatException$(source, null, null));
     },
     Error__objectToString: function(object) {
@@ -4584,20 +4582,20 @@
       }
     },
     DateTime_parse: function(formattedString) {
-      var t1, t2, years, month, day, hour, minute, second, milliAndMicroseconds, t3, t4, t5, sign, hourDifference, minuteDifference, isUtc, value, _null = null,
+      var t1, t2, years, month, day, hour, minute, second, milliAndMicroseconds, t3, t4, t5, sign, hourDifference, minuteDifference, isUtc, value,
         match = $.$get$DateTime__parseFormat().firstMatch$1(formattedString);
       if (match != null) {
         t1 = new P.DateTime_parse_parseIntOrZero();
         t2 = match._match;
         if (1 >= t2.length)
           return H.ioore(t2, 1);
-        years = P.int_parse(t2[1], _null);
+        years = P.int_parse(t2[1]);
         if (2 >= t2.length)
           return H.ioore(t2, 2);
-        month = P.int_parse(t2[2], _null);
+        month = P.int_parse(t2[2]);
         if (3 >= t2.length)
           return H.ioore(t2, 3);
-        day = P.int_parse(t2[3], _null);
+        day = P.int_parse(t2[3]);
         if (4 >= t2.length)
           return H.ioore(t2, 4);
         hour = t1.call$1(t2[4]);
@@ -4624,7 +4622,7 @@
             sign = t5 === "-" ? -1 : 1;
             if (10 >= t4)
               return H.ioore(t2, 10);
-            hourDifference = P.int_parse(t2[10], _null);
+            hourDifference = P.int_parse(t2[10]);
             if (11 >= t2.length)
               return H.ioore(t2, 11);
             minuteDifference = t1.call$1(t2[11]);
@@ -4641,10 +4639,10 @@
           isUtc = false;
         value = H.Primitives_valueFromDecomposedDate(years, month, day, hour, minute, second, t3 + C.JSDouble_methods.round$0(milliAndMicroseconds % 1000 / 1000), isUtc);
         if (value == null)
-          throw H.wrapException(P.FormatException$("Time out of range", formattedString, _null));
+          throw H.wrapException(P.FormatException$("Time out of range", formattedString, null));
         return P.DateTime$_withValue(value, isUtc);
       } else
-        throw H.wrapException(P.FormatException$("Invalid date format", formattedString, _null));
+        throw H.wrapException(P.FormatException$("Invalid date format", formattedString, null));
     },
     DateTime$_withValue: function(_value, isUtc) {
       var t1;
@@ -6245,7 +6243,7 @@
         return C.JSNumber_methods.round$0(d);
       else
         try {
-          t1 = P.int_parse(J.toString$0$(d), null);
+          t1 = P.int_parse(J.toString$0$(d));
           return t1;
         } catch (exception) {
           if (type$.Exception._is(H.unwrapException(exception)))
@@ -8067,7 +8065,7 @@
         return C.JSNumber_methods.round$0(d);
       else
         try {
-          t1 = P.int_parse(J.toString$0$(d), null);
+          t1 = P.int_parse(J.toString$0$(d));
           return t1;
         } catch (exception) {
           if (type$.Exception._is(H.unwrapException(exception)))
@@ -8118,7 +8116,7 @@
         return C.JSNumber_methods.round$0(d);
       else
         try {
-          t1 = P.int_parse(J.toString$0$(d), null);
+          t1 = P.int_parse(J.toString$0$(d));
           return t1;
         } catch (exception) {
           if (type$.Exception._is(H.unwrapException(exception)))
@@ -8181,9 +8179,13 @@
       var t1, exception;
       if (d == null)
         return defaultValue;
+      else if (H._isInt(d))
+        return d;
+      else if (typeof d == "number")
+        return C.JSNumber_methods.round$0(d);
       else
         try {
-          t1 = P.int_parse(d, null);
+          t1 = P.int_parse(J.toString$0$(d));
           return t1;
         } catch (exception) {
           if (type$.Exception._is(H.unwrapException(exception)))
@@ -8784,7 +8786,6 @@
       this.$this = t0;
       this.collection = t1;
       this.data = t2;
-    }, TrackLibrary__addTrack_closure: function TrackLibrary__addTrack_closure() {
     }, TrackLibrary__playTrackPreview_closure: function TrackLibrary__playTrackPreview_closure(t0) {
       this.track = t0;
     }, TrackLibrary__playTrackPreview_closure0: function TrackLibrary__playTrackPreview_closure0(t0) {
@@ -9871,7 +9872,7 @@
       C.JSArray_methods.add$1(this.$arguments, argument);
       ++t1.argumentCount;
     },
-    $signature: 82
+    $signature: 71
   };
   H.TypeErrorDecoder.prototype = {
     matchTypeError$1: function(message) {
@@ -10311,13 +10312,13 @@
     call$2: function(o, tag) {
       return this.getUnknownTag(o, tag);
     },
-    $signature: 49
+    $signature: 50
   };
   H.initHooks_closure1.prototype = {
     call$1: function(tag) {
       return this.prototypeForTag(H._asStringNullable(tag));
     },
-    $signature: 86
+    $signature: 44
   };
   H.JSSyntaxRegExp.prototype = {
     toString$0: function(_) {
@@ -10475,7 +10476,7 @@
       t2 = this.span;
       t1.firstChild ? t1.removeChild(t2) : t1.appendChild(t2);
     },
-    $signature: 50
+    $signature: 51
   };
   P._AsyncRun__scheduleImmediateJsOverride_internalCallback.prototype = {
     call$0: function() {
@@ -10586,13 +10587,13 @@
     },
     "call*": "call$2",
     $requiredArgCount: 2,
-    $signature: 52
+    $signature: 81
   };
   P._wrapJsFunctionForAsync_closure.prototype = {
     call$2: function(errorCode, result) {
       this.$protected(H._asIntNullable(errorCode), result);
     },
-    $signature: 74
+    $signature: 72
   };
   P._BroadcastStream.prototype = {};
   P._BroadcastSubscription.prototype = {
@@ -11085,7 +11086,7 @@
     $defaultValues: function() {
       return [null];
     },
-    $signature: 44
+    $signature: 49
   };
   P._Future__chainForeignFuture_closure1.prototype = {
     call$0: function() {
@@ -12947,9 +12948,9 @@
     call$1: function(matched) {
       if (matched == null)
         return 0;
-      return P.int_parse(matched, null);
+      return P.int_parse(matched);
     },
-    $signature: 21
+    $signature: 41
   };
   P.DateTime_parse_parseMilliAndMicroseconds.prototype = {
     call$1: function(matched) {
@@ -12963,7 +12964,7 @@
       }
       return result;
     },
-    $signature: 21
+    $signature: 41
   };
   P.double.prototype = {};
   P.Duration.prototype = {
@@ -13019,7 +13020,7 @@
         return "0000" + n;
       return "00000" + n;
     },
-    $signature: 41
+    $signature: 40
   };
   P.Duration_toString_twoDigits.prototype = {
     call$1: function(n) {
@@ -13027,7 +13028,7 @@
         return "" + n;
       return "0" + n;
     },
-    $signature: 41
+    $signature: 40
   };
   P.Error.prototype = {
     get$stackTrace: function() {
@@ -13878,7 +13879,7 @@
     call$1: function(e) {
       return type$.Element._is(type$.Node._as(e));
     },
-    $signature: 27
+    $signature: 32
   };
   W.EmbedElement.prototype = {
     get$type: function(receiver) {
@@ -14059,7 +14060,7 @@
     call$1: function(xhr) {
       return type$.HttpRequest._as(xhr).responseText;
     },
-    $signature: 69
+    $signature: 70
   };
   W.HttpRequest_request_closure.prototype = {
     call$1: function(e) {
@@ -14078,7 +14079,7 @@
       else
         t3.completeError$1(e);
     },
-    $signature: 70
+    $signature: 74
   };
   W.HttpRequestEventTarget.prototype = {};
   W.ImageData.prototype = {$isImageData: 1};
@@ -14290,13 +14291,13 @@
     call$1: function(stream) {
       this.completer.complete$1(0, type$.MediaStream._as(stream));
     },
-    $signature: 81
+    $signature: 85
   };
   W.Navigator_getUserMedia_closure0.prototype = {
     call$1: function(error) {
       this.completer.completeError$1(type$.NavigatorUserMediaError._as(error));
     },
-    $signature: 85
+    $signature: 46
   };
   W.NavigatorConcurrentHardware.prototype = {};
   W.NavigatorUserMediaError.prototype = {$isNavigatorUserMediaError: 1};
@@ -15243,14 +15244,14 @@
       if (J.getInterceptor$s(key).startsWith$1(key, "data-"))
         this.f.call$2(this.$this._toCamelCase$1(C.JSString_methods.substring$1(key, 5)), value);
     },
-    $signature: 29
+    $signature: 27
   };
   W._DataAttributeMap_keys_closure.prototype = {
     call$2: function(key, value) {
       if (J.getInterceptor$s(key).startsWith$1(key, "data-"))
         C.JSArray_methods.add$1(this.keys, this.$this._toCamelCase$1(C.JSString_methods.substring$1(key, 5)));
     },
-    $signature: 29
+    $signature: 27
   };
   W.CssClassSet.prototype = {$isEfficientLengthIterable: 1, $isIterable: 1, $isSet: 1};
   W._MultiElementCssClassSet.prototype = {
@@ -15282,33 +15283,33 @@
     call$1: function(e) {
       return J.get$classes$x(type$.Element._as(e));
     },
-    $signature: 72
+    $signature: 69
   };
   W._MultiElementCssClassSet_readClasses_closure.prototype = {
     call$1: function(e) {
       return this.s.addAll$1(0, type$.CssClassSetImpl._as(e).readClasses$0());
     },
-    $signature: 71
+    $signature: 67
   };
   W._MultiElementCssClassSet_modify_closure.prototype = {
     call$1: function(e) {
       return type$.CssClassSetImpl._as(e).modify$1(0, this.f);
     },
-    $signature: 67
+    $signature: 66
   };
   W._MultiElementCssClassSet_toggle_closure.prototype = {
     call$2: function(changed, e) {
       H._asBoolNullable(changed);
       return H.boolConversionCheck(type$.CssClassSetImpl._as(e).toggle$2(0, this.value, this.shouldAdd)) || H.boolConversionCheck(changed);
     },
-    $signature: 30
+    $signature: 28
   };
   W._MultiElementCssClassSet_remove_closure.prototype = {
     call$2: function(changed, e) {
       H._asBoolNullable(changed);
       return H.boolConversionCheck(type$.CssClassSetImpl._as(e).remove$1(0, this.value)) || H.boolConversionCheck(changed);
     },
-    $signature: 30
+    $signature: 28
   };
   W._ElementCssClassSet.prototype = {
     readClasses$0: function() {
@@ -15432,7 +15433,7 @@
     call$1: function(e) {
       return this.onData.call$1(type$.Event._as(e));
     },
-    $signature: 66
+    $signature: 62
   };
   W._StreamPool.prototype = {
     add$1: function(_, stream) {
@@ -15518,13 +15519,13 @@
     call$1: function(v) {
       return type$.NodeValidator._as(v).allowsElement$1(this.element);
     },
-    $signature: 31
+    $signature: 29
   };
   W.NodeValidatorBuilder_allowsAttribute_closure.prototype = {
     call$1: function(v) {
       return type$.NodeValidator._as(v).allowsAttribute$3(this.element, this.attributeName, this.value);
     },
-    $signature: 31
+    $signature: 29
   };
   W._SimpleNodeValidator.prototype = {
     _SimpleNodeValidator$4$allowedAttributes$allowedElements$allowedUriAttributes: function(uriPolicy, allowedAttributes, allowedElements, allowedUriAttributes) {
@@ -15590,7 +15591,7 @@
     call$1: function(attr) {
       return "TEMPLATE::" + H.S(H._asStringNullable(attr));
     },
-    $signature: 62
+    $signature: 61
   };
   W._SvgNodeValidator.prototype = {
     allowsElement$1: function(element) {
@@ -15809,7 +15810,7 @@
         child = nextChild;
       }
     },
-    $signature: 61
+    $signature: 60
   };
   W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase.prototype = {};
   W._DomRectList_Interceptor_ListMixin.prototype = {};
@@ -16035,7 +16036,7 @@
       J.$indexSet$ax(t1, key, t2);
       return t2;
     },
-    $signature: 60
+    $signature: 59
   };
   P.convertDartToNative_Dictionary_closure.prototype = {
     call$2: function(key, value) {
@@ -16156,13 +16157,13 @@
       s._filterWhere$2(H._instanceType(s)._eval$1("bool(1)")._as(this.test), true);
       return null;
     },
-    $signature: 33
+    $signature: 31
   };
   P.CssClassSetImpl_clear_closure.prototype = {
     call$1: function(s) {
       return type$.Set_String._as(s).clear$0(0);
     },
-    $signature: 33
+    $signature: 31
   };
   P.FilteredElementList.prototype = {
     get$_html_common$_iterable: function() {
@@ -16219,13 +16220,13 @@
     call$1: function(n) {
       return type$.Element._is(type$.Node._as(n));
     },
-    $signature: 27
+    $signature: 32
   };
   P.FilteredElementList__iterable_closure0.prototype = {
     call$1: function(n) {
       return type$.Element._as(type$.Node._as(n));
     },
-    $signature: 51
+    $signature: 52
   };
   P.FilteredElementList_removeRange_closure.prototype = {
     call$1: function(el) {
@@ -19539,7 +19540,7 @@
       button._sequencer$_disabled = true;
       button.setVelocity$1(button.velocity);
     },
-    $signature: 32
+    $signature: 26
   };
   D.SequencerRow_unmute_closure.prototype = {
     call$1: function(button) {
@@ -19547,7 +19548,7 @@
       button._sequencer$_disabled = false;
       button.setVelocity$1(button.velocity);
     },
-    $signature: 32
+    $signature: 26
   };
   D.SequencerDrumButton.prototype = {
     SequencerDrumButton$1: function(row) {
@@ -19868,31 +19869,31 @@
         t1.maxD = Math.max(t1.maxD, node.sampleDuration);
       }
     },
-    $signature: 26
+    $signature: 25
   };
   U.SynthChain_pitchBend_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).pitchBend$1(this.cents);
     },
-    $signature: 23
+    $signature: 22
   };
   U.SynthChain_schedulePitchBend_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).schedulePitchBend$2(this.start, this.cents);
     },
-    $signature: 23
+    $signature: 22
   };
   U.SynthChain_releaseNote_closure.prototype = {
     call$1: function(node) {
       type$.SynthNode._as(node).release$0(0);
     },
-    $signature: 26
+    $signature: 25
   };
   U.SynthChain_destroy_closure.prototype = {
     call$1: function(node) {
       return type$.SynthNode._as(node).destroy$0();
     },
-    $signature: 23
+    $signature: 22
   };
   E.ClockSubscriber.prototype = {};
   E.Metronome.prototype = {};
@@ -20038,7 +20039,7 @@
     call$1: function(m) {
       return type$.Metronome._as(m).pulse$1(0);
     },
-    $signature: 40
+    $signature: 39
   };
   E.PlayClock_startMetronome_closure0.prototype = {
     call$1: function(t) {
@@ -20069,13 +20070,13 @@
         }
       }
     },
-    $signature: 39
+    $signature: 38
   };
   E.PlayClock_startMetronome__closure.prototype = {
     call$1: function(m) {
       return type$.Metronome._as(m).pulse$1(this._box_0.beat);
     },
-    $signature: 40
+    $signature: 39
   };
   K.Effect.prototype = {
     Effect$_internal$2: function($name, params) {
@@ -20645,7 +20646,7 @@
         ++c;
       }
     },
-    $signature: 38
+    $signature: 35
   };
   B.DistNode__closure.prototype = {
     call$1: function(signal) {
@@ -21324,7 +21325,7 @@
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 24
+    $signature: 23
   };
   L.Synthesizer_loadCustomSound_closure.prototype = {
     call$1: function(e) {
@@ -21362,7 +21363,7 @@
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 24
+    $signature: 23
   };
   Y.Trace.prototype = {
     get$length: function(_) {
@@ -21837,13 +21838,13 @@
     call$1: function(c) {
       return J.$eq$(type$.User._as(c), this.collaborator);
     },
-    $signature: 37
+    $signature: 36
   };
   A.TunePadCell__onMessage_closure0.prototype = {
     call$1: function(c) {
       return J.$eq$(type$.User._as(c), this.collaborator);
     },
-    $signature: 37
+    $signature: 36
   };
   A._TunePadCell_Object_EditorListener.prototype = {};
   S.Datastore.prototype = {
@@ -22989,7 +22990,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 36
+    $signature: 34
   };
   S.Datastore_loginWithGoogle__closure.prototype = {
     call$1: function(data) {
@@ -24361,7 +24362,7 @@
       if (countdown < 0)
         this.$this._stop$0();
     },
-    $signature: 38
+    $signature: 35
   };
   U.EffectsChain_playSlice_closure.prototype = {
     call$1: function(e) {
@@ -24407,7 +24408,7 @@
       type$.ProgressEvent._as(e);
       return P.print("BufferLoader: XHR error");
     },
-    $signature: 24
+    $signature: 23
   };
   B.GraphicEq.prototype = {
     GraphicEq$2: function(container, onColor) {
@@ -26494,7 +26495,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 36
+    $signature: 34
   };
   Q.RecordingStudio__playPreview_closure.prototype = {
     call$1: function(e) {
@@ -30286,13 +30287,13 @@
     call$1: function(cell) {
       type$.TunePadCell._as(cell).play$0(0);
     },
-    $signature: 34
+    $signature: 37
   };
   A.Dropbook_pauseAll_closure.prototype = {
     call$1: function(cell) {
       type$.TunePadCell._as(cell).pause$0(0);
     },
-    $signature: 34
+    $signature: 37
   };
   A.Dropbook__registerEvents_closure.prototype = {
     call$1: function(e) {
@@ -30682,7 +30683,7 @@
       else
         t.cancel$0(0);
     },
-    $signature: 39
+    $signature: 38
   };
   A.Dropbook__toggleContextMenu_closure.prototype = {
     call$1: function(m) {
@@ -30952,18 +30953,6 @@
       new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(track.querySelectorAll(".add-button"), t4)), false, _s5_, t6).listen$1(new O.TrackLibrary__buildTrack_closure4(_this, collection, data));
       return track;
     },
-    _addTrack$1: function(track) {
-      var patchId,
-        t1 = J.getInterceptor$asx(track);
-      this.datastore.remixTrack$1(H._asIntNullable(t1.$index(track, "id")));
-      if (!H.boolConversionCheck(t1.containsKey$1(track, "patch"))) {
-        patchId = P.int_parse(H._asStringNullable(t1.$index(track, "voice")), new O.TrackLibrary__addTrack_closure());
-        if (typeof patchId !== "number")
-          return patchId.$gt();
-        if (patchId > 0)
-          t1.$indexSet(track, "patch", patchId);
-      }
-    },
     _starKey$1: function(track) {
       var collection = track.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(track))._toHyphenedName$1("collection")),
         id = track.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(track))._toHyphenedName$1("id"));
@@ -30985,7 +30974,7 @@
             case 0:
               // Function start
               key = $async$self._starKey$1(track);
-              id = P.int_parse(track.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(track))._toHyphenedName$1("id")), null);
+              id = P.int_parse(track.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(track))._toHyphenedName$1("id")));
               collection = track.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(track))._toHyphenedName$1("collection"));
               t1 = type$.Element;
               H.checkTypeBound(t1, t1, "T", "querySelectorAll");
@@ -31051,7 +31040,7 @@
             case 0:
               // Function start
               key = $async$self._starKey$1(track);
-              id = P.int_parse(track.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(track))._toHyphenedName$1("id")), null);
+              id = P.int_parse(track.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(track))._toHyphenedName$1("id")));
               collection = track.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(track))._toHyphenedName$1("collection"));
               t1 = type$.Element;
               H.checkTypeBound(t1, t1, "T", "querySelectorAll");
@@ -31303,25 +31292,34 @@
   };
   O.TrackLibrary__buildTrack_closure4.prototype = {
     call$1: function(e) {
-      var t1, t2, _this = this;
+      var t1, t2, t3, gadget, _this = this;
       type$.MouseEvent._as(e);
       t1 = _this.collection;
       t2 = t1 === "tracks";
       if (t2 && J.$eq$(J.$index$asx(_this.data, "instrument"), "definitions"))
         E.Dialog_message("        Add this line to import the cell into your project:<br><br>\n        <code>\n        &nbsp;&nbsp;&nbsp;<b>from tunepad_" + H.S(J.$index$asx(_this.data, "id")) + " import *</b>\n        </code>", "Add Code", "OK");
       else if (t2) {
-        _this.$this._addTrack$1(_this.data);
+        t1 = _this.data;
+        t2 = _this.$this.datastore;
+        t3 = J.getInterceptor$asx(t1);
+        t2.remixTrack$1(H._asIntNullable(t3.$index(t1, "id")));
+        gadget = new L.Gadget(new H.JsLinkedHashMap(type$.JsLinkedHashMap_dynamic_dynamic), -1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+        gadget.type = "gadgets";
+        gadget.name = "New Track";
+        gadget.load$1(0, t1);
+        gadget.id = -1;
+        gadget.$public = false;
+        gadget.remix_parent = H._asIntNullable(t3.$index(t1, "gadget_id"));
+        gadget.idata.$indexSet(0, "cloned", true);
+        gadget.idata.$indexSet(0, "python", t3.$index(t1, "code"));
+        if (!H.boolConversionCheck(t3.containsKey$1(t1, "patch")))
+          gadget.idata.$indexSet(0, "patch", B.toInt(t3.$index(t1, "voice"), -1));
+        t2.create$1(0, gadget);
         E.Dialog_closeModal();
       } else if (t1 === "sounds")
         E.Dialog_message("        Use this code to play the sound in your project:<br><br>\n        <code>\n        &nbsp;&nbsp;&nbsp;<b>playSound(" + H.S(J.$index$asx(_this.data, "id")) + ")</b>\n        </code>", "Add Sound", "OK");
     },
     $signature: 0
-  };
-  O.TrackLibrary__addTrack_closure.prototype = {
-    call$1: function(e) {
-      return -1;
-    },
-    $signature: 21
   };
   O.TrackLibrary__playTrackPreview_closure.prototype = {
     call$1: function(e) {
@@ -32319,7 +32317,7 @@
     var _;
     _instance_0_u(_ = P._BroadcastSubscription.prototype, "get$_onPause", "_onPause$0", 3);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 3);
-    _instance_1_i(P._BroadcastStreamController.prototype, "get$add", "add$1", 28);
+    _instance_1_i(P._BroadcastStreamController.prototype, "get$add", "add$1", 30);
     _instance(P._Completer.prototype, "get$completeError", 0, 1, null, ["call$2", "call$1"], ["completeError$2", "completeError$1"], 14, 0);
     _instance(P._Future.prototype, "get$_completeError", 0, 1, function() {
       return [null];
@@ -32329,16 +32327,16 @@
     _instance_0_u(_ = P._BufferingStreamSubscription.prototype, "get$_onPause", "_onPause$0", 3);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 3);
     _instance_0_u(P._DoneStreamSubscription.prototype, "get$_sendDone", "_sendDone$0", 3);
-    _instance_1_u(_ = P._StreamIterator.prototype, "get$_async$_onData", "_async$_onData$1", 28);
+    _instance_1_u(_ = P._StreamIterator.prototype, "get$_async$_onData", "_async$_onData$1", 30);
     _instance(_, "get$_onError", 0, 1, function() {
       return [null];
     }, ["call$2", "call$1"], ["_onError$2", "_onError$1"], 14, 0);
     _instance_0_u(_, "get$_onDone", "_onDone$0", 3);
     _static_1(P, "convert___defaultToEncodable$closure", "_defaultToEncodable", 9);
-    _static(W, "html__Html5NodeValidator__standardAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__standardAttributeValidator"], 35, 0);
-    _static(W, "html__Html5NodeValidator__uriAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__uriAttributeValidator"], 35, 0);
-    _instance_0_i(W.CacheStorage.prototype, "get$keys", "keys$0", 59);
-    _instance_0_i(W.PaymentInstruments.prototype, "get$keys", "keys$0", 46);
+    _static(W, "html__Html5NodeValidator__standardAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__standardAttributeValidator"], 33, 0);
+    _static(W, "html__Html5NodeValidator__uriAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__uriAttributeValidator"], 33, 0);
+    _instance_0_i(W.CacheStorage.prototype, "get$keys", "keys$0", 86);
+    _instance_0_i(W.PaymentInstruments.prototype, "get$keys", "keys$0", 82);
     _instance_0_i(W._StreamPool.prototype, "get$close", "close$0", 3);
     _static_1(P, "js___convertToJS$closure", "_convertToJS", 9);
     _static_1(P, "js___convertToDart$closure", "_convertToDart", 57);
@@ -32348,12 +32346,12 @@
     _static_2(R, "codemirror_CodeMirror_onCursorActivity$closure", "CodeMirror_onCursorActivity", 16);
     _static_1(R, "codemirror_CodeMirror_onEditorBlur$closure", "CodeMirror_onEditorBlur", 17);
     _static_1(R, "codemirror_CodeMirror_onEditorFocus$closure", "CodeMirror_onEditorFocus", 17);
-    _instance_1_u(_ = R.CodeMirror.prototype, "get$_codemirror$_onEditorUpdate", "_codemirror$_onEditorUpdate$1", 22);
-    _instance_1_u(_, "get$_onCursorActivity", "_onCursorActivity$1", 22);
+    _instance_1_u(_ = R.CodeMirror.prototype, "get$_codemirror$_onEditorUpdate", "_codemirror$_onEditorUpdate$1", 21);
+    _instance_1_u(_, "get$_onCursorActivity", "_onCursorActivity$1", 21);
     _instance_0_u(_, "get$_onEditorBlur", "_onEditorBlur$0", 3);
     _instance_0_u(_, "get$_onEditorFocus", "_onEditorFocus$0", 3);
     _static_2(A, "quill_QuillEditor_onEditorUpdate$closure", "QuillEditor_onEditorUpdate", 16);
-    _instance_1_u(A.QuillEditor.prototype, "get$_onEditorUpdate", "_onEditorUpdate$1", 22);
+    _instance_1_u(A.QuillEditor.prototype, "get$_onEditorUpdate", "_onEditorUpdate$1", 21);
     _instance_1_i(_ = Y.BassGuitar.prototype, "get$onKeyDown", "onKeyDown$1", 7);
     _instance_1_i(_, "get$onKeyUp", "onKeyUp$1", 7);
     _instance_1_i(_ = F.DrumKit.prototype, "get$onKeyDown", "onKeyDown$1", 7);
@@ -32371,9 +32369,9 @@
     _instance_1_u(_, "get$_onReordered", "_onReordered$1", 4);
     _instance_1_u(_, "get$_onMessage", "_onMessage$1", 4);
     _instance_1_u(S.Datastore.prototype, "get$_handleSocketMessage", "_handleSocketMessage$1", 13);
-    _instance_1_u(Q.RecordingStudio.prototype, "get$tick", "tick$1", 25);
-    _instance_1_i(R.PythonTrack.prototype, "get$animate", "animate$1", 25);
-    _instance_1_i(_ = A.Dropbook.prototype, "get$animate", "animate$1", 25);
+    _instance_1_u(Q.RecordingStudio.prototype, "get$tick", "tick$1", 24);
+    _instance_1_i(R.PythonTrack.prototype, "get$animate", "animate$1", 24);
+    _instance_1_i(_ = A.Dropbook.prototype, "get$animate", "animate$1", 24);
     _instance_1_u(_, "get$onUpdated", "onUpdated$1", 4);
     _instance_1_u(_, "get$onCreated", "onCreated$1", 4);
     _instance_1_u(_, "get$onDeleted", "onDeleted$1", 4);
@@ -32413,7 +32411,7 @@
     _inherit(P.UnmodifiableMapView, P._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
     _inherit(H.ConstantMapView, P.UnmodifiableMapView);
     _inherit(H.ConstantStringMap, H.ConstantMap);
-    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._completeRequest_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, A.QuillEditor_initialize_closure, A.QuillEditor_initialize_closure0, Y.BassFret_closure, Y.BassFret_closure0, Y.BassFret_closure1, Y.BassFret_closure2, F.DrumKit_render_closure, F.DrumKit_render_closure0, F.DrumKit_render_closure1, F.DrumKit_render_closure2, N.DrumPad_closure, N.DrumPad_closure0, N.DrumPad_closure1, N.DrumPad_closure2, F.GFret_closure, F.GFret_closure0, F.GFret_closure1, F.GFret_closure2, S.Instrument_unload_closure, B.Piano_render_closure, B.Piano_render_closure0, B.Piano__slideKeyboard_closure, B.MiniPiano_slide_closure, B.PianoKey_closure, B.PianoKey_closure0, B.PianoKey_closure1, B.PianoKey_closure2, D.Sequencer_render_closure, D.SequencerRow_closure, D.SequencerRow_closure0, D.SequencerRow_closure1, D.SequencerRow_mute_closure, D.SequencerRow_unmute_closure, D.SequencerDrumButton_closure, D.SequencerButton_closure, D.SequencerButton_closure0, D.SequencerButton_closure1, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.DistNode_closure, B.DistNode__closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, R.UserAccounts_login_closure, R.UserAccounts_login_closure0, R.UserAccounts_login_closure1, R.UserAccounts_login_closure2, A.TunePadCell_insert_closure, A.TunePadCell_insert_closure0, A.TunePadCell_insert_closure1, A.TunePadCell_insert_closure2, A.TunePadCell__onMessage_closure, A.TunePadCell__onMessage_closure0, S.Datastore_closure, S.Datastore_closure0, S.Datastore_loginWithGoogle_closure, S.Datastore_loginWithGoogle__closure, X.PythonCell_insert_closure, X.PythonCell_insert_closure0, X.PythonCell_insert_closure1, X.PythonCell_insert_closure2, X.PythonCell_onPythonDone_closure, X.PythonCell__shareCell_closure, X.PythonCell__shareCell_closure0, X.PythonCell_doContextMenu_closure, U.EffectsChain_closure, U.EffectsChain_closure0, U.EffectsChain_closure1, U.EffectsChain_closure2, U.EffectsChain_closure3, U.EffectsChain_closure4, U.EffectsChain_closure5, U.EffectsChain_playAudio_closure, U.EffectsChain_playSlice_closure, U.EffectsChain_loadSoundEffects_closure, U.EffectsChain_loadSoundEffects_closure0, Q.RecordingStudio_show_closure, Q.RecordingStudio_loadUserRecordings_closure, Q.RecordingStudio_uploadAudioFile_closure, Q.RecordingStudio__registerEvents_closure, Q.RecordingStudio__registerEvents_closure0, Q.RecordingStudio__registerEvents_closure1, Q.RecordingStudio__registerEvents_closure2, Q.RecordingStudio__registerEvents_closure3, Q.RecordingStudio__registerEvents_closure4, Q.RecordingStudio__registerEvents_closure5, Q.RecordingStudio__registerEvents_closure6, Q.RecordingStudio__registerEvents_closure7, Q.RecordingStudio__registerEvents_closure8, Q.RecordingStudio__registerEvents_closure9, Q.RecordingStudio__registerEvents_closure10, Q.RecordingStudio__registerEvents_closure11, Q.RecordingStudio__registerEvents_closure12, Q.RecordingStudio__registerRowEvents_closure, Q.RecordingStudio__registerRowEvents_closure0, Q.RecordingStudio__registerRowEvents_closure1, Q.RecordingStudio__registerRowEvents_closure2, Q.RecordingStudio__playPreview_closure, Q.RecordingStudio__playPreview_closure0, Q.RecordingStudio__playPreview_closure1, V.WaveformTrace__buildClipLine_closure, V.WaveformTrace__buildClipLine_closure0, V.WaveformTrace__buildClipLine_closure1, L.TextCell_insert_closure, L.TextCell__doContextMenu_closure, D.Timeline_setInstrument_closure, D.Timeline_insert_closure, D.Timeline__render_closure, D.Timeline__render_closure0, D.Timeline__registerTouchEvents_closure, D.Timeline__registerTouchEvents_closure0, D.Timeline__registerTouchEvents_closure1, D.Timeline__registerTouchEvents_closure2, D.Timeline__renderNote_closure, D.Timeline__renderNote_closure0, D.Timeline__renderNote_closure1, D.Timeline__renderNote_closure2, R.PythonTrack_insert_closure, R.PythonTrack_insert_closure0, R.PythonTrack_insert_closure1, R.PythonTrack_insert_closure2, R.PythonTrack_insert_closure3, R.PythonTrack_insert_closure4, R.PythonTrack_insert_closure5, R.PythonTrack_insert_closure6, R.PythonTrack_insert_closure7, R.PythonTrack_insert_closure8, R.PythonTrack_insert_closure9, R.PythonTrack_insert_closure10, R.PythonTrack_insert_closure11, R.PythonTrack_onPythonDone_closure, R.PythonTrack__initVoiceMenu_closure, R.PythonTrack__setInstrument_closure, R.PythonTrack__setInstrument_closure0, R.PythonTrack__shareTrack_closure, R.PythonTrack__shareTrack_closure0, R.PythonTrack_doContextMenu_closure, R.PythonTrack__initMidi_closure, R.PythonTrack_toggleContextMenu_closure, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, V.ToggleButton_buildUI_closure, V.ToggleButton_buildUI_closure0, V.ToggleButton_buildUI_closure1, V.ToggleButton_buildUI_closure2, E.Dialog_message_closure, E.Dialog_hideLoader_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu_closeAllMenus_closure, D.DropdownMenu__toggleMenu_closure, A.Dropbook_closure, A.Dropbook_closure0, A.Dropbook_playAll_closure, A.Dropbook_pauseAll_closure, A.Dropbook__registerEvents_closure, A.Dropbook__registerEvents__closure, A.Dropbook__registerEvents_closure0, A.Dropbook__registerEvents_closure1, A.Dropbook__registerEvents_closure2, A.Dropbook__registerEvents_closure3, A.Dropbook__registerEvents_closure4, A.Dropbook__registerEvents_closure5, A.Dropbook__registerEvents_closure6, A.Dropbook__registerEvents_closure7, A.Dropbook__registerEvents_closure8, A.Dropbook__registerEvents_closure9, A.Dropbook__registerEvents_closure10, A.Dropbook__registerEvents_closure11, A.Dropbook__registerEvents_closure12, A.Dropbook__registerEvents_closure13, A.Dropbook__registerEvents_closure14, A.Dropbook__registerEvents_closure15, A.Dropbook__registerEvents_closure16, A.Dropbook__registerEvents_closure17, A.Dropbook__registerEvents_closure18, A.Dropbook__registerEvents_closure19, A.Dropbook__registerEvents_closure20, A.Dropbook__registerEvents_closure21, A.Dropbook__registerEvents_closure22, A.Dropbook__registerEvents_closure23, A.Dropbook__registerEvents_closure24, A.Dropbook__registerEvents_closure25, A.Dropbook__registerEvents_closure26, A.Dropbook__registerEvents_closure27, A.Dropbook__bindSpinnerButton_closure, A.Dropbook__bindSpinnerButton_closure0, A.Dropbook__bindSpinnerButton__closure, A.Dropbook__bindSpinnerButton___closure, A.Dropbook__toggleContextMenu_closure, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show__closure0, O.TrackLibrary_show___closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__addTrack_closure, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F._showWelcomeMessage_closure, F._showWelcomeMessage_closure0, F._showProjectList_closure, Z.OutlineView_loadProject_closure, Z.OutlineView_loadProject__closure, Z.OutlineView_createItem_closure, Z.OutlineView_createItem_closure0, Z.OutlineView_createItem_closure1, Z.OutlineView_createItem_closure2, Z.OutlineView_updateItem_closure, Z.OutlineView__reorder_closure, Z.OutlineView__reorder_closure0, G.ProjectList_show_closure, G.ProjectList__buildItem_closure, G.ProjectList__buildItem_closure0, G.ProjectList__buildItem_closure1, G.ProjectList__buildProjectBadge_closure, G.ProjectList__buildProjectBadge_closure0, G.ProjectList__buildProjectBadge_closure1, G.ProjectList__playPreview_closure, G.ProjectList__playPreview_closure0, G.ProjectList__playPreview_closure1]);
+    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._completeRequest_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, A.QuillEditor_initialize_closure, A.QuillEditor_initialize_closure0, Y.BassFret_closure, Y.BassFret_closure0, Y.BassFret_closure1, Y.BassFret_closure2, F.DrumKit_render_closure, F.DrumKit_render_closure0, F.DrumKit_render_closure1, F.DrumKit_render_closure2, N.DrumPad_closure, N.DrumPad_closure0, N.DrumPad_closure1, N.DrumPad_closure2, F.GFret_closure, F.GFret_closure0, F.GFret_closure1, F.GFret_closure2, S.Instrument_unload_closure, B.Piano_render_closure, B.Piano_render_closure0, B.Piano__slideKeyboard_closure, B.MiniPiano_slide_closure, B.PianoKey_closure, B.PianoKey_closure0, B.PianoKey_closure1, B.PianoKey_closure2, D.Sequencer_render_closure, D.SequencerRow_closure, D.SequencerRow_closure0, D.SequencerRow_closure1, D.SequencerRow_mute_closure, D.SequencerRow_unmute_closure, D.SequencerDrumButton_closure, D.SequencerButton_closure, D.SequencerButton_closure0, D.SequencerButton_closure1, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.DistNode_closure, B.DistNode__closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, R.UserAccounts_login_closure, R.UserAccounts_login_closure0, R.UserAccounts_login_closure1, R.UserAccounts_login_closure2, A.TunePadCell_insert_closure, A.TunePadCell_insert_closure0, A.TunePadCell_insert_closure1, A.TunePadCell_insert_closure2, A.TunePadCell__onMessage_closure, A.TunePadCell__onMessage_closure0, S.Datastore_closure, S.Datastore_closure0, S.Datastore_loginWithGoogle_closure, S.Datastore_loginWithGoogle__closure, X.PythonCell_insert_closure, X.PythonCell_insert_closure0, X.PythonCell_insert_closure1, X.PythonCell_insert_closure2, X.PythonCell_onPythonDone_closure, X.PythonCell__shareCell_closure, X.PythonCell__shareCell_closure0, X.PythonCell_doContextMenu_closure, U.EffectsChain_closure, U.EffectsChain_closure0, U.EffectsChain_closure1, U.EffectsChain_closure2, U.EffectsChain_closure3, U.EffectsChain_closure4, U.EffectsChain_closure5, U.EffectsChain_playAudio_closure, U.EffectsChain_playSlice_closure, U.EffectsChain_loadSoundEffects_closure, U.EffectsChain_loadSoundEffects_closure0, Q.RecordingStudio_show_closure, Q.RecordingStudio_loadUserRecordings_closure, Q.RecordingStudio_uploadAudioFile_closure, Q.RecordingStudio__registerEvents_closure, Q.RecordingStudio__registerEvents_closure0, Q.RecordingStudio__registerEvents_closure1, Q.RecordingStudio__registerEvents_closure2, Q.RecordingStudio__registerEvents_closure3, Q.RecordingStudio__registerEvents_closure4, Q.RecordingStudio__registerEvents_closure5, Q.RecordingStudio__registerEvents_closure6, Q.RecordingStudio__registerEvents_closure7, Q.RecordingStudio__registerEvents_closure8, Q.RecordingStudio__registerEvents_closure9, Q.RecordingStudio__registerEvents_closure10, Q.RecordingStudio__registerEvents_closure11, Q.RecordingStudio__registerEvents_closure12, Q.RecordingStudio__registerRowEvents_closure, Q.RecordingStudio__registerRowEvents_closure0, Q.RecordingStudio__registerRowEvents_closure1, Q.RecordingStudio__registerRowEvents_closure2, Q.RecordingStudio__playPreview_closure, Q.RecordingStudio__playPreview_closure0, Q.RecordingStudio__playPreview_closure1, V.WaveformTrace__buildClipLine_closure, V.WaveformTrace__buildClipLine_closure0, V.WaveformTrace__buildClipLine_closure1, L.TextCell_insert_closure, L.TextCell__doContextMenu_closure, D.Timeline_setInstrument_closure, D.Timeline_insert_closure, D.Timeline__render_closure, D.Timeline__render_closure0, D.Timeline__registerTouchEvents_closure, D.Timeline__registerTouchEvents_closure0, D.Timeline__registerTouchEvents_closure1, D.Timeline__registerTouchEvents_closure2, D.Timeline__renderNote_closure, D.Timeline__renderNote_closure0, D.Timeline__renderNote_closure1, D.Timeline__renderNote_closure2, R.PythonTrack_insert_closure, R.PythonTrack_insert_closure0, R.PythonTrack_insert_closure1, R.PythonTrack_insert_closure2, R.PythonTrack_insert_closure3, R.PythonTrack_insert_closure4, R.PythonTrack_insert_closure5, R.PythonTrack_insert_closure6, R.PythonTrack_insert_closure7, R.PythonTrack_insert_closure8, R.PythonTrack_insert_closure9, R.PythonTrack_insert_closure10, R.PythonTrack_insert_closure11, R.PythonTrack_onPythonDone_closure, R.PythonTrack__initVoiceMenu_closure, R.PythonTrack__setInstrument_closure, R.PythonTrack__setInstrument_closure0, R.PythonTrack__shareTrack_closure, R.PythonTrack__shareTrack_closure0, R.PythonTrack_doContextMenu_closure, R.PythonTrack__initMidi_closure, R.PythonTrack_toggleContextMenu_closure, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, V.ToggleButton_buildUI_closure, V.ToggleButton_buildUI_closure0, V.ToggleButton_buildUI_closure1, V.ToggleButton_buildUI_closure2, E.Dialog_message_closure, E.Dialog_hideLoader_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu_closeAllMenus_closure, D.DropdownMenu__toggleMenu_closure, A.Dropbook_closure, A.Dropbook_closure0, A.Dropbook_playAll_closure, A.Dropbook_pauseAll_closure, A.Dropbook__registerEvents_closure, A.Dropbook__registerEvents__closure, A.Dropbook__registerEvents_closure0, A.Dropbook__registerEvents_closure1, A.Dropbook__registerEvents_closure2, A.Dropbook__registerEvents_closure3, A.Dropbook__registerEvents_closure4, A.Dropbook__registerEvents_closure5, A.Dropbook__registerEvents_closure6, A.Dropbook__registerEvents_closure7, A.Dropbook__registerEvents_closure8, A.Dropbook__registerEvents_closure9, A.Dropbook__registerEvents_closure10, A.Dropbook__registerEvents_closure11, A.Dropbook__registerEvents_closure12, A.Dropbook__registerEvents_closure13, A.Dropbook__registerEvents_closure14, A.Dropbook__registerEvents_closure15, A.Dropbook__registerEvents_closure16, A.Dropbook__registerEvents_closure17, A.Dropbook__registerEvents_closure18, A.Dropbook__registerEvents_closure19, A.Dropbook__registerEvents_closure20, A.Dropbook__registerEvents_closure21, A.Dropbook__registerEvents_closure22, A.Dropbook__registerEvents_closure23, A.Dropbook__registerEvents_closure24, A.Dropbook__registerEvents_closure25, A.Dropbook__registerEvents_closure26, A.Dropbook__registerEvents_closure27, A.Dropbook__bindSpinnerButton_closure, A.Dropbook__bindSpinnerButton_closure0, A.Dropbook__bindSpinnerButton__closure, A.Dropbook__bindSpinnerButton___closure, A.Dropbook__toggleContextMenu_closure, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show__closure0, O.TrackLibrary_show___closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F._showWelcomeMessage_closure, F._showWelcomeMessage_closure0, F._showProjectList_closure, Z.OutlineView_loadProject_closure, Z.OutlineView_loadProject__closure, Z.OutlineView_createItem_closure, Z.OutlineView_createItem_closure0, Z.OutlineView_createItem_closure1, Z.OutlineView_createItem_closure2, Z.OutlineView_updateItem_closure, Z.OutlineView__reorder_closure, Z.OutlineView__reorder_closure0, G.ProjectList_show_closure, G.ProjectList__buildItem_closure, G.ProjectList__buildItem_closure0, G.ProjectList__buildItem_closure1, G.ProjectList__buildProjectBadge_closure, G.ProjectList__buildProjectBadge_closure0, G.ProjectList__buildProjectBadge_closure1, G.ProjectList__playPreview_closure, G.ProjectList__playPreview_closure0, G.ProjectList__playPreview_closure1]);
     _inheritMany(P.Error, [H.NullError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, P.AssertionError, H._Error, P.JsonUnsupportedObjectError, P.NullThrownError, P.ArgumentError, P.NoSuchMethodError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
     _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
     _inherit(H._AssertionError, P.AssertionError);
@@ -32632,7 +32630,7 @@
     mangledNames: {},
     getTypeFromName: getGlobalFromName,
     metadata: [],
-    types: ["Null(MouseEvent)", "Null()", "Null(Event)", "~()", "~(DatastoreEvent)", "Null(@,@)", "Future<Null>(MouseEvent)", "~(KeyboardEvent)", "Null(@)", "@(@)", "Null(Element)", "bool(String)", "Null(KeyboardEvent)", "~(@)", "~(Object[StackTrace])", "~(String,@)", "~(String,String)", "~(String)", "~(ClockSubscriber)", "Future<Null>(ProgressEvent)", "~(~())", "int(String)", "~(Map<@,@>)", "~(SynthNode)", "~(ProgressEvent)", "~(num)", "Null(SynthNode)", "bool(Node)", "~(Object)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "bool(NodeValidator)", "Null(SequencerButton)", "~(Set<String>)", "Null(TunePadCell)", "bool(Element,String,String,_Html5NodeValidator)", "Future<Null>(@)", "bool(User)", "Null(AudioProcessingEvent)", "Null(Timer)", "~(Metronome)", "String(int)", "Null(DomException)", "Null(Symbol0,@)", "Null(@[StackTrace])", "JsFunction(@)", "Future<List<@>>()", "JsObject(@)", "Null(AudioBuffer)", "@(@,String)", "Null(~())", "Element(Node)", "Null(@,StackTrace)", "~(Element)", "~(PianoKey)", "Null(SequencerRow)", "JsArray<@>(@)", "Object(@)", "bool(Set<String>)", "Future<@>()", "@(@,@)", "~(Node,Node)", "String(String)", "double(@)", "num(@)", "~(SynthEvent)", "@(Event)", "@(CssClassSetImpl)", "bool(Event)", "String(HttpRequest)", "Null(ProgressEvent)", "~(CssClassSetImpl)", "CssClassSet(Element)", "Null(num)", "Null(int,@)", "~(Recording)", "Future<Null>(Event)", "~(Event)", "Node(SvgElement)", "Null(NoteEvent)", "Null(MIDIEvent)", "Null(MediaStream)", "Null(String,@)", "Null(List<Gadget>)", "Null(Gadget)", "Null(NavigatorUserMediaError)", "@(String)", "_Future<@>(@)"],
+    types: ["Null(MouseEvent)", "Null()", "Null(Event)", "~()", "~(DatastoreEvent)", "Null(@,@)", "Future<Null>(MouseEvent)", "~(KeyboardEvent)", "Null(@)", "@(@)", "Null(Element)", "bool(String)", "Null(KeyboardEvent)", "~(@)", "~(Object[StackTrace])", "~(String,@)", "~(String,String)", "~(String)", "~(ClockSubscriber)", "Future<Null>(ProgressEvent)", "~(~())", "~(Map<@,@>)", "~(SynthNode)", "~(ProgressEvent)", "~(num)", "Null(SynthNode)", "Null(SequencerButton)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "bool(NodeValidator)", "~(Object)", "~(Set<String>)", "bool(Node)", "bool(Element,String,String,_Html5NodeValidator)", "Future<Null>(@)", "Null(AudioProcessingEvent)", "bool(User)", "Null(TunePadCell)", "Null(Timer)", "~(Metronome)", "String(int)", "int(String)", "Null(DomException)", "Null(Symbol0,@)", "@(String)", "JsFunction(@)", "Null(NavigatorUserMediaError)", "JsObject(@)", "Null(AudioBuffer)", "Null(@[StackTrace])", "@(@,String)", "Null(~())", "Element(Node)", "~(Element)", "~(PianoKey)", "Null(SequencerRow)", "JsArray<@>(@)", "Object(@)", "bool(Set<String>)", "@(@,@)", "~(Node,Node)", "String(String)", "@(Event)", "double(@)", "num(@)", "~(SynthEvent)", "@(CssClassSetImpl)", "~(CssClassSetImpl)", "bool(Event)", "CssClassSet(Element)", "String(HttpRequest)", "Null(String,@)", "Null(int,@)", "Null(num)", "Null(ProgressEvent)", "~(Recording)", "Future<Null>(Event)", "~(Event)", "Node(SvgElement)", "Null(NoteEvent)", "Null(MIDIEvent)", "Null(@,StackTrace)", "Future<List<@>>()", "Null(List<Gadget>)", "Null(Gadget)", "Null(MediaStream)", "Future<@>()", "_Future<@>(@)"],
     interceptorsByTag: null,
     leafTags: null,
     arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
