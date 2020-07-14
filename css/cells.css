@@ -496,6 +496,7 @@ main.authenticated .logged-in-only { display: inherit; }
 
 .collaborators {
   display: flex;
+  list-style: none;
 }
 
 .collaborators .collaborator {
