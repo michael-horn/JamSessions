@@ -6360,14 +6360,9 @@
       this.$this = t0;
     },
     PythonCell$: function(gadget, datastore, clock) {
-      var t2,
-        _s11_ = "show-output",
-        t1 = new X.PythonCell(clock, gadget, datastore, H.setRuntimeTypeInfo([], type$.JSArray_User));
+      var t1 = new X.PythonCell(clock, gadget, datastore, H.setRuntimeTypeInfo([], type$.JSArray_User));
       t1.TunePadCell$2(gadget, datastore);
-      t2 = type$.JSArray_String;
-      t1.compiler = new X.PythonCompiler(t1, new S.Preprocessor(new H.JsLinkedHashMap(type$.JsLinkedHashMap_int_int), H.setRuntimeTypeInfo([], t2), H.setRuntimeTypeInfo([], t2)));
-      if (!gadget.idata.containsKey$1(0, _s11_))
-        gadget.idata.$indexSet(0, _s11_, false);
+      t1.PythonCell$3(gadget, datastore, clock);
       return t1;
     },
     PythonCell: function PythonCell(t0, t1, t2, t3) {
@@ -6404,7 +6399,7 @@
       this.$this = t0;
       this.dialog = t1;
     },
-    PythonCell__doContextMenu_closure: function PythonCell__doContextMenu_closure(t0) {
+    PythonCell_doContextMenu_closure: function PythonCell_doContextMenu_closure(t0) {
       this.$this = t0;
     },
     _PythonCell_TunePadCell_PythonListener: function _PythonCell_TunePadCell_PythonListener() {
@@ -6651,26 +6646,6 @@
     },
     HexEncoder: function HexEncoder() {
     },
-    CodeMirror$: function(listener, id) {
-      var t2,
-        _s14_ = "onEditorUpdate",
-        t1 = new R.CodeMirror(id, listener),
-        el = document.querySelector(id);
-      if (el != null)
-        el.parentElement;
-      t2 = $.$get$_context();
-      if (t2.$index(0, _s14_) == null) {
-        t2.$indexSet(0, _s14_, R.codemirror_CodeMirror_onEditorUpdate$closure());
-        t2.$indexSet(0, "onCursorActivity", R.codemirror_CodeMirror_onCursorActivity$closure());
-        t2.$indexSet(0, "onFocus", R.codemirror_CodeMirror_onEditorFocus$closure());
-        t2.$indexSet(0, "onBlur", R.codemirror_CodeMirror_onEditorBlur$closure());
-      }
-      $.$get$CodeMirror_editorUpdateMap().$indexSet(0, id, t1.get$_codemirror$_onEditorUpdate());
-      $.$get$CodeMirror_cursorActivityMap().$indexSet(0, id, t1.get$_onCursorActivity());
-      $.$get$CodeMirror_editorBlurMap().$indexSet(0, id, t1.get$_onEditorBlur());
-      $.$get$CodeMirror_editorFocusMap().$indexSet(0, id, t1.get$_onEditorFocus());
-      return t1;
-    },
     CodeMirror_onEditorUpdate: function(editor, change) {
       H._asStringNullable(editor);
       H._asStringNullable(change);
@@ -6882,19 +6857,17 @@
         _s13_ = "show-timeline",
         _s11_ = "show-editor",
         _s15_ = "show-instrument",
-        _s11_0 = "show-output",
         _s10_ = "midi-input",
-        _s11_1 = "midi-output",
-        t1 = new R.PythonTrack(clock, patches, gadget, datastore, H.setRuntimeTypeInfo([], type$.JSArray_User));
+        _s11_0 = "midi-output",
+        t1 = new R.PythonTrack(patches, clock, gadget, datastore, H.setRuntimeTypeInfo([], type$.JSArray_User));
       t1.TunePadCell$2(gadget, datastore);
+      t1.PythonCell$3(gadget, datastore, clock);
       t2 = clock._listeners;
       t2.add$1(0, t1);
       t3 = document;
       t4 = type$.SvgElement;
       t5 = type$.PathElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, "path")));
       t1.timeline = new D.Timeline(t1, t5, new H.JsLinkedHashMap(type$.JsLinkedHashMap_TraceEvent_SvgElement), type$.GElement._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, "g"))));
-      t3 = type$.JSArray_String;
-      t1.compiler = new X.PythonCompiler(t1, new S.Preprocessor(new H.JsLinkedHashMap(type$.JsLinkedHashMap_int_int), H.setRuntimeTypeInfo([], t3), H.setRuntimeTypeInfo([], t3)));
       t3 = type$.JSArray_Effect;
       t4 = type$.JSArray_SynthEvent;
       t5 = type$.JSArray_SynthChain;
@@ -6916,12 +6889,10 @@
         gadget.idata.$indexSet(0, _s11_, true);
       if (!gadget.idata.containsKey$1(0, _s15_))
         gadget.idata.$indexSet(0, _s15_, true);
-      if (!gadget.idata.containsKey$1(0, _s11_0))
-        gadget.idata.$indexSet(0, _s11_0, false);
       if (!gadget.idata.containsKey$1(0, _s10_))
         gadget.idata.$indexSet(0, _s10_, false);
-      if (!gadget.idata.containsKey$1(0, _s11_1))
-        gadget.idata.$indexSet(0, _s11_1, false);
+      if (!gadget.idata.containsKey$1(0, _s11_0))
+        gadget.idata.$indexSet(0, _s11_0, false);
       if (!gadget.idata.containsKey$1(0, "gain"))
         gadget.idata.$indexSet(0, "gain", 1);
       if (!gadget.idata.containsKey$1(0, "pan"))
@@ -6944,14 +6915,14 @@
     },
     PythonTrack: function PythonTrack(t0, t1, t2, t3, t4) {
       var _ = this;
-      _.clock = t0;
-      _.voice = _.synth = _.compiler = _.editor = _.timeline = null;
-      _.patches = t1;
-      _._panNode = _._gainNode = _.midi = _.trace = _.recorder = _.instrument = _.metronome = null;
-      _._track$_lastline = 0;
-      _._lastTrace = null;
+      _.voice = _.synth = _.timeline = null;
+      _.patches = t0;
+      _._lastTrace = _._panNode = _._gainNode = _.midi = _.trace = _.recorder = _.instrument = _.metronome = null;
       _._lastTime = -1;
       _._looped = false;
+      _.clock = t1;
+      _.compiler = _.editor = null;
+      _._lastline = 0;
       _.gadget = t2;
       _.datastore = t3;
       _.root = null;
@@ -6997,19 +6968,6 @@
     PythonTrack_insert_closure11: function PythonTrack_insert_closure11(t0) {
       this.$this = t0;
     },
-    PythonTrack_insert_closure12: function PythonTrack_insert_closure12(t0) {
-      this.$this = t0;
-    },
-    PythonTrack_insert_closure13: function PythonTrack_insert_closure13(t0) {
-      this.$this = t0;
-    },
-    PythonTrack_insert_closure14: function PythonTrack_insert_closure14(t0) {
-      this.$this = t0;
-    },
-    PythonTrack_insert_closure15: function PythonTrack_insert_closure15(t0, t1) {
-      this._box_0 = t0;
-      this.$this = t1;
-    },
     PythonTrack_onPythonDone_closure: function PythonTrack_onPythonDone_closure(t0) {
       this.$this = t0;
     },
@@ -7029,7 +6987,7 @@
       this.$this = t0;
       this.dialog = t1;
     },
-    PythonTrack__doContextMenu_closure: function PythonTrack__doContextMenu_closure(t0) {
+    PythonTrack_doContextMenu_closure: function PythonTrack_doContextMenu_closure(t0) {
       this.$this = t0;
     },
     PythonTrack__initMidi_closure: function PythonTrack__initMidi_closure(t0) {
@@ -7038,15 +6996,15 @@
     PythonTrack_toggleContextMenu_closure: function PythonTrack_toggleContextMenu_closure(t0) {
       this.menu = t0;
     },
-    _PythonTrack_TunePadCell_PythonListener: function _PythonTrack_TunePadCell_PythonListener() {
+    _PythonTrack_PythonCell_PythonListener: function _PythonTrack_PythonCell_PythonListener() {
     },
-    _PythonTrack_TunePadCell_PythonListener_EditorListener: function _PythonTrack_TunePadCell_PythonListener_EditorListener() {
+    _PythonTrack_PythonCell_PythonListener_EditorListener: function _PythonTrack_PythonCell_PythonListener_EditorListener() {
     },
-    _PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener: function _PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener() {
+    _PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener: function _PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener() {
     },
-    _PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber: function _PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber() {
+    _PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber: function _PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber() {
     },
-    _PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome: function _PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome() {
+    _PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome: function _PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome() {
     }
   },
   Z = {EditorListener: function EditorListener() {
@@ -7142,6 +7100,7 @@
       _.project = t1;
       _.patches = t2;
       _.cells = t3;
+      _._loading = false;
     },
     Dropbook_closure: function Dropbook_closure(t0) {
       this.$this = t0;
@@ -7788,7 +7747,7 @@
       t2 = type$._FrozenElementList_Element;
       t3 = type$.ElementList_Element;
       t4 = type$._ElementListEventStreamImpl_MouseEvent;
-      new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(welcome.querySelectorAll(".confirm-button"), t2)), false, "click", t4).listen$1(new F._showWelcomeMessage_closure());
+      new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(welcome.querySelectorAll(".confirm-button"), t2)), false, "click", t4).listen$1(new F._showWelcomeMessage_closure(project));
       H.checkTypeBound(t1, t1, "T", _s16_);
       new W._ElementListEventStreamImpl(t3._as(new W._FrozenElementList(welcome.querySelectorAll(".new-button"), t2)), false, "click", t4).listen$1(new F._showWelcomeMessage_closure0());
     },
@@ -7896,7 +7855,8 @@
     },
     main_closure4: function main_closure4() {
     },
-    _showWelcomeMessage_closure: function _showWelcomeMessage_closure() {
+    _showWelcomeMessage_closure: function _showWelcomeMessage_closure(t0) {
+      this.project = t0;
     },
     _showWelcomeMessage_closure0: function _showWelcomeMessage_closure0() {
     },
@@ -17365,7 +17325,7 @@
     compile$body$PythonCompiler: function(code, boilerplate) {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(type$.bool),
-        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, pcode, modules, worker, message, error, e, e0, t1, t2, imports, t3, t4, import_code, t5, t6, t7, exception, $async$exception, $async$temp1, $async$temp2;
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, pcode, modules, worker, message, error, e, e0, t1, t2, imports, t3, t4, import_code, t5, t6, t7, t8, t9, t10, line, name_el, desc_el, exception, $async$exception, $async$temp1, $async$temp2;
       var $async$compile$2 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1) {
           $async$currentError = $async$result;
@@ -17426,7 +17386,7 @@
               error = false;
               t3 = P._StreamIterator$(new W._EventStream(type$.EventTarget._as(worker), "message", false, type$._EventStream_MessageEvent), type$.MessageEvent);
               $async$handler = 14;
-              t1 = t1.linemap;
+              t1 = t1.linemap, t4 = type$.Element, t5 = type$._FrozenElementList_Element, t6 = t2.gadget;
             case 17:
               // for condition
               $async$temp1 = H;
@@ -17440,42 +17400,82 @@
                 break;
               }
               e = t3.get$current(t3);
-              t4 = e.data;
-              t5 = new P._AcceptStructuredCloneDart2Js([], []);
-              t5.mustCopy = true;
-              if (J.$eq$(J.$index$asx(t5.walk$1(t4), 0), "error")) {
-                t4 = e.data;
-                t5 = new P._AcceptStructuredCloneDart2Js([], []);
-                t5.mustCopy = true;
-                t4 = H._asStringNullable(J.$index$asx(t5.walk$1(t4), 1));
-                t5 = e.data;
-                t6 = new P._AcceptStructuredCloneDart2Js([], []);
-                t6.mustCopy = true;
-                message = H._asStringNullable(J.$index$asx(t6.walk$1(t5), 2));
-                t5 = e.data;
-                t6 = new P._AcceptStructuredCloneDart2Js([], []);
-                t6.mustCopy = true;
-                t5 = H._asStringNullable(J.$index$asx(t6.walk$1(t5), 3));
-                t6 = e.data;
-                t7 = new P._AcceptStructuredCloneDart2Js([], []);
-                t7.mustCopy = true;
-                t6 = H._asIntNullable(J.$index$asx(t7.walk$1(t6), 4));
+              t7 = e.data;
+              t8 = new P._AcceptStructuredCloneDart2Js([], []);
+              t8.mustCopy = true;
+              if (J.$eq$(J.$index$asx(t8.walk$1(t7), 0), "error")) {
+                t7 = e.data;
+                t8 = new P._AcceptStructuredCloneDart2Js([], []);
+                t8.mustCopy = true;
+                t7 = H._asStringNullable(J.$index$asx(t8.walk$1(t7), 1));
+                t8 = e.data;
+                t9 = new P._AcceptStructuredCloneDart2Js([], []);
+                t9.mustCopy = true;
+                message = H._asStringNullable(J.$index$asx(t9.walk$1(t8), 2));
+                t8 = e.data;
+                t9 = new P._AcceptStructuredCloneDart2Js([], []);
+                t9.mustCopy = true;
+                t8 = H._asStringNullable(J.$index$asx(t9.walk$1(t8), 3));
+                t9 = e.data;
+                t10 = new P._AcceptStructuredCloneDart2Js([], []);
+                t10.mustCopy = true;
+                t9 = H._asIntNullable(J.$index$asx(t10.walk$1(t9), 4));
                 if (message == null || message === "")
                   message = "Unknown";
-                if (typeof t6 !== "number") {
-                  $async$returnValue = t6.$ge();
+                if (typeof t9 !== "number") {
+                  $async$returnValue = t9.$ge();
                   $async$next = [1, 12];
                   // goto finally
                   $async$goto = 15;
                   break;
                 }
-                t2.onPythonError$4(t4, message, t5, t6 >= 0 && t1.containsKey$1(0, t6) ? t1.$index(0, t6) : -1);
+                line = t9 >= 0 && t1.containsKey$1(0, t9) ? t1.$index(0, t9) : -1;
+                t9 = t2.root;
+                name_el = t9.querySelector(".error-name");
+                desc_el = t2.root.querySelector(".error-description");
+                if (name_el != null && desc_el != null) {
+                  J.set$innerHtml$x(name_el, t7);
+                  t7 = J.getInterceptor$x(desc_el);
+                  t7.set$innerHtml(desc_el, message);
+                  if (typeof line !== "number") {
+                    $async$returnValue = line.$gt();
+                    $async$next = [1, 12];
+                    // goto finally
+                    $async$goto = 15;
+                    break;
+                  }
+                  if (line > 0)
+                    t7.set$innerHtml(desc_el, J.$add$ansx(t7.get$innerHtml(desc_el), " on line " + line + "."));
+                  if (t8 != null && t8 !== "")
+                    t7.set$innerHtml(desc_el, J.$add$ansx(t7.get$innerHtml(desc_el), "<br>" + H.S(t8)));
+                  t7 = t2.root;
+                  t7.toString;
+                  H.checkTypeBound(t4, t4, "T", "querySelectorAll");
+                  W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t7.querySelectorAll(".error-container"), t5)).remove$1(0, "hidden");
+                  t2.root.classList.add("error");
+                  t7 = "#cell-nav-" + H.S(t6.id) + " .shortcut-error";
+                  t8 = document;
+                  H.checkTypeBound(t4, t4, "T", "querySelectorAll");
+                  W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t8.querySelectorAll(t7), t5)).remove$1(0, "hidden");
+                }
+                if (typeof line !== "number") {
+                  $async$returnValue = line.$gt();
+                  $async$next = [1, 12];
+                  // goto finally
+                  $async$goto = 15;
+                  break;
+                }
+                if (line > 0) {
+                  t7 = t2.editor;
+                  t7.toString;
+                  $.$get$_context().callMethod$2("setErrorMarker", [t7.id, line]);
+                }
                 error = true;
               } else {
-                t4 = e.data;
-                t5 = new P._AcceptStructuredCloneDart2Js([], []);
-                t5.mustCopy = true;
-                if (J.$eq$(J.$index$asx(t5.walk$1(t4), 0), "done")) {
+                t7 = e.data;
+                t8 = new P._AcceptStructuredCloneDart2Js([], []);
+                t8.mustCopy = true;
+                if (J.$eq$(J.$index$asx(t8.walk$1(t7), 0), "done")) {
                   $async$self._compiling = false;
                   t1 = e.data;
                   t4 = new P._AcceptStructuredCloneDart2Js([], []);
@@ -17835,14 +17835,6 @@
     }
   };
   R.CodeMirror.prototype = {
-    setCode$1: function(code) {
-      $.$get$_context().callMethod$2("setCode", [this.id, code]);
-      this._codemirror$_dirty = true;
-    },
-    applyChange$1: function(changes) {
-      $.$get$_context().callMethod$2("replaceRange", [this.id, C.C_JsonCodec.encode$2$toEncodable(changes, null)]);
-      this._codemirror$_dirty = true;
-    },
     setTraceMarker$1: function(line) {
       if (line != null && line > 0)
         $.$get$_context().callMethod$2("setTraceMarker", [this.id, line]);
@@ -17856,16 +17848,29 @@
         t1.onEditorUpdate$1(change);
         t2 = J.getInterceptor$asx(change);
         if (J.$gt$n(J.get$length$asx(t2.$index(change, "text")), 1))
-          t1.onLineAdded$1(change);
+          t1.compile$0();
         else if (!J.$eq$(J.$index$asx(t2.$index(change, "from"), "line"), J.$index$asx(t2.$index(change, "to"), "line")))
-          t1.onLineRemoved$1(change);
+          t1.compile$0();
       }
     },
     _onCursorActivity$1: function(position) {
-      this.listener.onCursorActivity$1(type$.Map_dynamic_dynamic._as(position));
+      var t1 = this.listener,
+        line = H._asIntNullable(J.$index$asx(type$.Map_dynamic_dynamic._as(position), "line"));
+      if (t1.editor._codemirror$_dirty && line != t1._lastline)
+        t1.compile$0();
+      t1._lastline = line;
     },
     _onEditorBlur$0: function() {
-      this.listener.onEditorBlur$0();
+      var t2, t3,
+        t1 = this.listener;
+      t1.super$TunePadCell$onEditorBlur();
+      t2 = t1.editor;
+      if (t2._codemirror$_dirty) {
+        t3 = t1.gadget;
+        t3.idata.$indexSet(0, "python", H._asStringNullable($.$get$_context().callMethod$2("getCode", [t2.id])));
+        t1.datastore.update$1(0, t3);
+        t1.editor._codemirror$_dirty = false;
+      }
     },
     _onEditorFocus$0: function() {
       this.listener.onEditorFocus$0();
@@ -23047,9 +23052,21 @@
     get$gadgetTemplate: function() {
       return "definitions-gadget-template";
     },
+    get$default_code: function() {
+      return "# Use this cell to define variables and functions for other tracks.\n# Import your definitions using this line of code:\n\n# from tunepad_" + H.S(this.gadget.id) + " import *\n\n\n";
+    },
+    PythonCell$3: function(gadget, datastore, clock) {
+      var _s11_ = "show-output",
+        t1 = type$.JSArray_String;
+      this.compiler = new X.PythonCompiler(this, new S.Preprocessor(new H.JsLinkedHashMap(type$.JsLinkedHashMap_int_int), H.setRuntimeTypeInfo([], t1), H.setRuntimeTypeInfo([], t1)));
+      t1 = this.gadget;
+      if (!t1.idata.containsKey$1(0, _s11_))
+        t1.idata.$indexSet(0, _s11_, false);
+    },
     insert$2: function(_, container, displayOrder) {
       var t2, t3, t4, t5, t6, el, code, _this = this,
         _s16_ = "querySelectorAll",
+        _s14_ = "onEditorUpdate",
         t1 = {};
       _this.super$TunePadCell$insert(0, container, displayOrder);
       t2 = _this.root;
@@ -23069,11 +23086,27 @@
       if (el != null)
         J.setInnerHtml$1$x(el, "Module: tunepad_" + H.S(_this.gadget.id));
       t2 = _this.gadget;
-      _this.editor = R.CodeMirror$(_this, "#gadget-" + H.S(t2.id) + " .python-editor");
+      t3 = "#gadget-" + H.S(t2.id) + " .python-editor";
+      t4 = new R.CodeMirror(t3, _this);
+      el = document.querySelector(t3);
+      if (el != null)
+        el.parentElement;
+      t5 = $.$get$_context();
+      if (t5.$index(0, _s14_) == null) {
+        t5.$indexSet(0, _s14_, R.codemirror_CodeMirror_onEditorUpdate$closure());
+        t5.$indexSet(0, "onCursorActivity", R.codemirror_CodeMirror_onCursorActivity$closure());
+        t5.$indexSet(0, "onFocus", R.codemirror_CodeMirror_onEditorFocus$closure());
+        t5.$indexSet(0, "onBlur", R.codemirror_CodeMirror_onEditorBlur$closure());
+      }
+      $.$get$CodeMirror_editorUpdateMap().$indexSet(0, t3, t4.get$_codemirror$_onEditorUpdate());
+      $.$get$CodeMirror_cursorActivityMap().$indexSet(0, t3, t4.get$_onCursorActivity());
+      $.$get$CodeMirror_editorBlurMap().$indexSet(0, t3, t4.get$_onEditorBlur());
+      $.$get$CodeMirror_editorFocusMap().$indexSet(0, t3, t4.get$_onEditorFocus());
+      _this.editor = t4;
       code = H._asStringNullable(t2.idata.$index(0, "python"));
       t1.code = code;
       if (code == null || C.JSString_methods.trim$0(code).length === 0)
-        t1.code = "# You can define variables and functions here for other Tunepad tracks.\n# Import code from this cell using the command:\n#\n# from tunepad_" + H.S(t2.id) + " import *\n\n\n";
+        t1.code = _this.get$default_code();
       P.Timer_Timer(C.Duration_100000, new X.PythonCell_insert_closure2(t1, _this));
       _this.updateView$1(false);
     },
@@ -23100,39 +23133,18 @@
       if (remote) {
         t2 = _this.editor;
         t2._codemirror$_noEvents = true;
-        t2.setCode$1(H._asStringNullable(t1.idata.$index(0, "python")));
+        t1 = H._asStringNullable(t1.idata.$index(0, "python"));
+        $.$get$_context().callMethod$2("setCode", [t2.id, t1]);
+        t2._codemirror$_dirty = true;
         _this.editor._codemirror$_noEvents = false;
       }
     },
     onCollaboratorEdit$1: function(change) {
       var t1 = this.editor;
       t1._codemirror$_noEvents = true;
-      t1.applyChange$1(change);
+      $.$get$_context().callMethod$2("replaceRange", [t1.id, C.C_JsonCodec.encode$2$toEncodable(change, null)]);
+      t1._codemirror$_dirty = true;
       this.editor._codemirror$_noEvents = false;
-    },
-    onLineAdded$1: function(change) {
-      this.compile$0();
-    },
-    onLineRemoved$1: function(change) {
-      this.compile$0();
-    },
-    onEditorBlur$0: function() {
-      var t1, t2, _this = this;
-      _this.super$TunePadCell$onEditorBlur();
-      t1 = _this.editor;
-      if (t1._codemirror$_dirty) {
-        t2 = _this.gadget;
-        t2.idata.$indexSet(0, "python", H._asStringNullable($.$get$_context().callMethod$2("getCode", [t1.id])));
-        _this.datastore.update$1(0, t2);
-        _this.editor._codemirror$_dirty = false;
-      }
-    },
-    onCursorActivity$1: function(position) {
-      var _this = this,
-        line = H._asIntNullable(J.$index$asx(position, "line"));
-      if (_this.editor._codemirror$_dirty && line != _this._lastline)
-        _this.compile$0();
-      _this._lastline = line;
     },
     getPythonModule$1: function(module) {
       var $async$goto = 0,
@@ -23267,46 +23279,11 @@
         P.Timer_Timer(C.Duration_3000000, new X.PythonCell_onPythonDone_closure(_this));
       }
     },
-    onPythonError$4: function($name, message, details, line) {
-      var t1, t2, t3, t4, _this = this,
-        _s16_ = "querySelectorAll",
-        name_el = _this.root.querySelector(".error-name"),
-        desc_el = _this.root.querySelector(".error-description");
-      if (name_el != null && desc_el != null) {
-        J.set$innerHtml$x(name_el, $name);
-        t1 = J.getInterceptor$x(desc_el);
-        t1.set$innerHtml(desc_el, message);
-        if (typeof line !== "number")
-          return line.$gt();
-        if (line > 0)
-          t1.set$innerHtml(desc_el, J.$add$ansx(t1.get$innerHtml(desc_el), " on line " + line + "."));
-        if (details != null && details !== "")
-          t1.set$innerHtml(desc_el, J.$add$ansx(t1.get$innerHtml(desc_el), "<br>" + H.S(details)));
-        t1 = _this.root;
-        t2 = type$.Element;
-        t1.toString;
-        H.checkTypeBound(t2, t2, "T", _s16_);
-        t3 = type$._FrozenElementList_Element;
-        W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".error-container"), t3)).remove$1(0, "hidden");
-        _this.root.classList.add("error");
-        t1 = "#cell-nav-" + H.S(_this.gadget.id) + " .shortcut-error";
-        t4 = document;
-        H.checkTypeBound(t2, t2, "T", _s16_);
-        W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t4.querySelectorAll(t1), t3)).remove$1(0, "hidden");
-      }
-      if (typeof line !== "number")
-        return line.$gt();
-      if (line > 0) {
-        t1 = _this.editor;
-        t1.toString;
-        $.$get$_context().callMethod$2("setErrorMarker", [t1.id, line]);
-      }
-    },
-    compile$0: function() {
+    compile$1: function(runWhenDone) {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
-        $async$returnValue, $async$self = this, t1, t2, t3, t4, t5, $async$temp1;
-      var $async$compile$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        $async$returnValue, $async$self = this, t1, t2, t3, t4, t5, success, $async$temp1;
+      var $async$compile$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
         while (true)
@@ -23319,7 +23296,7 @@
               // then
               $async$temp1 = $;
               $async$goto = 5;
-              return P._asyncAwait(W.HttpRequest_getString("packages/compiler/python/boilerplate.py"), $async$compile$0);
+              return P._asyncAwait(W.HttpRequest_getString("packages/compiler/python/boilerplate.py"), $async$compile$1);
             case 5:
               // returning from await.
               $async$temp1.PythonCell_boilerplate = $async$result;
@@ -23351,9 +23328,12 @@
                 break;
               }
               $async$goto = 8;
-              return P._asyncAwait($async$self.compiler.compile$2(H._asStringNullable(t2.callMethod$2("getCode", [$async$self.editor.id])), "from tunepad import *\n\n"), $async$compile$0);
+              return P._asyncAwait($async$self.compiler.compile$2(H._asStringNullable(t2.callMethod$2("getCode", [$async$self.editor.id])), "from tunepad import *\n\n"), $async$compile$1);
             case 8:
               // returning from await.
+              success = $async$result;
+              if (runWhenDone && H.boolConversionCheck(success))
+                $async$self.play$0(0);
             case 7:
               // join
             case 1:
@@ -23361,7 +23341,10 @@
               return P._asyncReturn($async$returnValue, $async$completer);
           }
       });
-      return P._asyncStartSync($async$compile$0, $async$completer);
+      return P._asyncStartSync($async$compile$1, $async$completer);
+    },
+    compile$0: function() {
+      return this.compile$1(false);
     },
     play$0: function(_) {
     },
@@ -23401,6 +23384,17 @@
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll(t1), t4)).remove$1(0, "fa-check");
       this.gadget.idata.$indexSet(0, "show-" + $name, false);
     },
+    toggleElement$1: function($name) {
+      var t1 = this.root,
+        t2 = "." + $name + "-container",
+        t3 = type$.Element;
+      t1.toString;
+      H.checkTypeBound(t3, t3, "T", "querySelectorAll");
+      if (W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(t2), type$._FrozenElementList_Element)).contains$1(0, "hidden"))
+        this._showElement$1($name);
+      else
+        this._hideElement$1($name);
+    },
     _shareCell$0: function() {
       var dialog, t2, t3, t4, t5, t6, t7, _this = this,
         _s15_ = ".confirm-button",
@@ -23433,36 +23427,38 @@
         new W._ElementListEventStreamImpl(type$.ElementList_Element._as(new W._FrozenElementList(dialog.querySelectorAll(_s15_), t4)), false, "click", type$._ElementListEventStreamImpl_MouseEvent).listen$1(new X.PythonCell__shareCell_closure0(_this, dialog));
       }
     },
-    _definitions$_doContextMenu$1: function(menu) {
-      var t1, data, clone, t2, _this = this;
+    cloneCell$0: function() {
+      var clone, _s5_ = "idata",
+        t1 = this.gadget,
+        data = t1.save$0(0);
+      data.$indexSet(0, "id", -1);
+      data.$indexSet(0, "name", "Copy of " + H.S(t1.name));
+      data.$indexSet(0, "remix_parent", t1.id);
+      J.$indexSet$ax(data.$index(0, _s5_), "cloned", true);
+      J.$indexSet$ax(data.$index(0, _s5_), "show-editor", true);
+      J.$indexSet$ax(data.$index(0, _s5_), "show-instrument", true);
+      J.$indexSet$ax(data.$index(0, _s5_), "show-output", false);
+      J.$indexSet$ax(data.$index(0, _s5_), "show-timeline", true);
+      J.$indexSet$ax(data.$index(0, _s5_), "midi-output", false);
+      J.$indexSet$ax(data.$index(0, _s5_), "midi-input", false);
+      clone = new L.Gadget(new H.JsLinkedHashMap(type$.JsLinkedHashMap_dynamic_dynamic), -1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
+      clone.type = "gadgets";
+      clone.name = "New Track";
+      clone.load$1(0, data);
+      this.datastore.create$1(0, clone);
+    },
+    doContextMenu$1: function(menu) {
+      var _this = this;
       menu.toString;
       switch (menu.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(menu))._toHyphenedName$1("command"))) {
         case "delete-track":
-          P.Timer_Timer(C.Duration_200000, new X.PythonCell__doContextMenu_closure(_this));
+          P.Timer_Timer(C.Duration_200000, new X.PythonCell_doContextMenu_closure(_this));
           return;
         case "clone-track":
-          t1 = _this.gadget;
-          data = t1.save$0(0);
-          data.$indexSet(0, "id", -1);
-          data.$indexSet(0, "name", "Copy of " + H.S(t1.name));
-          data.$indexSet(0, "remix_parent", t1.id);
-          J.$indexSet$ax(data.$index(0, "idata"), "cloned", true);
-          J.$indexSet$ax(data.$index(0, "idata"), "show-output", false);
-          clone = new L.Gadget(new H.JsLinkedHashMap(type$.JsLinkedHashMap_dynamic_dynamic), -1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
-          clone.type = "gadgets";
-          clone.name = "New Track";
-          clone.load$1(0, data);
-          _this.datastore.create$1(0, clone);
+          _this.cloneCell$0();
           return;
         case "show-output":
-          t1 = _this.root;
-          t2 = type$.Element;
-          t1.toString;
-          H.checkTypeBound(t2, t2, "T", "querySelectorAll");
-          if (W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".output-container"), type$._FrozenElementList_Element)).contains$1(0, "hidden"))
-            _this._showElement$1("output");
-          else
-            _this._hideElement$1("output");
+          _this.toggleElement$1("output");
           break;
         case "share":
           _this._shareCell$0();
@@ -23487,7 +23483,7 @@
   };
   X.PythonCell_insert_closure1.prototype = {
     call$1: function(menu) {
-      this.$this._definitions$_doContextMenu$1(type$.HtmlElement._as(menu));
+      this.$this.doContextMenu$1(type$.HtmlElement._as(menu));
       D.DropdownMenu_closeAllMenus();
     },
     $signature: 8
@@ -23593,11 +23589,12 @@
     },
     $signature: 6
   };
-  X.PythonCell__doContextMenu_closure.prototype = {
+  X.PythonCell_doContextMenu_closure.prototype = {
     call$0: function() {
       if (H.boolConversionCheck(window.confirm("Are you sure you want to delete this track?"))) {
         var t1 = this.$this;
         t1.datastore.delete$1(0, t1.gadget);
+        t1.pause$0(0);
         t1 = t1.root;
         (t1 && C.DivElement_methods).remove$0(t1);
       }
@@ -27480,105 +27477,91 @@
     $signature: 0
   };
   R.PythonTrack.prototype = {
+    get$gadgetTemplate: function() {
+      return "gadget-template";
+    },
+    get$default_code: function() {
+      return "# New TunePad track\n\n\n\n";
+    },
     insert$2: function(_, container, displayOrder) {
-      var t2, t3, t4, t5, t6, code, _this = this,
+      var t1, t2, t3, t4, t5, _this = this,
         _s21_ = ".instrument-container",
         _s1_ = "T",
         _s16_ = "querySelectorAll",
         _s9_ = "mousedown",
-        _s5_ = "click", t1 = {};
-      _this.super$TunePadCell$insert(0, container, displayOrder);
+        _s5_ = "click";
+      _this.super$PythonCell$insert(0, container, displayOrder);
       _this.timeline.insert$1(0, type$.HtmlElement._as(_this.root.querySelector(".timeline-container")));
       _this._initVoiceMenu$0();
       _this._setInstrument$1(_this.voice);
       _this._loadPatch$1(_this.voice);
-      t2 = _this.root;
-      t3 = type$.Element;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      t4 = type$._FrozenElementList_Element;
-      t5 = type$.ElementList_Element;
-      t6 = type$._ElementListEventStreamImpl_MouseEvent;
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(_s21_), t4)), false, _s9_, t6).listen$1(new R.PythonTrack_insert_closure(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(_s21_), t4)), false, "blur", type$._ElementListEventStreamImpl_Event).listen$1(new R.PythonTrack_insert_closure0(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".play-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure1(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".pause-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure2(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".step-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure3(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".record-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure4(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".stop-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure5(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".clear-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure6(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".copy-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure7(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".quant-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure8(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".record-close-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure9(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".metronome-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure10(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".voice-selector"), t4)), false, _s9_, t6).listen$1(new R.PythonTrack_insert_closure11(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".output-hint"), t4)), false, _s9_, t6).listen$1(new R.PythonTrack_insert_closure12(_this));
-      t2 = _this.root;
-      t2.toString;
-      H.checkTypeBound(t3, t3, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t5._as(new W._FrozenElementList(t2.querySelectorAll(".output-container .close-button"), t4)), false, _s5_, t6).listen$1(new R.PythonTrack_insert_closure13(_this));
-      D.DropdownMenu_armMenu(_this.root.querySelector(".menu-button"), new R.PythonTrack_insert_closure14(_this));
-      t6 = _this.gadget;
-      _this.editor = R.CodeMirror$(_this, "#gadget-" + H.S(t6.id) + " .python-editor");
-      code = H._asStringNullable(t6.idata.$index(0, "python"));
-      t1.code = code;
-      if (code == null || C.JSString_methods.trim$0(code).length === 0)
-        t1.code = "# New TunePad track\n\n\n\n";
-      P.Timer_Timer(C.Duration_100000, new R.PythonTrack_insert_closure15(t1, _this));
+      t1 = _this.root;
+      t2 = type$.Element;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      t3 = type$._FrozenElementList_Element;
+      t4 = type$.ElementList_Element;
+      t5 = type$._ElementListEventStreamImpl_MouseEvent;
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(_s21_), t3)), false, _s9_, t5).listen$1(new R.PythonTrack_insert_closure(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(_s21_), t3)), false, "blur", type$._ElementListEventStreamImpl_Event).listen$1(new R.PythonTrack_insert_closure0(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".play-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure1(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".pause-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure2(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".step-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure3(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".record-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure4(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".stop-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure5(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".clear-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure6(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".copy-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure7(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".quant-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure8(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".record-close-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure9(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".metronome-button"), t3)), false, _s5_, t5).listen$1(new R.PythonTrack_insert_closure10(_this));
+      t1 = _this.root;
+      t1.toString;
+      H.checkTypeBound(t2, t2, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t1.querySelectorAll(".voice-selector"), t3)), false, _s9_, t5).listen$1(new R.PythonTrack_insert_closure11(_this));
       _this.updateView$1(false);
     },
-    onUpdated$1: function($event) {
-      this.updateView$1($event.remote);
-    },
-    onDeleted$1: function($event) {
-    },
-    onMessage$1: function(_, $event) {
-    },
     updateView$1: function(remote) {
-      var t2, g, div, patchId, t3, _this = this,
+      var t1, p, t2, g, div, patchId, _this = this,
         _s8_ = "timeline",
-        _s10_ = "instrument",
-        t1 = _this.gadget,
-        p = J.clamp$2$n(B.toNum(t1.idata.$index(0, "pan"), 0), -1, 1);
+        _s10_ = "instrument";
+      _this.super$PythonCell$updateView(remote);
+      if (_this.instrument == null)
+        return;
+      t1 = _this.gadget;
+      p = J.clamp$2$n(B.toNum(t1.idata.$index(0, "pan"), 0), -1, 1);
       t1.idata.$indexSet(0, "pan", p);
       t2 = _this._panNode;
       if (t2 != null)
@@ -27589,21 +27572,17 @@
       if (t2 != null)
         t2.gain.value = g;
       if (B.toBool(t1.idata.$index(0, "show-timeline"), false))
-        _this._track$_showElement$1(_s8_);
+        _this._showElement$1(_s8_);
       else
-        _this._track$_hideElement$1(_s8_);
+        _this._hideElement$1(_s8_);
       if (B.toBool(t1.idata.$index(0, "show-editor"), false))
-        _this._track$_showElement$1("editor");
+        _this._showElement$1("editor");
       else
-        _this._track$_hideElement$1("editor");
+        _this._hideElement$1("editor");
       if (B.toBool(t1.idata.$index(0, "show-instrument"), false))
-        _this._track$_showElement$1(_s10_);
+        _this._showElement$1(_s10_);
       else
-        _this._track$_hideElement$1(_s10_);
-      if (B.toBool(t1.idata.$index(0, "show-output"), false))
-        _this._track$_showElement$1("output");
-      else
-        _this._track$_hideElement$1("output");
+        _this._hideElement$1(_s10_);
       _this._setMidiInput$1(B.toBool(t1.idata.$index(0, "midi-input"), false));
       _this._setMidiOutput$1(B.toBool(t1.idata.$index(0, "midi-output"), false));
       t2 = _this.editor;
@@ -27613,53 +27592,17 @@
       if (div != null)
         C.DivElement_methods.setInnerHtml$1(div, H.S(t1.beats) + " BEATS &mdash; " + t2 + " LINES");
       patchId = B.toInt0(t1.idata.$index(0, "patch"), 9);
-      t2 = _this.patches;
-      if (t2.containsKey$1(0, patchId)) {
-        t3 = _this.voice.id;
-        t3 = patchId == null ? t3 != null : patchId !== t3;
+      t1 = _this.patches;
+      if (t1.containsKey$1(0, patchId)) {
+        t2 = _this.voice.id;
+        t2 = patchId == null ? t2 != null : patchId !== t2;
       } else
-        t3 = false;
-      if (t3) {
-        _this.set$voice(0, t2.$index(0, patchId));
+        t2 = false;
+      if (t2) {
+        _this.set$voice(0, t1.$index(0, patchId));
         _this._setInstrument$1(_this.voice);
         _this._loadPatch$1(_this.voice);
       }
-      if (remote) {
-        t2 = _this.editor;
-        t2._codemirror$_noEvents = true;
-        t2.setCode$1(H._asStringNullable(t1.idata.$index(0, "python")));
-        _this.editor._codemirror$_noEvents = false;
-      }
-    },
-    onCollaboratorEdit$1: function(change) {
-      var t1 = this.editor;
-      t1._codemirror$_noEvents = true;
-      t1.applyChange$1(change);
-      this.editor._codemirror$_noEvents = false;
-    },
-    onLineAdded$1: function(change) {
-      this.compile$0();
-    },
-    onLineRemoved$1: function(change) {
-      this.compile$0();
-    },
-    onEditorBlur$0: function() {
-      var t1, t2, _this = this;
-      _this.super$TunePadCell$onEditorBlur();
-      t1 = _this.editor;
-      if (t1._codemirror$_dirty) {
-        t2 = _this.gadget;
-        t2.idata.$indexSet(0, "python", H._asStringNullable($.$get$_context().callMethod$2("getCode", [t1.id])));
-        _this.datastore.update$1(0, t2);
-        _this.editor._codemirror$_dirty = false;
-      }
-    },
-    onCursorActivity$1: function(position) {
-      var _this = this,
-        line = H._asIntNullable(J.$index$asx(position, "line"));
-      if (_this.editor._codemirror$_dirty && line != _this._track$_lastline)
-        _this.compile$0();
-      _this._track$_lastline = line;
     },
     onTempoChange$0: function() {
       var t2, t3, _this = this,
@@ -27705,106 +27648,6 @@
       _this.synth.releaseAllNotes$0();
       _this._lastTrace = _this.trace.advanceToBeat$1(playhead);
       t1.setTime$1(playhead);
-    },
-    getPythonModule$1: function(module) {
-      var $async$goto = 0,
-        $async$completer = P._makeAsyncAwaitCompleter(type$.String),
-        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, id, gadget, t1, exception, $async$exception, $async$temp1;
-      var $async$getPythonModule$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1) {
-          $async$currentError = $async$result;
-          $async$goto = $async$handler;
-        }
-        while (true)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              $async$goto = module === "tunepad" ? 3 : 5;
-              break;
-            case 3:
-              // then
-              t1 = $.PythonTrack_boilerplate;
-              $async$returnValue = t1 == null ? "" : t1;
-              // goto return
-              $async$goto = 1;
-              break;
-              // goto join
-              $async$goto = 4;
-              break;
-            case 5:
-              // else
-              $async$goto = J.startsWith$1$s(module, "tunepad_") ? 6 : 7;
-              break;
-            case 6:
-              // then
-              id = B.toInt0(C.JSString_methods.substring$1(module, 8), -1);
-              t1 = id;
-              if (typeof t1 !== "number") {
-                $async$returnValue = t1.$lt();
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              if (t1 < 0) {
-                $async$returnValue = "";
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$handler = 9;
-              t1 = new L.Gadget(new H.JsLinkedHashMap(type$.JsLinkedHashMap_dynamic_dynamic), id, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
-              t1.type = "gadgets";
-              t1.name = "New Track";
-              $async$temp1 = type$.Gadget;
-              $async$goto = 12;
-              return P._asyncAwait($async$self.datastore.retrieve$1(t1), $async$getPythonModule$1);
-            case 12:
-              // returning from await.
-              gadget = $async$temp1._as($async$result);
-              if (gadget != null && gadget.idata.containsKey$1(0, "python")) {
-                t1 = type$.FutureOr_String._as(gadget.idata.$index(0, "python"));
-                $async$returnValue = t1;
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$handler = 2;
-              // goto after finally
-              $async$goto = 11;
-              break;
-            case 9:
-              // catch
-              $async$handler = 8;
-              $async$exception = $async$currentError;
-              H.unwrapException($async$exception);
-              P.print("Error loading python module. Module not found.");
-              // goto after finally
-              $async$goto = 11;
-              break;
-            case 8:
-              // uncaught
-              // goto rethrow
-              $async$goto = 2;
-              break;
-            case 11:
-              // after finally
-            case 7:
-              // join
-            case 4:
-              // join
-              $async$returnValue = "";
-              // goto return
-              $async$goto = 1;
-              break;
-            case 1:
-              // return
-              return P._asyncReturn($async$returnValue, $async$completer);
-            case 2:
-              // rethrow
-              return P._asyncRethrow($async$currentError, $async$completer);
-          }
-      });
-      return P._asyncStartSync($async$getPythonModule$1, $async$completer);
     },
     onPythonDone$1: function(outputs) {
       var t3, out, t4, out_count, output, t5, t6, t7, _this = this,
@@ -27866,108 +27709,6 @@
         J.set$innerHtml$x(_this.root.querySelector(".output-count"), "" + out_count);
         P.Timer_Timer(C.Duration_3000000, new R.PythonTrack_onPythonDone_closure(_this));
       }
-    },
-    onPythonError$4: function($name, message, details, line) {
-      var t1, t2, t3, t4, _this = this,
-        _s16_ = "querySelectorAll",
-        name_el = _this.root.querySelector(".error-name"),
-        desc_el = _this.root.querySelector(".error-description");
-      if (name_el != null && desc_el != null) {
-        J.set$innerHtml$x(name_el, $name);
-        t1 = J.getInterceptor$x(desc_el);
-        t1.set$innerHtml(desc_el, message);
-        if (typeof line !== "number")
-          return line.$gt();
-        if (line > 0)
-          t1.set$innerHtml(desc_el, J.$add$ansx(t1.get$innerHtml(desc_el), " on line " + line + "."));
-        if (details != null && details !== "")
-          t1.set$innerHtml(desc_el, J.$add$ansx(t1.get$innerHtml(desc_el), "<br>" + H.S(details)));
-        t1 = _this.root;
-        t2 = type$.Element;
-        t1.toString;
-        H.checkTypeBound(t2, t2, "T", _s16_);
-        t3 = type$._FrozenElementList_Element;
-        W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".error-container"), t3)).remove$1(0, "hidden");
-        _this.root.classList.add("error");
-        t1 = "#cell-nav-" + H.S(_this.gadget.id) + " .shortcut-error";
-        t4 = document;
-        H.checkTypeBound(t2, t2, "T", _s16_);
-        W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t4.querySelectorAll(t1), t3)).remove$1(0, "hidden");
-      }
-      if (typeof line !== "number")
-        return line.$gt();
-      if (line > 0) {
-        t1 = _this.editor;
-        t1.toString;
-        $.$get$_context().callMethod$2("setErrorMarker", [t1.id, line]);
-      }
-    },
-    compile$1: function(runWhenDone) {
-      var $async$goto = 0,
-        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
-        $async$returnValue, $async$self = this, t1, t2, t3, t4, t5, success, $async$temp1;
-      var $async$compile$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return P._asyncRethrow($async$result, $async$completer);
-        while (true)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              $async$goto = $.PythonTrack_boilerplate == null ? 3 : 4;
-              break;
-            case 3:
-              // then
-              $async$temp1 = $;
-              $async$goto = 5;
-              return P._asyncAwait(W.HttpRequest_getString("packages/compiler/python/boilerplate.py"), $async$compile$1);
-            case 5:
-              // returning from await.
-              $async$temp1.PythonTrack_boilerplate = $async$result;
-            case 4:
-              // join
-              $async$goto = !$async$self.compiler._compiling ? 6 : 7;
-              break;
-            case 6:
-              // then
-              t1 = $async$self.editor;
-              t1.toString;
-              t2 = $.$get$_context();
-              t2.callMethod$2("clearErrorMarkers", [t1.id]);
-              t2.callMethod$2("clearTraceMarkers", [$async$self.editor.id]);
-              t1 = $async$self.root;
-              t3 = type$.Element;
-              t1.toString;
-              H.checkTypeBound(t3, t3, "T", "querySelectorAll");
-              t4 = type$._FrozenElementList_Element;
-              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(".error-container"), t4)).add$1(0, "hidden");
-              t1 = "#cell-nav-" + H.S($async$self.gadget.id) + " .shortcut-error";
-              t5 = document;
-              H.checkTypeBound(t3, t3, "T", "querySelectorAll");
-              W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t5.querySelectorAll(t1), t4)).add$1(0, "hidden");
-              $async$self.root.classList.remove("error");
-              if (H._asStringNullable(t2.callMethod$2("getCode", [$async$self.editor.id])) == null) {
-                // goto return
-                $async$goto = 1;
-                break;
-              }
-              $async$goto = 8;
-              return P._asyncAwait($async$self.compiler.compile$2(H._asStringNullable(t2.callMethod$2("getCode", [$async$self.editor.id])), "from tunepad import *\n\n"), $async$compile$1);
-            case 8:
-              // returning from await.
-              success = $async$result;
-              if (runWhenDone && H.boolConversionCheck(success))
-                $async$self.play$0(0);
-            case 7:
-              // join
-            case 1:
-              // return
-              return P._asyncReturn($async$returnValue, $async$completer);
-          }
-      });
-      return P._asyncStartSync($async$compile$1, $async$completer);
-    },
-    compile$0: function() {
-      return this.compile$1(false);
     },
     play$0: function(_) {
       var t1, t2, id, t3, t4, t5, t6, b, _this = this, _s1_ = "T",
@@ -28372,16 +28113,21 @@
       }
     },
     _matchingInstrument$1: function(patch) {
-      var _this = this,
+      var t2, _this = this,
         t1 = patch.instrument;
       if (t1 === "drums" && _this.gadget.instrument === "drumkit")
         return true;
       else if (t1 === "drumkit" && _this.gadget.instrument === "drums")
         return true;
-      else if (t1 === "piano" && _this.gadget.instrument === "synth")
-        return true;
-      else
-        return t1 == _this.gadget.instrument;
+      else {
+        t2 = t1 === "piano";
+        if (t2 && _this.gadget.instrument === "synth")
+          return true;
+        else if (t2 && _this.gadget.instrument === "marimba")
+          return true;
+        else
+          return t1 == _this.gadget.instrument;
+      }
     },
     _loadPatch$1: function(patch) {
       var $async$goto = 0,
@@ -28501,6 +28247,14 @@
           t3.height = 190;
           _this.instrument = t3;
         } else if (t2 === "synth" && !(old instanceof B.Piano)) {
+          t2 = H.setRuntimeTypeInfo([], type$.JSArray_PianoKey);
+          t3 = document;
+          t4 = type$.SvgElement;
+          t5 = type$.GElement;
+          t3 = new B.Piano(t2, t5._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, _s1_))), _s5_, P.StreamController_StreamController(type$.NoteEvent), t5._as(t4._as(C.HtmlDocument_methods.createElementNS$2(t3, _s26_, _s1_))));
+          t3.height = 190;
+          _this.instrument = t3;
+        } else if (t2 === "marimba" && !(old instanceof B.Piano)) {
           t2 = H.setRuntimeTypeInfo([], type$.JSArray_PianoKey);
           t3 = document;
           t4 = type$.SvgElement;
@@ -28819,51 +28573,6 @@
       if (m != null)
         J.setInnerHtml$1$x(m, $status);
     },
-    _track$_showElement$1: function($name) {
-      var t4,
-        _s16_ = "querySelectorAll",
-        t1 = this.root,
-        t2 = "." + $name + "-container",
-        t3 = type$.Element;
-      t1.toString;
-      H.checkTypeBound(t3, t3, "T", _s16_);
-      t4 = type$._FrozenElementList_Element;
-      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(t2), t4)).remove$1(0, "hidden");
-      t2 = this.root;
-      t1 = ".menu-item[data-command='show-" + $name + "'] i.fas";
-      t2.toString;
-      H.checkTypeBound(t3, t3, "T", _s16_);
-      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll(t1), t4)).add$1(0, "fa-check");
-      this.gadget.idata.$indexSet(0, "show-" + $name, true);
-    },
-    _track$_hideElement$1: function($name) {
-      var t4,
-        _s16_ = "querySelectorAll",
-        t1 = this.root,
-        t2 = "." + $name + "-container",
-        t3 = type$.Element;
-      t1.toString;
-      H.checkTypeBound(t3, t3, "T", _s16_);
-      t4 = type$._FrozenElementList_Element;
-      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(t2), t4)).add$1(0, "hidden");
-      t2 = this.root;
-      t1 = ".menu-item[data-command='show-" + $name + "'] i.fas";
-      t2.toString;
-      H.checkTypeBound(t3, t3, "T", _s16_);
-      W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll(t1), t4)).remove$1(0, "fa-check");
-      this.gadget.idata.$indexSet(0, "show-" + $name, false);
-    },
-    _toggleElement$1: function($name) {
-      var t1 = this.root,
-        t2 = "." + $name + "-container",
-        t3 = type$.Element;
-      t1.toString;
-      H.checkTypeBound(t3, t3, "T", "querySelectorAll");
-      if (W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t1.querySelectorAll(t2), type$._FrozenElementList_Element)).contains$1(0, "hidden"))
-        this._track$_showElement$1($name);
-      else
-        this._track$_hideElement$1($name);
-    },
     _setMidiInput$1: function(armed) {
       var _this = this,
         _s43_ = ".menu-item[data-command='midi-input'] i.fas",
@@ -28945,45 +28654,29 @@
         new W._ElementListEventStreamImpl(type$.ElementList_Element._as(new W._FrozenElementList(dialog.querySelectorAll(_s15_), t6)), false, "click", type$._ElementListEventStreamImpl_MouseEvent).listen$1(new R.PythonTrack__shareTrack_closure0(_this, dialog));
       }
     },
-    _track$_doContextMenu$1: function(menu) {
-      var t1, data, clone, t2, _this = this, _s5_ = "idata",
-        _s11_ = "midi-output",
+    doContextMenu$1: function(menu) {
+      var t1, t2, _this = this,
         _s16_ = "querySelectorAll",
         _s4_ = "show";
       menu.toString;
       switch (menu.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(menu))._toHyphenedName$1("command"))) {
         case "delete-track":
-          P.Timer_Timer(C.Duration_200000, new R.PythonTrack__doContextMenu_closure(_this));
+          P.Timer_Timer(C.Duration_200000, new R.PythonTrack_doContextMenu_closure(_this));
           return;
         case "clone-track":
-          t1 = _this.gadget;
-          data = t1.save$0(0);
-          data.$indexSet(0, "id", -1);
-          data.$indexSet(0, "remix_parent", t1.id);
-          J.$indexSet$ax(data.$index(0, _s5_), "cloned", true);
-          J.$indexSet$ax(data.$index(0, _s5_), "show-editor", true);
-          J.$indexSet$ax(data.$index(0, _s5_), "show-instrument", true);
-          J.$indexSet$ax(data.$index(0, _s5_), "show-output", false);
-          J.$indexSet$ax(data.$index(0, _s5_), "show-timeline", true);
-          J.$indexSet$ax(data.$index(0, _s5_), _s11_, false);
-          J.$indexSet$ax(data.$index(0, _s5_), "midi-input", false);
-          clone = new L.Gadget(new H.JsLinkedHashMap(type$.JsLinkedHashMap_dynamic_dynamic), -1, new P.DateTime(Date.now(), false), new P.DateTime(Date.now(), false));
-          clone.type = "gadgets";
-          clone.name = "New Track";
-          clone.load$1(0, data);
-          _this.datastore.create$1(0, clone);
+          _this.cloneCell$0();
           return;
         case "show-instrument":
-          _this._toggleElement$1("instrument");
+          _this.toggleElement$1("instrument");
           break;
         case "show-timeline":
-          _this._toggleElement$1("timeline");
+          _this.toggleElement$1("timeline");
           break;
         case "show-editor":
-          _this._toggleElement$1("editor");
+          _this.toggleElement$1("editor");
           break;
         case "show-output":
-          _this._toggleElement$1("output");
+          _this.toggleElement$1("output");
           break;
         case "note-hints":
           t1 = _this.instrument.root;
@@ -29019,7 +28712,7 @@
           _this._setMidiInput$1(!_this.instrument.isMidiArmed$0());
           break;
         case "midi-output":
-          _this._setMidiOutput$1(!H.boolConversionCheck(H._asBoolNullable(_this.gadget.idata.$index(0, _s11_))));
+          _this._setMidiOutput$1(!H.boolConversionCheck(H._asBoolNullable(_this.gadget.idata.$index(0, "midi-output"))));
           break;
         case "share":
           _this._shareTrack$0();
@@ -29261,38 +28954,6 @@
     },
     $signature: 0
   };
-  R.PythonTrack_insert_closure12.prototype = {
-    call$1: function(e) {
-      type$.MouseEvent._as(e);
-      this.$this._track$_showElement$1("output");
-    },
-    $signature: 0
-  };
-  R.PythonTrack_insert_closure13.prototype = {
-    call$1: function(e) {
-      type$.MouseEvent._as(e);
-      this.$this._track$_hideElement$1("output");
-    },
-    $signature: 0
-  };
-  R.PythonTrack_insert_closure14.prototype = {
-    call$1: function(menu) {
-      this.$this._track$_doContextMenu$1(type$.HtmlElement._as(menu));
-      D.DropdownMenu_closeAllMenus();
-    },
-    $signature: 8
-  };
-  R.PythonTrack_insert_closure15.prototype = {
-    call$0: function() {
-      var t1 = this.$this,
-        t2 = t1.editor,
-        t3 = this._box_0.code;
-      t2.toString;
-      $.$get$_context().callMethod$2("codemirror", [t2.id, t3]);
-      t1.compile$0();
-    },
-    $signature: 1
-  };
   R.PythonTrack_onPythonDone_closure.prototype = {
     call$0: function() {
       var t1 = this.$this.root,
@@ -29458,7 +29119,7 @@
     },
     $signature: 6
   };
-  R.PythonTrack__doContextMenu_closure.prototype = {
+  R.PythonTrack_doContextMenu_closure.prototype = {
     call$0: function() {
       if (H.boolConversionCheck(window.confirm("Are you sure you want to delete this track?"))) {
         var t1 = this.$this;
@@ -29537,11 +29198,11 @@
     },
     $signature: 10
   };
-  R._PythonTrack_TunePadCell_PythonListener.prototype = {};
-  R._PythonTrack_TunePadCell_PythonListener_EditorListener.prototype = {};
-  R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener.prototype = {};
-  R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber.prototype = {};
-  R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome.prototype = {};
+  R._PythonTrack_PythonCell_PythonListener.prototype = {};
+  R._PythonTrack_PythonCell_PythonListener_EditorListener.prototype = {};
+  R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener.prototype = {};
+  R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber.prototype = {};
+  R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome.prototype = {};
   N.User.prototype = {
     get$uid: function() {
       return J.toString$0$(this.id);
@@ -30098,50 +29759,6 @@
       t2 = new W._EventStream(t1, "mousedown", false, t2);
       t2.get$first(t2).then$1$1(new A.Dropbook_closure0(_this), t4);
     },
-    _initAudio$0: function() {
-      var $async$goto = 0,
-        $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
-        $async$self = this, t1, t2, t3, $async$temp1;
-      var $async$_initAudio$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
-        if ($async$errorCode === 1)
-          return P._asyncRethrow($async$result, $async$completer);
-        while (true)
-          switch ($async$goto) {
-            case 0:
-              // Function start
-              E.Dialog_showLoader();
-              $async$self.project.clock.context = new (window.AudioContext || window.webkitAudioContext)();
-              $async$temp1 = J;
-              $async$goto = 2;
-              return P._asyncAwait($async$self.datastore.getPublicSynthPatches$0(), $async$_initAudio$0);
-            case 2:
-              // returning from await.
-              t1 = $async$temp1.get$iterator$ax($async$result), t2 = $async$self.patches;
-            case 3:
-              // for condition
-              if (!t1.moveNext$0()) {
-                // goto after for
-                $async$goto = 4;
-                break;
-              }
-              t3 = t1.get$current(t1);
-              t2.$indexSet(0, H._asIntNullable(t3.id), t3);
-              // goto for condition
-              $async$goto = 3;
-              break;
-            case 4:
-              // after for
-              $async$goto = 5;
-              return P._asyncAwait($async$self.loadProject$1($async$self.project), $async$_initAudio$0);
-            case 5:
-              // returning from await.
-              E.Dialog_hideLoader();
-              // implicit return
-              return P._asyncReturn(null, $async$completer);
-          }
-      });
-      return P._asyncStartSync($async$_initAudio$0, $async$completer);
-    },
     playAll$0: function() {
       var t3,
         _s16_ = "querySelectorAll",
@@ -30330,7 +29947,7 @@
     loadProject$1: function(p) {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
-        $async$handler = 1, $async$currentError, $async$next = [], $async$self = this, container, gadgets, gadget, cell, t2, t3, t4, t5, t6, t7, t8, cell0, exception, t1, $async$exception;
+        $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, container, gadgets, gadget, cell, t1, t2, t3, t4, t5, t6, t7, t8, cell0, exception, $async$exception, $async$temp1;
       var $async$loadProject$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1) {
           $async$currentError = $async$result;
@@ -30340,80 +29957,115 @@
           switch ($async$goto) {
             case 0:
               // Function start
-              t1 = p.clock;
-              if (t1.context == null && $async$self.project.clock.context != null)
-                t1.context = $async$self.project.clock.context;
+              if ($async$self._loading) {
+                // goto return
+                $async$goto = 1;
+                break;
+              }
+              $async$self._loading = true;
+              t1 = $async$self.patches;
+              $async$goto = t1.get$isEmpty(t1) ? 3 : 4;
+              break;
+            case 3:
+              // then
+              $async$temp1 = J;
+              $async$goto = 5;
+              return P._asyncAwait($async$self.datastore.getPublicSynthPatches$0(), $async$loadProject$1);
+            case 5:
+              // returning from await.
+              t2 = $async$temp1.get$iterator$ax($async$result);
+            case 6:
+              // for condition
+              if (!t2.moveNext$0()) {
+                // goto after for
+                $async$goto = 7;
+                break;
+              }
+              t3 = t2.get$current(t2);
+              t1.$indexSet(0, H._asIntNullable(t3.id), t3);
+              // goto for condition
+              $async$goto = 6;
+              break;
+            case 7:
+              // after for
+            case 4:
+              // join
+              t2 = p.clock;
+              if (t2.context == null && $async$self.project.clock.context != null)
+                t2.context = $async$self.project.clock.context;
               $async$self.project = p;
               $async$self._updateToolbar$0();
               container = type$.DivElement._as(document.querySelector(".track-container"));
               if (container != null) {
-                t1 = container;
-                t1.children;
-                J._clearChildren$0$x(t1);
+                t2 = container;
+                t2.children;
+                J._clearChildren$0$x(t2);
               }
-              t1 = $async$self.cells;
-              C.JSArray_methods.set$length(t1, 0);
-              $async$goto = $async$self.project.get$hasValidId() ? 2 : 3;
+              t2 = $async$self.cells;
+              C.JSArray_methods.set$length(t2, 0);
+              $async$goto = $async$self.project.get$hasValidId() ? 8 : 9;
               break;
-            case 2:
-              // then
-              $async$handler = 5;
-              t2 = $async$self.datastore;
-              $async$goto = 8;
-              return P._asyncAwait(t2.getProjectGadgets$1($async$self.project), $async$loadProject$1);
             case 8:
+              // then
+              $async$handler = 11;
+              t3 = $async$self.datastore;
+              $async$goto = 14;
+              return P._asyncAwait(t3.getProjectGadgets$1($async$self.project), $async$loadProject$1);
+            case 14:
               // returning from await.
               gadgets = $async$result;
-              for (t3 = J.get$iterator$ax(gadgets), t4 = type$.JSArray_String, t5 = type$.JSArray_User, t6 = type$.JsLinkedHashMap_int_int, t7 = $async$self.patches; t3.moveNext$0();) {
-                gadget = t3.get$current(t3);
+              for (t4 = J.get$iterator$ax(gadgets), t5 = type$.JSArray_String, t6 = type$.JSArray_User, t7 = type$.JsLinkedHashMap_int_int; t4.moveNext$0();) {
+                gadget = t4.get$current(t4);
                 cell = null;
-                if (C.JSArray_methods.contains$1(H.setRuntimeTypeInfo(["bass", "piano", "synth", "guitar", "drums", "drumkit"], t4), gadget.instrument))
-                  cell = R.PythonTrack$(gadget, t7, t2, $async$self.project.clock);
+                if (C.JSArray_methods.contains$1(H.setRuntimeTypeInfo(["bass", "piano", "synth", "guitar", "drums", "drumkit", "marimba"], t5), gadget.instrument))
+                  cell = R.PythonTrack$(gadget, t1, t3, $async$self.project.clock);
                 else if (gadget.instrument === "definitions") {
                   t8 = gadget;
-                  cell0 = new X.PythonCell($async$self.project.clock, t8, t2, H.setRuntimeTypeInfo([], t5));
-                  cell0.TunePadCell$2(t8, t2);
-                  cell0.compiler = new X.PythonCompiler(cell0, new S.Preprocessor(new H.JsLinkedHashMap(t6), H.setRuntimeTypeInfo([], t4), H.setRuntimeTypeInfo([], t4)));
+                  cell0 = new X.PythonCell($async$self.project.clock, t8, t3, H.setRuntimeTypeInfo([], t6));
+                  cell0.TunePadCell$2(t8, t3);
+                  cell0.compiler = new X.PythonCompiler(cell0, new S.Preprocessor(new H.JsLinkedHashMap(t7), H.setRuntimeTypeInfo([], t5), H.setRuntimeTypeInfo([], t5)));
                   if (!t8.idata.containsKey$1(0, "show-output"))
                     t8.idata.$indexSet(0, "show-output", false);
                   cell = cell0;
                 } else if (gadget.instrument === "text") {
                   t8 = gadget;
-                  cell0 = new L.TextCell(t8, t2, H.setRuntimeTypeInfo([], t5));
-                  cell0.TunePadCell$2(t8, t2);
+                  cell0 = new L.TextCell(t8, t3, H.setRuntimeTypeInfo([], t6));
+                  cell0.TunePadCell$2(t8, t3);
                   cell = cell0;
                 } else
                   H.printString(H.S(gadget.instrument));
                 if (cell != null) {
-                  C.JSArray_methods.add$1(t1, cell);
-                  J.insert$2$ax(cell, container, t1.length);
+                  C.JSArray_methods.add$1(t2, cell);
+                  J.insert$2$ax(cell, container, t2.length);
                 }
               }
-              $async$handler = 1;
+              $async$handler = 2;
               // goto after finally
-              $async$goto = 7;
+              $async$goto = 13;
               break;
-            case 5:
+            case 11:
               // catch
-              $async$handler = 4;
+              $async$handler = 10;
               $async$exception = $async$currentError;
               H.unwrapException($async$exception);
               P.print("Error loading project gadgets.");
               // goto after finally
-              $async$goto = 7;
+              $async$goto = 13;
               break;
-            case 4:
+            case 10:
               // uncaught
               // goto rethrow
-              $async$goto = 1;
+              $async$goto = 2;
               break;
-            case 7:
+            case 13:
               // after finally
-            case 3:
+            case 9:
               // join
-              // implicit return
-              return P._asyncReturn(null, $async$completer);
+              $async$self._loading = false;
             case 1:
+              // return
+              return P._asyncReturn($async$returnValue, $async$completer);
+            case 2:
               // rethrow
               return P._asyncRethrow($async$currentError, $async$completer);
           }
@@ -30614,9 +30266,9 @@
     call$1: function(e) {
       var t1;
       type$.MouseEvent._as(e);
-      t1 = this.$this;
-      if (t1.project.clock.context == null)
-        t1._initAudio$0();
+      t1 = this.$this.project.clock;
+      if (t1.context == null)
+        t1.context = new (window.AudioContext || window.webkitAudioContext)();
     },
     $signature: 0
   };
@@ -30624,9 +30276,9 @@
     call$1: function(e) {
       var t1;
       type$.MouseEvent._as(e);
-      t1 = this.$this;
-      if (t1.project.clock.context == null)
-        t1._initAudio$0();
+      t1 = this.$this.project.clock;
+      if (t1.context == null)
+        t1.context = new (window.AudioContext || window.webkitAudioContext)();
     },
     $signature: 0
   };
@@ -31780,8 +31432,12 @@
   };
   F._showWelcomeMessage_closure.prototype = {
     call$1: function(e) {
+      var t1;
       type$.MouseEvent._as(e);
       E.Dialog_closeModal();
+      t1 = this.project;
+      $.dropbook.loadProject$1(t1);
+      $.outline.loadProject$1(t1);
     },
     $signature: 0
   };
@@ -32638,6 +32294,9 @@
     _ = A.TunePadCell.prototype;
     _.super$TunePadCell$insert = _.insert$2;
     _.super$TunePadCell$onEditorBlur = _.onEditorBlur$0;
+    _ = X.PythonCell.prototype;
+    _.super$PythonCell$insert = _.insert$2;
+    _.super$PythonCell$updateView = _.updateView$1;
   })();
   (function installTearOffs() {
     var _static_1 = hunkHelpers._static_1,
@@ -32754,7 +32413,7 @@
     _inherit(P.UnmodifiableMapView, P._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
     _inherit(H.ConstantMapView, P.UnmodifiableMapView);
     _inherit(H.ConstantStringMap, H.ConstantMap);
-    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._completeRequest_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, A.QuillEditor_initialize_closure, A.QuillEditor_initialize_closure0, Y.BassFret_closure, Y.BassFret_closure0, Y.BassFret_closure1, Y.BassFret_closure2, F.DrumKit_render_closure, F.DrumKit_render_closure0, F.DrumKit_render_closure1, F.DrumKit_render_closure2, N.DrumPad_closure, N.DrumPad_closure0, N.DrumPad_closure1, N.DrumPad_closure2, F.GFret_closure, F.GFret_closure0, F.GFret_closure1, F.GFret_closure2, S.Instrument_unload_closure, B.Piano_render_closure, B.Piano_render_closure0, B.Piano__slideKeyboard_closure, B.MiniPiano_slide_closure, B.PianoKey_closure, B.PianoKey_closure0, B.PianoKey_closure1, B.PianoKey_closure2, D.Sequencer_render_closure, D.SequencerRow_closure, D.SequencerRow_closure0, D.SequencerRow_closure1, D.SequencerRow_mute_closure, D.SequencerRow_unmute_closure, D.SequencerDrumButton_closure, D.SequencerButton_closure, D.SequencerButton_closure0, D.SequencerButton_closure1, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.DistNode_closure, B.DistNode__closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, R.UserAccounts_login_closure, R.UserAccounts_login_closure0, R.UserAccounts_login_closure1, R.UserAccounts_login_closure2, A.TunePadCell_insert_closure, A.TunePadCell_insert_closure0, A.TunePadCell_insert_closure1, A.TunePadCell_insert_closure2, A.TunePadCell__onMessage_closure, A.TunePadCell__onMessage_closure0, S.Datastore_closure, S.Datastore_closure0, S.Datastore_loginWithGoogle_closure, S.Datastore_loginWithGoogle__closure, X.PythonCell_insert_closure, X.PythonCell_insert_closure0, X.PythonCell_insert_closure1, X.PythonCell_insert_closure2, X.PythonCell_onPythonDone_closure, X.PythonCell__shareCell_closure, X.PythonCell__shareCell_closure0, X.PythonCell__doContextMenu_closure, U.EffectsChain_closure, U.EffectsChain_closure0, U.EffectsChain_closure1, U.EffectsChain_closure2, U.EffectsChain_closure3, U.EffectsChain_closure4, U.EffectsChain_closure5, U.EffectsChain_playAudio_closure, U.EffectsChain_playSlice_closure, U.EffectsChain_loadSoundEffects_closure, U.EffectsChain_loadSoundEffects_closure0, Q.RecordingStudio_show_closure, Q.RecordingStudio_loadUserRecordings_closure, Q.RecordingStudio_uploadAudioFile_closure, Q.RecordingStudio__registerEvents_closure, Q.RecordingStudio__registerEvents_closure0, Q.RecordingStudio__registerEvents_closure1, Q.RecordingStudio__registerEvents_closure2, Q.RecordingStudio__registerEvents_closure3, Q.RecordingStudio__registerEvents_closure4, Q.RecordingStudio__registerEvents_closure5, Q.RecordingStudio__registerEvents_closure6, Q.RecordingStudio__registerEvents_closure7, Q.RecordingStudio__registerEvents_closure8, Q.RecordingStudio__registerEvents_closure9, Q.RecordingStudio__registerEvents_closure10, Q.RecordingStudio__registerEvents_closure11, Q.RecordingStudio__registerEvents_closure12, Q.RecordingStudio__registerRowEvents_closure, Q.RecordingStudio__registerRowEvents_closure0, Q.RecordingStudio__registerRowEvents_closure1, Q.RecordingStudio__registerRowEvents_closure2, Q.RecordingStudio__playPreview_closure, Q.RecordingStudio__playPreview_closure0, Q.RecordingStudio__playPreview_closure1, V.WaveformTrace__buildClipLine_closure, V.WaveformTrace__buildClipLine_closure0, V.WaveformTrace__buildClipLine_closure1, L.TextCell_insert_closure, L.TextCell__doContextMenu_closure, D.Timeline_setInstrument_closure, D.Timeline_insert_closure, D.Timeline__render_closure, D.Timeline__render_closure0, D.Timeline__registerTouchEvents_closure, D.Timeline__registerTouchEvents_closure0, D.Timeline__registerTouchEvents_closure1, D.Timeline__registerTouchEvents_closure2, D.Timeline__renderNote_closure, D.Timeline__renderNote_closure0, D.Timeline__renderNote_closure1, D.Timeline__renderNote_closure2, R.PythonTrack_insert_closure, R.PythonTrack_insert_closure0, R.PythonTrack_insert_closure1, R.PythonTrack_insert_closure2, R.PythonTrack_insert_closure3, R.PythonTrack_insert_closure4, R.PythonTrack_insert_closure5, R.PythonTrack_insert_closure6, R.PythonTrack_insert_closure7, R.PythonTrack_insert_closure8, R.PythonTrack_insert_closure9, R.PythonTrack_insert_closure10, R.PythonTrack_insert_closure11, R.PythonTrack_insert_closure12, R.PythonTrack_insert_closure13, R.PythonTrack_insert_closure14, R.PythonTrack_insert_closure15, R.PythonTrack_onPythonDone_closure, R.PythonTrack__initVoiceMenu_closure, R.PythonTrack__setInstrument_closure, R.PythonTrack__setInstrument_closure0, R.PythonTrack__shareTrack_closure, R.PythonTrack__shareTrack_closure0, R.PythonTrack__doContextMenu_closure, R.PythonTrack__initMidi_closure, R.PythonTrack_toggleContextMenu_closure, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, V.ToggleButton_buildUI_closure, V.ToggleButton_buildUI_closure0, V.ToggleButton_buildUI_closure1, V.ToggleButton_buildUI_closure2, E.Dialog_message_closure, E.Dialog_hideLoader_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu_closeAllMenus_closure, D.DropdownMenu__toggleMenu_closure, A.Dropbook_closure, A.Dropbook_closure0, A.Dropbook_playAll_closure, A.Dropbook_pauseAll_closure, A.Dropbook__registerEvents_closure, A.Dropbook__registerEvents__closure, A.Dropbook__registerEvents_closure0, A.Dropbook__registerEvents_closure1, A.Dropbook__registerEvents_closure2, A.Dropbook__registerEvents_closure3, A.Dropbook__registerEvents_closure4, A.Dropbook__registerEvents_closure5, A.Dropbook__registerEvents_closure6, A.Dropbook__registerEvents_closure7, A.Dropbook__registerEvents_closure8, A.Dropbook__registerEvents_closure9, A.Dropbook__registerEvents_closure10, A.Dropbook__registerEvents_closure11, A.Dropbook__registerEvents_closure12, A.Dropbook__registerEvents_closure13, A.Dropbook__registerEvents_closure14, A.Dropbook__registerEvents_closure15, A.Dropbook__registerEvents_closure16, A.Dropbook__registerEvents_closure17, A.Dropbook__registerEvents_closure18, A.Dropbook__registerEvents_closure19, A.Dropbook__registerEvents_closure20, A.Dropbook__registerEvents_closure21, A.Dropbook__registerEvents_closure22, A.Dropbook__registerEvents_closure23, A.Dropbook__registerEvents_closure24, A.Dropbook__registerEvents_closure25, A.Dropbook__registerEvents_closure26, A.Dropbook__registerEvents_closure27, A.Dropbook__bindSpinnerButton_closure, A.Dropbook__bindSpinnerButton_closure0, A.Dropbook__bindSpinnerButton__closure, A.Dropbook__bindSpinnerButton___closure, A.Dropbook__toggleContextMenu_closure, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show__closure0, O.TrackLibrary_show___closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__addTrack_closure, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F._showWelcomeMessage_closure, F._showWelcomeMessage_closure0, F._showProjectList_closure, Z.OutlineView_loadProject_closure, Z.OutlineView_loadProject__closure, Z.OutlineView_createItem_closure, Z.OutlineView_createItem_closure0, Z.OutlineView_createItem_closure1, Z.OutlineView_createItem_closure2, Z.OutlineView_updateItem_closure, Z.OutlineView__reorder_closure, Z.OutlineView__reorder_closure0, G.ProjectList_show_closure, G.ProjectList__buildItem_closure, G.ProjectList__buildItem_closure0, G.ProjectList__buildItem_closure1, G.ProjectList__buildProjectBadge_closure, G.ProjectList__buildProjectBadge_closure0, G.ProjectList__buildProjectBadge_closure1, G.ProjectList__playPreview_closure, G.ProjectList__playPreview_closure0, G.ProjectList__playPreview_closure1]);
+    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._completeRequest_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, A.QuillEditor_initialize_closure, A.QuillEditor_initialize_closure0, Y.BassFret_closure, Y.BassFret_closure0, Y.BassFret_closure1, Y.BassFret_closure2, F.DrumKit_render_closure, F.DrumKit_render_closure0, F.DrumKit_render_closure1, F.DrumKit_render_closure2, N.DrumPad_closure, N.DrumPad_closure0, N.DrumPad_closure1, N.DrumPad_closure2, F.GFret_closure, F.GFret_closure0, F.GFret_closure1, F.GFret_closure2, S.Instrument_unload_closure, B.Piano_render_closure, B.Piano_render_closure0, B.Piano__slideKeyboard_closure, B.MiniPiano_slide_closure, B.PianoKey_closure, B.PianoKey_closure0, B.PianoKey_closure1, B.PianoKey_closure2, D.Sequencer_render_closure, D.SequencerRow_closure, D.SequencerRow_closure0, D.SequencerRow_closure1, D.SequencerRow_mute_closure, D.SequencerRow_unmute_closure, D.SequencerDrumButton_closure, D.SequencerButton_closure, D.SequencerButton_closure0, D.SequencerButton_closure1, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.DistNode_closure, B.DistNode__closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, R.UserAccounts_login_closure, R.UserAccounts_login_closure0, R.UserAccounts_login_closure1, R.UserAccounts_login_closure2, A.TunePadCell_insert_closure, A.TunePadCell_insert_closure0, A.TunePadCell_insert_closure1, A.TunePadCell_insert_closure2, A.TunePadCell__onMessage_closure, A.TunePadCell__onMessage_closure0, S.Datastore_closure, S.Datastore_closure0, S.Datastore_loginWithGoogle_closure, S.Datastore_loginWithGoogle__closure, X.PythonCell_insert_closure, X.PythonCell_insert_closure0, X.PythonCell_insert_closure1, X.PythonCell_insert_closure2, X.PythonCell_onPythonDone_closure, X.PythonCell__shareCell_closure, X.PythonCell__shareCell_closure0, X.PythonCell_doContextMenu_closure, U.EffectsChain_closure, U.EffectsChain_closure0, U.EffectsChain_closure1, U.EffectsChain_closure2, U.EffectsChain_closure3, U.EffectsChain_closure4, U.EffectsChain_closure5, U.EffectsChain_playAudio_closure, U.EffectsChain_playSlice_closure, U.EffectsChain_loadSoundEffects_closure, U.EffectsChain_loadSoundEffects_closure0, Q.RecordingStudio_show_closure, Q.RecordingStudio_loadUserRecordings_closure, Q.RecordingStudio_uploadAudioFile_closure, Q.RecordingStudio__registerEvents_closure, Q.RecordingStudio__registerEvents_closure0, Q.RecordingStudio__registerEvents_closure1, Q.RecordingStudio__registerEvents_closure2, Q.RecordingStudio__registerEvents_closure3, Q.RecordingStudio__registerEvents_closure4, Q.RecordingStudio__registerEvents_closure5, Q.RecordingStudio__registerEvents_closure6, Q.RecordingStudio__registerEvents_closure7, Q.RecordingStudio__registerEvents_closure8, Q.RecordingStudio__registerEvents_closure9, Q.RecordingStudio__registerEvents_closure10, Q.RecordingStudio__registerEvents_closure11, Q.RecordingStudio__registerEvents_closure12, Q.RecordingStudio__registerRowEvents_closure, Q.RecordingStudio__registerRowEvents_closure0, Q.RecordingStudio__registerRowEvents_closure1, Q.RecordingStudio__registerRowEvents_closure2, Q.RecordingStudio__playPreview_closure, Q.RecordingStudio__playPreview_closure0, Q.RecordingStudio__playPreview_closure1, V.WaveformTrace__buildClipLine_closure, V.WaveformTrace__buildClipLine_closure0, V.WaveformTrace__buildClipLine_closure1, L.TextCell_insert_closure, L.TextCell__doContextMenu_closure, D.Timeline_setInstrument_closure, D.Timeline_insert_closure, D.Timeline__render_closure, D.Timeline__render_closure0, D.Timeline__registerTouchEvents_closure, D.Timeline__registerTouchEvents_closure0, D.Timeline__registerTouchEvents_closure1, D.Timeline__registerTouchEvents_closure2, D.Timeline__renderNote_closure, D.Timeline__renderNote_closure0, D.Timeline__renderNote_closure1, D.Timeline__renderNote_closure2, R.PythonTrack_insert_closure, R.PythonTrack_insert_closure0, R.PythonTrack_insert_closure1, R.PythonTrack_insert_closure2, R.PythonTrack_insert_closure3, R.PythonTrack_insert_closure4, R.PythonTrack_insert_closure5, R.PythonTrack_insert_closure6, R.PythonTrack_insert_closure7, R.PythonTrack_insert_closure8, R.PythonTrack_insert_closure9, R.PythonTrack_insert_closure10, R.PythonTrack_insert_closure11, R.PythonTrack_onPythonDone_closure, R.PythonTrack__initVoiceMenu_closure, R.PythonTrack__setInstrument_closure, R.PythonTrack__setInstrument_closure0, R.PythonTrack__shareTrack_closure, R.PythonTrack__shareTrack_closure0, R.PythonTrack_doContextMenu_closure, R.PythonTrack__initMidi_closure, R.PythonTrack_toggleContextMenu_closure, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, V.ToggleButton_buildUI_closure, V.ToggleButton_buildUI_closure0, V.ToggleButton_buildUI_closure1, V.ToggleButton_buildUI_closure2, E.Dialog_message_closure, E.Dialog_hideLoader_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu_closeAllMenus_closure, D.DropdownMenu__toggleMenu_closure, A.Dropbook_closure, A.Dropbook_closure0, A.Dropbook_playAll_closure, A.Dropbook_pauseAll_closure, A.Dropbook__registerEvents_closure, A.Dropbook__registerEvents__closure, A.Dropbook__registerEvents_closure0, A.Dropbook__registerEvents_closure1, A.Dropbook__registerEvents_closure2, A.Dropbook__registerEvents_closure3, A.Dropbook__registerEvents_closure4, A.Dropbook__registerEvents_closure5, A.Dropbook__registerEvents_closure6, A.Dropbook__registerEvents_closure7, A.Dropbook__registerEvents_closure8, A.Dropbook__registerEvents_closure9, A.Dropbook__registerEvents_closure10, A.Dropbook__registerEvents_closure11, A.Dropbook__registerEvents_closure12, A.Dropbook__registerEvents_closure13, A.Dropbook__registerEvents_closure14, A.Dropbook__registerEvents_closure15, A.Dropbook__registerEvents_closure16, A.Dropbook__registerEvents_closure17, A.Dropbook__registerEvents_closure18, A.Dropbook__registerEvents_closure19, A.Dropbook__registerEvents_closure20, A.Dropbook__registerEvents_closure21, A.Dropbook__registerEvents_closure22, A.Dropbook__registerEvents_closure23, A.Dropbook__registerEvents_closure24, A.Dropbook__registerEvents_closure25, A.Dropbook__registerEvents_closure26, A.Dropbook__registerEvents_closure27, A.Dropbook__bindSpinnerButton_closure, A.Dropbook__bindSpinnerButton_closure0, A.Dropbook__bindSpinnerButton__closure, A.Dropbook__bindSpinnerButton___closure, A.Dropbook__toggleContextMenu_closure, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show__closure0, O.TrackLibrary_show___closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__addTrack_closure, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F._showWelcomeMessage_closure, F._showWelcomeMessage_closure0, F._showProjectList_closure, Z.OutlineView_loadProject_closure, Z.OutlineView_loadProject__closure, Z.OutlineView_createItem_closure, Z.OutlineView_createItem_closure0, Z.OutlineView_createItem_closure1, Z.OutlineView_createItem_closure2, Z.OutlineView_updateItem_closure, Z.OutlineView__reorder_closure, Z.OutlineView__reorder_closure0, G.ProjectList_show_closure, G.ProjectList__buildItem_closure, G.ProjectList__buildItem_closure0, G.ProjectList__buildItem_closure1, G.ProjectList__buildProjectBadge_closure, G.ProjectList__buildProjectBadge_closure0, G.ProjectList__buildProjectBadge_closure1, G.ProjectList__playPreview_closure, G.ProjectList__playPreview_closure0, G.ProjectList__playPreview_closure1]);
     _inheritMany(P.Error, [H.NullError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, P.AssertionError, H._Error, P.JsonUnsupportedObjectError, P.NullThrownError, P.ArgumentError, P.NoSuchMethodError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
     _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
     _inherit(H._AssertionError, P.AssertionError);
@@ -32882,17 +32541,18 @@
     _inheritMany(B.SynthNode, [B.ADSRNode, B.FMNode, B.LFONode, B.DistNode, B.SynthSampleNode, B.SynthDelayNode, B.SynthCompressorNode, B.FilterNode]);
     _inherit(B.SchedulerSynth, L.Synthesizer);
     _inherit(A.TunePadCell, A._TunePadCell_Object_EditorListener);
-    _inheritMany(A.TunePadCell, [X._PythonCell_TunePadCell_PythonListener, L._TextCell_TunePadCell_EditorListener, R._PythonTrack_TunePadCell_PythonListener]);
+    _inheritMany(A.TunePadCell, [X._PythonCell_TunePadCell_PythonListener, L._TextCell_TunePadCell_EditorListener]);
     _inherit(X._PythonCell_TunePadCell_PythonListener_EditorListener, X._PythonCell_TunePadCell_PythonListener);
     _inherit(X.PythonCell, X._PythonCell_TunePadCell_PythonListener_EditorListener);
     _inheritMany(S.DataModel, [L.Gadget, L.SynthPatch, K.Project, R.Recording, N.User]);
     _inherit(V.NoteRecorder, V._NoteRecorder_Object_ClockSubscriber);
     _inherit(L.TextCell, L._TextCell_TunePadCell_EditorListener);
-    _inherit(R._PythonTrack_TunePadCell_PythonListener_EditorListener, R._PythonTrack_TunePadCell_PythonListener);
-    _inherit(R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener, R._PythonTrack_TunePadCell_PythonListener_EditorListener);
-    _inherit(R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber, R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener);
-    _inherit(R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome, R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber);
-    _inherit(R.PythonTrack, R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome);
+    _inherit(R._PythonTrack_PythonCell_PythonListener, X.PythonCell);
+    _inherit(R._PythonTrack_PythonCell_PythonListener_EditorListener, R._PythonTrack_PythonCell_PythonListener);
+    _inherit(R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener, R._PythonTrack_PythonCell_PythonListener_EditorListener);
+    _inherit(R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber, R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener);
+    _inherit(R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome, R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber);
+    _inherit(R.PythonTrack, R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome);
     _inherit(A.Dropbook, A._Dropbook_Object_ClockSubscriber);
     _mixin(H.UnmodifiableListBase, H.UnmodifiableListMixin);
     _mixin(H._NativeTypedArrayOfDouble_NativeTypedArray_ListMixin, P.ListMixin);
@@ -32959,11 +32619,11 @@
     _mixin(X._PythonCell_TunePadCell_PythonListener_EditorListener, Z.EditorListener);
     _mixin(V._NoteRecorder_Object_ClockSubscriber, E.ClockSubscriber);
     _mixin(L._TextCell_TunePadCell_EditorListener, Z.EditorListener);
-    _mixin(R._PythonTrack_TunePadCell_PythonListener, X.PythonListener);
-    _mixin(R._PythonTrack_TunePadCell_PythonListener_EditorListener, Z.EditorListener);
-    _mixin(R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener, D.TimelineListener);
-    _mixin(R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber, E.ClockSubscriber);
-    _mixin(R._PythonTrack_TunePadCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome, E.Metronome);
+    _mixin(R._PythonTrack_PythonCell_PythonListener, X.PythonListener);
+    _mixin(R._PythonTrack_PythonCell_PythonListener_EditorListener, Z.EditorListener);
+    _mixin(R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener, D.TimelineListener);
+    _mixin(R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber, E.ClockSubscriber);
+    _mixin(R._PythonTrack_PythonCell_PythonListener_EditorListener_TimelineListener_ClockSubscriber_Metronome, E.Metronome);
     _mixin(A._Dropbook_Object_ClockSubscriber, E.ClockSubscriber);
   })();
   var init = {
@@ -33513,7 +33173,6 @@
     $.PianoKey_NOTES = H.setRuntimeTypeInfo(["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], type$.JSArray_String);
     $.SequencerButton_WIDTH = 50;
     $.PythonCell_boilerplate = null;
-    $.PythonTrack_boilerplate = null;
     $.datastore = null;
     $.dropbook = null;
     $.outline = null;
