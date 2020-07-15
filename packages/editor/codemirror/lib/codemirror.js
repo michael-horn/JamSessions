@@ -3768,6 +3768,7 @@ function endOperation_R1(op) {
     display.maxLineChanged && cm.options.lineWrapping
   op.update = op.mustUpdate &&
     new DisplayUpdate(cm, op.mustUpdate && {top: op.scrollTop, ensure: op.scrollToPos}, op.forceUpdate)
+  console.log(op.scrollToPos);
 }
 
 function endOperation_W1(op) {

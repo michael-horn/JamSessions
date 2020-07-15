@@ -7121,6 +7121,7 @@
       _.patches = t2;
       _.cells = t3;
       _._loading = false;
+      _._art_cache = "";
     },
     Dropbook_closure: function Dropbook_closure(t0) {
       this.$this = t0;
@@ -7135,7 +7136,7 @@
     Dropbook__registerEvents_closure: function Dropbook__registerEvents_closure(t0) {
       this.$this = t0;
     },
-    Dropbook__registerEvents__closure: function Dropbook__registerEvents__closure(t0) {
+    Dropbook__registerEvents__closure0: function Dropbook__registerEvents__closure0(t0) {
       this.$this = t0;
     },
     Dropbook__registerEvents_closure0: function Dropbook__registerEvents_closure0(t0) {
@@ -7219,6 +7220,29 @@
     },
     Dropbook__registerEvents_closure27: function Dropbook__registerEvents_closure27(t0) {
       this.$this = t0;
+    },
+    Dropbook__registerEvents_closure28: function Dropbook__registerEvents_closure28(t0) {
+      this.$this = t0;
+    },
+    Dropbook__registerEvents_closure29: function Dropbook__registerEvents_closure29(t0) {
+      this.$this = t0;
+    },
+    Dropbook__registerEvents_closure30: function Dropbook__registerEvents_closure30(t0) {
+      this.$this = t0;
+    },
+    Dropbook__registerEvents_closure31: function Dropbook__registerEvents_closure31(t0) {
+      this.$this = t0;
+    },
+    Dropbook__registerEvents_closure32: function Dropbook__registerEvents_closure32(t0) {
+      this.artInput = t0;
+    },
+    Dropbook__registerEvents_closure33: function Dropbook__registerEvents_closure33(t0, t1) {
+      this.$this = t0;
+      this.artInput = t1;
+    },
+    Dropbook__registerEvents__closure: function Dropbook__registerEvents__closure(t0, t1) {
+      this.$this = t0;
+      this.reader = t1;
     },
     Dropbook__bindSpinnerButton_closure: function Dropbook__bindSpinnerButton_closure(t0, t1) {
       this._box_0 = t0;
@@ -10608,7 +10632,7 @@
     call$1: function(result) {
       return this.bodyFunction.call$2(0, result);
     },
-    $signature: 13
+    $signature: 14
   };
   P._awaitOnObject_closure0.prototype = {
     call$2: function(error, stackTrace) {
@@ -14226,7 +14250,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 15
+    $signature: 16
   };
   W.MidiMessageEvent.prototype = {
     get$data: function(receiver) {
@@ -14271,7 +14295,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 15
+    $signature: 16
   };
   W.MidiPort.prototype = {
     get$id: function(receiver) {
@@ -14599,7 +14623,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 15
+    $signature: 16
   };
   W.ScreenOrientation.prototype = {
     get$type: function(receiver) {
@@ -14617,7 +14641,8 @@
     },
     get$type: function(receiver) {
       return receiver.type;
-    }
+    },
+    $isSelectElement: 1
   };
   W.Selection.prototype = {
     get$type: function(receiver) {
@@ -14740,7 +14765,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 16
+    $signature: 17
   };
   W.StyleElement.prototype = {
     get$type: function(receiver) {
@@ -16481,13 +16506,13 @@
     call$1: function(r) {
       return this.completer.complete$1(0, this.T._eval$1("0/")._as(r));
     },
-    $signature: 13
+    $signature: 14
   };
   P.promiseToFuture_closure0.prototype = {
     call$1: function(e) {
       return this.completer.completeError$1(e);
     },
-    $signature: 13
+    $signature: 14
   };
   P._JSRandom.prototype = {
     nextInt$1: function(max) {
@@ -16667,6 +16692,9 @@
       for (; t1 = root.firstChild, t1 != null;)
         svgFragment.appendChild(t1);
       return svgFragment;
+    },
+    insertAdjacentHtml$4$treeSanitizer$validator: function(receiver, where, text, treeSanitizer, validator) {
+      throw H.wrapException(P.UnsupportedError$("Cannot invoke insertAdjacentHtml on SVG."));
     },
     insertAdjacentElement$2: function(receiver, where, element) {
       throw H.wrapException(P.UnsupportedError$("Cannot invoke insertAdjacentElement on SVG."));
@@ -16852,7 +16880,7 @@
     call$2: function(k, v) {
       return C.JSArray_methods.add$1(this.keys, k);
     },
-    $signature: 15
+    $signature: 16
   };
   P.AudioProcessingEvent.prototype = {$isAudioProcessingEvent: 1};
   P.AudioScheduledSourceNode.prototype = {};
@@ -20102,25 +20130,25 @@
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onClockReset$0();
     },
-    $signature: 18
+    $signature: 19
   };
   E.PlayClock_setTime_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onClockTimeChange$0();
     },
-    $signature: 18
+    $signature: 19
   };
   E.PlayClock_setTempo_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onTempoChange$0();
     },
-    $signature: 18
+    $signature: 19
   };
   E.PlayClock_setTimeSignature_closure.prototype = {
     call$1: function(s) {
       return type$.ClockSubscriber._as(s).onTimeSignatureChange$0();
     },
-    $signature: 18
+    $signature: 19
   };
   E.PlayClock_startMetronome_closure.prototype = {
     call$1: function(m) {
@@ -21405,7 +21433,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 19
+    $signature: 12
   };
   L.Synthesizer_loadAudioBuffer_closure0.prototype = {
     call$1: function(e) {
@@ -21443,7 +21471,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 19
+    $signature: 12
   };
   L.Synthesizer_loadCustomSound_closure0.prototype = {
     call$1: function(e) {
@@ -21830,7 +21858,7 @@
       if (type$.KeyboardEvent._as(e).keyCode === 13)
         J.blur$0$x(this.$this.root.querySelector(".gadget-name"));
     },
-    $signature: 12
+    $signature: 13
   };
   A.TunePadCell_insert_closure1.prototype = {
     call$1: function(e) {
@@ -23704,7 +23732,7 @@
       t5 = t2._bpm;
       t2 = t2._meter;
       t6 = type$.dynamic;
-      result = P.LinkedHashMap_LinkedHashMap$_literal(["id", t1, "type", t3, "name", t4, "bpm", t5, "meter", t2, "bars", _this.bars, "color", _this.color, "summary", _this.summary, "description", _this.description, "tags", [], "tracks", [], "remix_parent", _this.remix_parent, "pucks", _this.settings, "public", _this.$public, "deleted", _this.deleted, "created", _this.created.toString$0(0), "modified", _this.modified.toString$0(0)], t6, t6);
+      result = P.LinkedHashMap_LinkedHashMap$_literal(["id", t1, "type", t3, "name", t4, "bpm", t5, "meter", t2, "bars", _this.bars, "color", _this.color, "artwork", _this.artwork, "summary", _this.summary, "description", _this.description, "tags", [], "tracks", [], "remix_parent", _this.remix_parent, "pucks", _this.settings, "public", _this.$public, "deleted", _this.deleted, "created", _this.created.toString$0(0), "modified", _this.modified.toString$0(0)], t6, t6);
       for (t1 = _this.tags, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
         tag = t1[_i];
         J.add$1$ax(result.$index(0, "tags"), tag);
@@ -24411,7 +24439,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 19
+    $signature: 12
   };
   U.EffectsChain_loadSoundEffects_closure0.prototype = {
     call$1: function(e) {
@@ -25945,7 +25973,7 @@
       });
       return P._asyncStartSync($async$call$1, $async$completer);
     },
-    $signature: 19
+    $signature: 12
   };
   Q.RecordingStudio__registerEvents_closure.prototype = {
     call$1: function(e) {
@@ -29899,6 +29927,7 @@
       _this.project.clock._listeners.add$1(0, _this);
       _this._dropbook$_registerEvents$0();
       _this._updateToolbar$0();
+      _this._updateDetails$0();
       t1 = document;
       t2 = type$._EventStream_MouseEvent;
       t3 = new W._EventStream(t1, "click", false, t2);
@@ -30007,6 +30036,7 @@
       if (t1 instanceof K.Project && J.$eq$(t1.id, _this.project.id)) {
         _this.project.load$1(0, $event.target.save$0(0));
         _this._updateToolbar$0();
+        _this._updateDetails$0();
       }
       if (!_this.project.get$hasValidId()) {
         t1 = type$.Element;
@@ -30143,6 +30173,7 @@
                 t2.context = $async$self.project.clock.context;
               $async$self.project = p;
               $async$self._updateToolbar$0();
+              $async$self._updateDetails$0();
               container = type$.DivElement._as(document.querySelector(".track-container"));
               if (container != null) {
                 t2 = container;
@@ -30220,6 +30251,81 @@
       });
       return P._asyncStartSync($async$loadProject$1, $async$completer);
     },
+    _updateDetails$0: function() {
+      var desc, tagList, t2, t3, t4, _i, $public, remix, moddate, art, music, baseUrl, shareLink, remixLink, _this = this,
+        _s9_ = "remixable",
+        t1 = document,
+        $name = type$.InputElement._as(t1.querySelector("#project-details-name"));
+      if ($name != null)
+        $name.value = _this.project.name;
+      desc = type$.TextAreaElement._as(t1.querySelector("#project-details-description"));
+      if (desc != null)
+        C.TextAreaElement_methods.setInnerHtml$1(desc, _this.project.summary);
+      tagList = t1.querySelector("#project-details-tags");
+      if (tagList != null) {
+        t2 = J.getInterceptor$x(tagList);
+        t2.get$children(tagList).clear$0(0);
+        for (t3 = _this.project.tags, t4 = t3.length, _i = 0; _i < t3.length; t3.length === t4 || (0, H.throwConcurrentModificationError)(t3), ++_i)
+          t2.insertAdjacentHtml$4$treeSanitizer$validator(tagList, "beforeend", "<li>#" + t3[_i] + "</li>", null, null);
+      }
+      t2 = type$.SelectElement;
+      $public = t2._as(t1.querySelector("#project-details-public"));
+      if ($public != null)
+        $public.value = "" + _this.project.$public;
+      remix = t2._as(t1.querySelector("#project-details-remix"));
+      if (remix != null)
+        remix.value = "" + B.toBool(J.$index$asx(_this.project.settings, _s9_), true);
+      moddate = t1.querySelector("#project-details-modified");
+      if (moddate != null) {
+        t2 = _this.project;
+        J.set$innerHtml$x(moddate, "Last Saved: " + t2.formatDateTime$1(t2.modified));
+      }
+      art = type$.DivElement._as(t1.querySelector("#project-details-artwork"));
+      if (art != null) {
+        t2 = _this.project;
+        t3 = t2.artwork;
+        if (t3 != null) {
+          t2 = art.style;
+          t3 = "url(" + t3 + _this._art_cache + ")";
+          t2.backgroundImage = t3;
+          t2 = art.style;
+          t2.backgroundColor = "";
+        } else {
+          t3 = art.style;
+          t2 = t2.color;
+          t3.toString;
+          t3.backgroundColor = t2 == null ? "" : t2;
+          t2 = art.style;
+          t2.backgroundImage = "";
+        }
+      }
+      music = t1.querySelector("#project-details-music");
+      if (music != null) {
+        t2 = "" + _this.project.clock._bpm + " bpm | ";
+        t3 = _this.project.clock;
+        J.set$innerHtml$x(music, t2 + t3._meter + " time | " + H.S(t3._key.name));
+      }
+      baseUrl = C.JSString_methods.$add(C.JSString_methods.$add(J.$add$ansx(window.location.protocol, "//"), window.location.host), window.location.pathname);
+      t2 = type$.AnchorElement;
+      shareLink = t2._as(t1.querySelector("#project-share-url"));
+      if (shareLink != null) {
+        shareLink.href = baseUrl + "#session-" + H.S(_this.project.id);
+        C.AnchorElement_methods.setInnerHtml$1(shareLink, baseUrl + "#session-" + H.S(_this.project.id));
+        if (_this.project.$public)
+          shareLink.classList.remove("hidden");
+        else
+          shareLink.classList.add("hidden");
+      }
+      remixLink = t2._as(t1.querySelector("#project-remix-url"));
+      if (remixLink != null) {
+        remixLink.href = baseUrl + "#remix-" + H.S(_this.project.id);
+        C.AnchorElement_methods.setInnerHtml$1(remixLink, baseUrl + "#remix-" + H.S(_this.project.id));
+        if (B.toBool(J.$index$asx(_this.project.settings, _s9_), true))
+          remixLink.classList.remove("hidden");
+        else
+          remixLink.classList.add("hidden");
+      }
+    },
     _updateToolbar$0: function() {
       var t3, numField, denField, base, scale, key, t4, t5, t6, el, tempoField, nameField, _this = this,
         _s16_ = "querySelectorAll",
@@ -30284,11 +30390,11 @@
       W._MultiElementCssClassSet__MultiElementCssClassSet(new W._FrozenElementList(t2.querySelectorAll(t4), t3)).add$1(0, _s8_);
     },
     _dropbook$_registerEvents$0: function() {
-      var t3, t4, t5, t6, t7, bpmField, numField, denField, t8, _this = this, _s1_ = "T",
+      var t3, t4, t5, t6, t7, bpmField, numField, denField, t8, t9, t10, artInput, _this = this, _s1_ = "T",
         _s16_ = "querySelectorAll",
         _s13_ = "#project-name",
         _s68_ = ".tempo-menu .tempo, .tempo-menu .numerator, .tempo-menu .denominator",
-        _s5_ = "click",
+        _s5_ = "click", _s4_ = "blur",
         _s8_ = "keypress",
         _s9_ = "mousedown",
         t1 = type$.Element,
@@ -30300,7 +30406,7 @@
       new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#add-cell-button"), t3)), false, _s5_, t5).listen$1(new A.Dropbook__registerEvents_closure(_this));
       H.checkTypeBound(t1, t1, _s1_, _s16_);
       t6 = type$._ElementListEventStreamImpl_Event;
-      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll(_s13_), t3)), false, "blur", t6).listen$1(new A.Dropbook__registerEvents_closure0(_this));
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll(_s13_), t3)), false, _s4_, t6).listen$1(new A.Dropbook__registerEvents_closure0(_this));
       H.checkTypeBound(t1, t1, _s1_, _s16_);
       new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll(_s13_), t3)), false, _s8_, type$._ElementListEventStreamImpl_KeyboardEvent).listen$1(new A.Dropbook__registerEvents_closure1());
       H.checkTypeBound(t1, t1, _s1_, _s16_);
@@ -30341,22 +30447,37 @@
       H.checkTypeBound(t1, t1, _s1_, _s16_);
       new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll(_s68_), t3)), false, "input", t6).listen$1(new A.Dropbook__registerEvents_closure21());
       H.checkTypeBound(t1, t1, _s1_, _s16_);
-      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll(_s68_), t3)), false, "blur", t6).listen$1(new A.Dropbook__registerEvents_closure22(_this, numField, denField));
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll(_s68_), t3)), false, _s4_, t6).listen$1(new A.Dropbook__registerEvents_closure22(_this, numField, denField));
       bpmField.toString;
-      t6 = type$._ElementEventStreamImpl_KeyboardEvent;
-      t7 = t6._eval$1("~(1)");
-      t8 = t7._as(new A.Dropbook__registerEvents_closure23(bpmField));
+      t8 = type$._ElementEventStreamImpl_KeyboardEvent;
+      t9 = t8._eval$1("~(1)");
+      t10 = t9._as(new A.Dropbook__registerEvents_closure23(bpmField));
       type$.void_Function._as(null);
-      t6 = t6._precomputed1;
-      W._EventStreamSubscription$(bpmField, _s8_, t8, false, t6);
+      t8 = t8._precomputed1;
+      W._EventStreamSubscription$(bpmField, _s8_, t10, false, t8);
       numField.toString;
-      W._EventStreamSubscription$(numField, _s8_, t7._as(new A.Dropbook__registerEvents_closure24(numField)), false, t6);
+      W._EventStreamSubscription$(numField, _s8_, t9._as(new A.Dropbook__registerEvents_closure24(numField)), false, t8);
       denField.toString;
-      W._EventStreamSubscription$(denField, _s8_, t7._as(new A.Dropbook__registerEvents_closure25(denField)), false, t6);
+      W._EventStreamSubscription$(denField, _s8_, t9._as(new A.Dropbook__registerEvents_closure25(denField)), false, t8);
       H.checkTypeBound(t1, t1, _s1_, _s16_);
       new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#change-key .menu-item"), t3)), false, _s9_, t5).listen$1(new A.Dropbook__registerEvents_closure26(_this));
       H.checkTypeBound(t1, t1, _s1_, _s16_);
       new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#change-key"), t3)), false, _s9_, t5).listen$1(new A.Dropbook__registerEvents_closure27(_this));
+      H.checkTypeBound(t1, t1, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#project-details-name"), t3)), false, _s4_, t6).listen$1(new A.Dropbook__registerEvents_closure28(_this));
+      H.checkTypeBound(t1, t1, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#project-details-description"), t3)), false, _s4_, t6).listen$1(new A.Dropbook__registerEvents_closure29(_this));
+      H.checkTypeBound(t1, t1, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#project-details-public"), t3)), false, "change", t6).listen$1(new A.Dropbook__registerEvents_closure30(_this));
+      H.checkTypeBound(t1, t1, _s1_, _s16_);
+      new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#project-details-remix"), t3)), false, "change", t6).listen$1(new A.Dropbook__registerEvents_closure31(_this));
+      artInput = t7._as(t2.querySelector("#artwork-file-input"));
+      if (artInput != null) {
+        H.checkTypeBound(t1, t1, _s1_, _s16_);
+        new W._ElementListEventStreamImpl(t4._as(new W._FrozenElementList(t2.querySelectorAll("#project-artwork-upload-button"), t3)), false, _s5_, t5).listen$1(new A.Dropbook__registerEvents_closure32(artInput));
+        t1 = type$._ElementEventStreamImpl_Event;
+        W._EventStreamSubscription$(artInput, "input", t1._eval$1("~(1)")._as(new A.Dropbook__registerEvents_closure33(_this, artInput)), false, t1._precomputed1);
+      }
     },
     _adjustTempo$1: function(delta) {
       var t1,
@@ -30450,15 +30571,15 @@
       t1 = type$.Element;
       dialog.toString;
       H.checkTypeBound(t1, t1, "T", "querySelectorAll");
-      new W._ElementListEventStreamImpl(type$.ElementList_Element._as(new W._FrozenElementList(dialog.querySelectorAll(".add-button"), type$._FrozenElementList_Element)), false, "click", type$._ElementListEventStreamImpl_MouseEvent).listen$1(new A.Dropbook__registerEvents__closure(this.$this));
+      new W._ElementListEventStreamImpl(type$.ElementList_Element._as(new W._FrozenElementList(dialog.querySelectorAll(".add-button"), type$._FrozenElementList_Element)), false, "click", type$._ElementListEventStreamImpl_MouseEvent).listen$1(new A.Dropbook__registerEvents__closure0(this.$this));
     },
     $signature: 0
   };
-  A.Dropbook__registerEvents__closure.prototype = {
+  A.Dropbook__registerEvents__closure0.prototype = {
     call$1: function(e) {
-      return this.$call$body$Dropbook__registerEvents__closure(type$.MouseEvent._as(e));
+      return this.$call$body$Dropbook__registerEvents__closure0(type$.MouseEvent._as(e));
     },
-    $call$body$Dropbook__registerEvents__closure: function(e) {
+    $call$body$Dropbook__registerEvents__closure0: function(e) {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
         $async$handler = 1, $async$currentError, $async$next = [], $async$self = this, gadget, exception, button, gadget0, $async$exception;
@@ -30542,7 +30663,7 @@
       if (type$.KeyboardEvent._as(e).keyCode === 13)
         J.blur$0$x(document.querySelector("#project-name"));
     },
-    $signature: 12
+    $signature: 13
   };
   A.Dropbook__registerEvents_closure2.prototype = {
     call$1: function(e) {
@@ -30747,21 +30868,21 @@
       if (type$.KeyboardEvent._as(e).keyCode === 13)
         this.bpmField.blur();
     },
-    $signature: 12
+    $signature: 13
   };
   A.Dropbook__registerEvents_closure24.prototype = {
     call$1: function(e) {
       if (type$.KeyboardEvent._as(e).keyCode === 13)
         this.numField.blur();
     },
-    $signature: 12
+    $signature: 13
   };
   A.Dropbook__registerEvents_closure25.prototype = {
     call$1: function(e) {
       if (type$.KeyboardEvent._as(e).keyCode === 13)
         this.denField.blur();
     },
-    $signature: 12
+    $signature: 13
   };
   A.Dropbook__registerEvents_closure26.prototype = {
     call$1: function(e) {
@@ -30787,6 +30908,100 @@
       e.stopPropagation();
     },
     $signature: 0
+  };
+  A.Dropbook__registerEvents_closure28.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.Event._as(e);
+      t1 = this.$this;
+      t1.project.name = type$.InputElement._as(J.get$currentTarget$x(e)).value;
+      t1.datastore.update$1(0, t1.project);
+    },
+    $signature: 2
+  };
+  A.Dropbook__registerEvents_closure29.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.Event._as(e);
+      t1 = this.$this;
+      t1.project.summary = type$.TextAreaElement._as(J.get$currentTarget$x(e)).value;
+      t1.datastore.update$1(0, t1.project);
+    },
+    $signature: 2
+  };
+  A.Dropbook__registerEvents_closure30.prototype = {
+    call$1: function(e) {
+      var t1;
+      type$.Event._as(e);
+      t1 = this.$this;
+      t1.project.$public = type$.SelectElement._as(J.get$currentTarget$x(e)).value === "true";
+      t1.datastore.update$1(0, t1.project);
+    },
+    $signature: 2
+  };
+  A.Dropbook__registerEvents_closure31.prototype = {
+    call$1: function(e) {
+      var t1, t2, t3;
+      type$.Event._as(e);
+      t1 = this.$this;
+      t2 = t1.project;
+      t3 = type$.SelectElement._as(J.get$currentTarget$x(e)).value;
+      J.$indexSet$ax(t2.settings, "remixable", t3 === "true");
+      t1.datastore.update$1(0, t1.project);
+    },
+    $signature: 2
+  };
+  A.Dropbook__registerEvents_closure32.prototype = {
+    call$1: function(e) {
+      type$.MouseEvent._as(e);
+      this.artInput.click();
+    },
+    $signature: 0
+  };
+  A.Dropbook__registerEvents_closure33.prototype = {
+    call$1: function(e) {
+      var reader = new FileReader(),
+        t1 = this.artInput.files;
+      if (0 >= t1.length)
+        return H.ioore(t1, 0);
+      reader.readAsDataURL(t1[0]);
+      t1 = type$.void_Function_ProgressEvent._as(new A.Dropbook__registerEvents__closure(this.$this, reader));
+      type$.void_Function._as(null);
+      W._EventStreamSubscription$(reader, "load", t1, false, type$.ProgressEvent);
+    },
+    $signature: 2
+  };
+  A.Dropbook__registerEvents__closure.prototype = {
+    call$1: function(e) {
+      return this.$call$body$Dropbook__registerEvents__closure(type$.ProgressEvent._as(e));
+    },
+    $call$body$Dropbook__registerEvents__closure: function(e) {
+      var $async$goto = 0,
+        $async$completer = P._makeAsyncAwaitCompleter(type$.Null),
+        $async$self = this, t1;
+      var $async$call$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+        if ($async$errorCode === 1)
+          return P._asyncRethrow($async$result, $async$completer);
+        while (true)
+          switch ($async$goto) {
+            case 0:
+              // Function start
+              t1 = $async$self.$this;
+              t1.project.artwork = H._asStringNullable(C.FileReader_methods.get$result($async$self.reader));
+              t1._art_cache = "?" + C.C__JSRandom.nextInt$1(500);
+              E.Dialog_showLoader();
+              $async$goto = 2;
+              return P._asyncAwait(t1.datastore.update$1(0, t1.project), $async$call$1);
+            case 2:
+              // returning from await.
+              E.Dialog_hideLoader();
+              // implicit return
+              return P._asyncReturn(null, $async$completer);
+          }
+      });
+      return P._asyncStartSync($async$call$1, $async$completer);
+    },
+    $signature: 12
   };
   A.Dropbook__bindSpinnerButton_closure.prototype = {
     call$1: function(e) {
@@ -32459,16 +32674,16 @@
     _static_0(P, "async___startMicrotaskLoop$closure", "_startMicrotaskLoop", 3);
     _static(P, "async___nullErrorHandler$closure", 1, null, ["call$2", "call$1"], ["_nullErrorHandler", function(error) {
       return P._nullErrorHandler(error, null);
-    }], 14, 0);
+    }], 15, 0);
     _static_0(P, "async___nullDoneHandler$closure", "_nullDoneHandler", 3);
     var _;
     _instance_0_u(_ = P._BroadcastSubscription.prototype, "get$_onPause", "_onPause$0", 3);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 3);
     _instance_1_i(P._BroadcastStreamController.prototype, "get$add", "add$1", 31);
-    _instance(P._Completer.prototype, "get$completeError", 0, 1, null, ["call$2", "call$1"], ["completeError$2", "completeError$1"], 14, 0);
+    _instance(P._Completer.prototype, "get$completeError", 0, 1, null, ["call$2", "call$1"], ["completeError$2", "completeError$1"], 15, 0);
     _instance(P._Future.prototype, "get$_completeError", 0, 1, function() {
       return [null];
-    }, ["call$2", "call$1"], ["_completeError$2", "_completeError$1"], 14, 0);
+    }, ["call$2", "call$1"], ["_completeError$2", "_completeError$1"], 15, 0);
     _instance_0_u(_ = P._ControllerSubscription.prototype, "get$_onPause", "_onPause$0", 3);
     _instance_0_u(_, "get$_onResume", "_onResume$0", 3);
     _instance_0_u(_ = P._BufferingStreamSubscription.prototype, "get$_onPause", "_onPause$0", 3);
@@ -32477,7 +32692,7 @@
     _instance_1_u(_ = P._StreamIterator.prototype, "get$_async$_onData", "_async$_onData$1", 31);
     _instance(_, "get$_onError", 0, 1, function() {
       return [null];
-    }, ["call$2", "call$1"], ["_onError$2", "_onError$1"], 14, 0);
+    }, ["call$2", "call$1"], ["_onError$2", "_onError$1"], 15, 0);
     _instance_0_u(_, "get$_onDone", "_onDone$0", 3);
     _static_1(P, "convert___defaultToEncodable$closure", "_defaultToEncodable", 9);
     _static(W, "html__Html5NodeValidator__standardAttributeValidator$closure", 4, null, ["call$4"], ["_Html5NodeValidator__standardAttributeValidator"], 40, 0);
@@ -32487,17 +32702,17 @@
     _instance_0_i(W._StreamPool.prototype, "get$close", "close$0", 3);
     _static_1(P, "js___convertToJS$closure", "_convertToJS", 9);
     _static_1(P, "js___convertToDart$closure", "_convertToDart", 58);
-    _instance_1_u(_ = U.MIDIManager.prototype, "get$_midiConnection", "_midiConnection$1", 17);
-    _instance_1_u(_, "get$_midiEvent", "_midiEvent$1", 17);
-    _static_2(R, "codemirror_CodeMirror_onEditorUpdate$closure", "CodeMirror_onEditorUpdate", 16);
-    _static_2(R, "codemirror_CodeMirror_onCursorActivity$closure", "CodeMirror_onCursorActivity", 16);
-    _static_1(R, "codemirror_CodeMirror_onEditorBlur$closure", "CodeMirror_onEditorBlur", 17);
-    _static_1(R, "codemirror_CodeMirror_onEditorFocus$closure", "CodeMirror_onEditorFocus", 17);
+    _instance_1_u(_ = U.MIDIManager.prototype, "get$_midiConnection", "_midiConnection$1", 18);
+    _instance_1_u(_, "get$_midiEvent", "_midiEvent$1", 18);
+    _static_2(R, "codemirror_CodeMirror_onEditorUpdate$closure", "CodeMirror_onEditorUpdate", 17);
+    _static_2(R, "codemirror_CodeMirror_onCursorActivity$closure", "CodeMirror_onCursorActivity", 17);
+    _static_1(R, "codemirror_CodeMirror_onEditorBlur$closure", "CodeMirror_onEditorBlur", 18);
+    _static_1(R, "codemirror_CodeMirror_onEditorFocus$closure", "CodeMirror_onEditorFocus", 18);
     _instance_1_u(_ = R.CodeMirror.prototype, "get$_codemirror$_onEditorUpdate", "_codemirror$_onEditorUpdate$1", 22);
     _instance_1_u(_, "get$_onCursorActivity", "_onCursorActivity$1", 22);
     _instance_0_u(_, "get$_onEditorBlur", "_onEditorBlur$0", 3);
     _instance_0_u(_, "get$_onEditorFocus", "_onEditorFocus$0", 3);
-    _static_2(A, "quill_QuillEditor_onEditorUpdate$closure", "QuillEditor_onEditorUpdate", 16);
+    _static_2(A, "quill_QuillEditor_onEditorUpdate$closure", "QuillEditor_onEditorUpdate", 17);
     _instance_1_u(A.QuillEditor.prototype, "get$_onEditorUpdate", "_onEditorUpdate$1", 22);
     _instance_1_i(_ = Y.BassGuitar.prototype, "get$onKeyDown", "onKeyDown$1", 6);
     _instance_1_i(_, "get$onKeyUp", "onKeyUp$1", 6);
@@ -32515,7 +32730,7 @@
     _instance_1_u(_, "get$_cell$_onDeleted", "_cell$_onDeleted$1", 4);
     _instance_1_u(_, "get$_onReordered", "_onReordered$1", 4);
     _instance_1_u(_, "get$_onMessage", "_onMessage$1", 4);
-    _instance_1_u(S.Datastore.prototype, "get$_handleSocketMessage", "_handleSocketMessage$1", 13);
+    _instance_1_u(S.Datastore.prototype, "get$_handleSocketMessage", "_handleSocketMessage$1", 14);
     _instance_1_u(Q.RecordingStudio.prototype, "get$tick", "tick$1", 21);
     _instance_1_i(R.PythonTrack.prototype, "get$animate", "animate$1", 21);
     _instance_1_u(_ = B.UserList.prototype, "get$onLogin", "onLogin$1", 4);
@@ -32561,7 +32776,7 @@
     _inherit(P.UnmodifiableMapView, P._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
     _inherit(H.ConstantMapView, P.UnmodifiableMapView);
     _inherit(H.ConstantStringMap, H.ConstantMap);
-    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._BeforeUnloadEventStreamProvider_forTarget_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._completeRequest_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, A.QuillEditor_initialize_closure, A.QuillEditor_initialize_closure0, Y.BassFret_closure, Y.BassFret_closure0, Y.BassFret_closure1, Y.BassFret_closure2, F.DrumKit_render_closure, F.DrumKit_render_closure0, F.DrumKit_render_closure1, F.DrumKit_render_closure2, N.DrumPad_closure, N.DrumPad_closure0, N.DrumPad_closure1, N.DrumPad_closure2, F.GFret_closure, F.GFret_closure0, F.GFret_closure1, F.GFret_closure2, S.Instrument_unload_closure, B.Piano_render_closure, B.Piano_render_closure0, B.Piano__slideKeyboard_closure, B.MiniPiano_slide_closure, B.PianoKey_closure, B.PianoKey_closure0, B.PianoKey_closure1, B.PianoKey_closure2, D.Sequencer_render_closure, D.SequencerRow_closure, D.SequencerRow_closure0, D.SequencerRow_closure1, D.SequencerRow_mute_closure, D.SequencerRow_unmute_closure, D.SequencerDrumButton_closure, D.SequencerButton_closure, D.SequencerButton_closure0, D.SequencerButton_closure1, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.DistNode_closure, B.DistNode__closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, R.UserAccounts_login_closure, R.UserAccounts_login_closure0, R.UserAccounts_login_closure1, R.UserAccounts_login_closure2, A.TunePadCell_insert_closure, A.TunePadCell_insert_closure0, A.TunePadCell_insert_closure1, A.TunePadCell_insert_closure2, S.Datastore_closure, S.Datastore_closure0, S.Datastore_loginWithGoogle_closure, S.Datastore_loginWithGoogle__closure, X.PythonCell_insert_closure, X.PythonCell_insert_closure0, X.PythonCell_insert_closure1, X.PythonCell_insert_closure2, X.PythonCell_onPythonDone_closure, X.PythonCell__shareCell_closure, X.PythonCell__shareCell_closure0, X.PythonCell_doContextMenu_closure, U.EffectsChain_closure, U.EffectsChain_closure0, U.EffectsChain_closure1, U.EffectsChain_closure2, U.EffectsChain_closure3, U.EffectsChain_closure4, U.EffectsChain_closure5, U.EffectsChain_playAudio_closure, U.EffectsChain_playSlice_closure, U.EffectsChain_loadSoundEffects_closure, U.EffectsChain_loadSoundEffects_closure0, Q.RecordingStudio_show_closure, Q.RecordingStudio_loadUserRecordings_closure, Q.RecordingStudio_uploadAudioFile_closure, Q.RecordingStudio__registerEvents_closure, Q.RecordingStudio__registerEvents_closure0, Q.RecordingStudio__registerEvents_closure1, Q.RecordingStudio__registerEvents_closure2, Q.RecordingStudio__registerEvents_closure3, Q.RecordingStudio__registerEvents_closure4, Q.RecordingStudio__registerEvents_closure5, Q.RecordingStudio__registerEvents_closure6, Q.RecordingStudio__registerEvents_closure7, Q.RecordingStudio__registerEvents_closure8, Q.RecordingStudio__registerEvents_closure9, Q.RecordingStudio__registerEvents_closure10, Q.RecordingStudio__registerEvents_closure11, Q.RecordingStudio__registerEvents_closure12, Q.RecordingStudio__registerRowEvents_closure, Q.RecordingStudio__registerRowEvents_closure0, Q.RecordingStudio__registerRowEvents_closure1, Q.RecordingStudio__registerRowEvents_closure2, Q.RecordingStudio__playPreview_closure, Q.RecordingStudio__playPreview_closure0, Q.RecordingStudio__playPreview_closure1, V.WaveformTrace__buildClipLine_closure, V.WaveformTrace__buildClipLine_closure0, V.WaveformTrace__buildClipLine_closure1, L.TextCell_insert_closure, L.TextCell__doContextMenu_closure, D.Timeline_setInstrument_closure, D.Timeline_insert_closure, D.Timeline__render_closure, D.Timeline__render_closure0, D.Timeline__registerTouchEvents_closure, D.Timeline__registerTouchEvents_closure0, D.Timeline__registerTouchEvents_closure1, D.Timeline__registerTouchEvents_closure2, D.Timeline__renderNote_closure, D.Timeline__renderNote_closure0, D.Timeline__renderNote_closure1, D.Timeline__renderNote_closure2, R.PythonTrack_insert_closure, R.PythonTrack_insert_closure0, R.PythonTrack_insert_closure1, R.PythonTrack_insert_closure2, R.PythonTrack_insert_closure3, R.PythonTrack_insert_closure4, R.PythonTrack_insert_closure5, R.PythonTrack_insert_closure6, R.PythonTrack_insert_closure7, R.PythonTrack_insert_closure8, R.PythonTrack_insert_closure9, R.PythonTrack_insert_closure10, R.PythonTrack_insert_closure11, R.PythonTrack_onPythonDone_closure, R.PythonTrack__initVoiceMenu_closure, R.PythonTrack__setInstrument_closure, R.PythonTrack__setInstrument_closure0, R.PythonTrack__shareTrack_closure, R.PythonTrack__shareTrack_closure0, R.PythonTrack_doContextMenu_closure, R.PythonTrack__initMidi_closure, R.PythonTrack_toggleContextMenu_closure, B.UserList_closure, B.UserList_closure0, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, V.ToggleButton_buildUI_closure, V.ToggleButton_buildUI_closure0, V.ToggleButton_buildUI_closure1, V.ToggleButton_buildUI_closure2, E.Dialog_message_closure, E.Dialog_hideLoader_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu_closeAllMenus_closure, D.DropdownMenu__toggleMenu_closure, A.Dropbook_closure, A.Dropbook_closure0, A.Dropbook_playAll_closure, A.Dropbook_pauseAll_closure, A.Dropbook__registerEvents_closure, A.Dropbook__registerEvents__closure, A.Dropbook__registerEvents_closure0, A.Dropbook__registerEvents_closure1, A.Dropbook__registerEvents_closure2, A.Dropbook__registerEvents_closure3, A.Dropbook__registerEvents_closure4, A.Dropbook__registerEvents_closure5, A.Dropbook__registerEvents_closure6, A.Dropbook__registerEvents_closure7, A.Dropbook__registerEvents_closure8, A.Dropbook__registerEvents_closure9, A.Dropbook__registerEvents_closure10, A.Dropbook__registerEvents_closure11, A.Dropbook__registerEvents_closure12, A.Dropbook__registerEvents_closure13, A.Dropbook__registerEvents_closure14, A.Dropbook__registerEvents_closure15, A.Dropbook__registerEvents_closure16, A.Dropbook__registerEvents_closure17, A.Dropbook__registerEvents_closure18, A.Dropbook__registerEvents_closure19, A.Dropbook__registerEvents_closure20, A.Dropbook__registerEvents_closure21, A.Dropbook__registerEvents_closure22, A.Dropbook__registerEvents_closure23, A.Dropbook__registerEvents_closure24, A.Dropbook__registerEvents_closure25, A.Dropbook__registerEvents_closure26, A.Dropbook__registerEvents_closure27, A.Dropbook__bindSpinnerButton_closure, A.Dropbook__bindSpinnerButton_closure0, A.Dropbook__bindSpinnerButton__closure, A.Dropbook__bindSpinnerButton___closure, A.Dropbook__toggleContextMenu_closure, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show__closure0, O.TrackLibrary_show___closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F._showWelcomeMessage_closure, F._showWelcomeMessage_closure0, F._showProjectList_closure, Z.OutlineView_loadProject_closure, Z.OutlineView_loadProject__closure, Z.OutlineView_createItem_closure, Z.OutlineView_createItem_closure0, Z.OutlineView_createItem_closure1, Z.OutlineView_createItem_closure2, Z.OutlineView_updateItem_closure, Z.OutlineView__reorder_closure, Z.OutlineView__reorder_closure0, G.ProjectList_show_closure, G.ProjectList__buildItem_closure, G.ProjectList__buildItem_closure0, G.ProjectList__buildItem_closure1, G.ProjectList__buildProjectBadge_closure, G.ProjectList__buildProjectBadge_closure0, G.ProjectList__buildProjectBadge_closure1, G.ProjectList__playPreview_closure, G.ProjectList__playPreview_closure0, G.ProjectList__playPreview_closure1]);
+    _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.unwrapException_saveStackTrace, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._TimerImpl$periodic_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P._SyncBroadcastStreamController__sendData_closure, P._SyncBroadcastStreamController__sendDone_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncComplete_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P.Stream_length_closure, P.Stream_length_closure0, P.Stream_first_closure, P.Stream_first_closure0, P._StreamController__subscribe_closure, P._StreamController__recordCancel_complete, P._BufferingStreamSubscription__sendDone_sendDone, P._PendingEvents_schedule_closure, P._cancelAndValue_closure, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P._RootZone_bindUnaryCallbackGuarded_closure, P.LinkedHashMap_LinkedHashMap$from_closure, P.MapBase_mapToString_closure, P._JsonStringifier_writeMap_closure, P._symbolMapToStringMap_closure, P.NoSuchMethodError_toString_closure, P.DateTime_parse_parseIntOrZero, P.DateTime_parse_parseMilliAndMicroseconds, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, W.Element_Element$html_closure, W.Entry_remove_closure, W.Entry_remove_closure0, W.HttpRequest_getString_closure, W.HttpRequest_request_closure, W.MidiInputMap_keys_closure, W.MidiOutputMap_keys_closure, W.Navigator_getUserMedia_closure, W.Navigator_getUserMedia_closure0, W.RtcStatsReport_keys_closure, W.Storage_keys_closure, W.Window_animationFrame_closure, W._BeforeUnloadEventStreamProvider_forTarget_closure, W._DataAttributeMap_forEach_closure, W._DataAttributeMap_keys_closure, W._MultiElementCssClassSet__MultiElementCssClassSet_closure, W._MultiElementCssClassSet_readClasses_closure, W._MultiElementCssClassSet_modify_closure, W._MultiElementCssClassSet_toggle_closure, W._MultiElementCssClassSet_remove_closure, W._EventStreamSubscription_closure, W._StreamPool_add_closure, W.NodeValidatorBuilder_allowsElement_closure, W.NodeValidatorBuilder_allowsAttribute_closure, W._SimpleNodeValidator_closure, W._SimpleNodeValidator_closure0, W._TemplatingNodeValidator_closure, W._ValidatingTreeSanitizer_sanitizeTree_walk, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._AcceptStructuredClone_walk_closure, P.convertDartToNative_Dictionary_closure, P.CssClassSetImpl_add_closure, P.CssClassSetImpl_removeWhere_closure, P.CssClassSetImpl_clear_closure, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, P.FilteredElementList_removeRange_closure, P._completeRequest_closure, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, P.promiseToFuture_closure, P.promiseToFuture_closure0, P.AudioContext_decodeAudioData_closure, P.AudioContext_decodeAudioData_closure0, P.AudioParamMap_keys_closure, A.QuillEditor_initialize_closure, A.QuillEditor_initialize_closure0, Y.BassFret_closure, Y.BassFret_closure0, Y.BassFret_closure1, Y.BassFret_closure2, F.DrumKit_render_closure, F.DrumKit_render_closure0, F.DrumKit_render_closure1, F.DrumKit_render_closure2, N.DrumPad_closure, N.DrumPad_closure0, N.DrumPad_closure1, N.DrumPad_closure2, F.GFret_closure, F.GFret_closure0, F.GFret_closure1, F.GFret_closure2, S.Instrument_unload_closure, B.Piano_render_closure, B.Piano_render_closure0, B.Piano__slideKeyboard_closure, B.MiniPiano_slide_closure, B.PianoKey_closure, B.PianoKey_closure0, B.PianoKey_closure1, B.PianoKey_closure2, D.Sequencer_render_closure, D.SequencerRow_closure, D.SequencerRow_closure0, D.SequencerRow_closure1, D.SequencerRow_mute_closure, D.SequencerRow_unmute_closure, D.SequencerDrumButton_closure, D.SequencerButton_closure, D.SequencerButton_closure0, D.SequencerButton_closure1, U.SynthChain_playNote_closure, U.SynthChain_pitchBend_closure, U.SynthChain_schedulePitchBend_closure, U.SynthChain_releaseNote_closure, U.SynthChain_destroy_closure, E.PlayClock_stopAll_closure, E.PlayClock_setTime_closure, E.PlayClock_setTempo_closure, E.PlayClock_setTimeSignature_closure, E.PlayClock_startMetronome_closure, E.PlayClock_startMetronome_closure0, E.PlayClock_startMetronome__closure, X.SynthEvent_releaseNote_closure, X.SynthEvent_scheduleNote_closure, B.DistNode_closure, B.DistNode__closure, B.SynthSampleNode_schedulePitchBend_closure, L.Synthesizer_loadPatch_closure, L.Synthesizer__play_closure, L.Synthesizer__schedule_closure, L.Synthesizer_pitchBend_closure, L.Synthesizer_loadAudioBuffer_closure, L.Synthesizer_loadAudioBuffer_closure0, L.Synthesizer_loadCustomSound_closure, L.Synthesizer_loadCustomSound_closure0, R.UserAccounts_login_closure, R.UserAccounts_login_closure0, R.UserAccounts_login_closure1, R.UserAccounts_login_closure2, A.TunePadCell_insert_closure, A.TunePadCell_insert_closure0, A.TunePadCell_insert_closure1, A.TunePadCell_insert_closure2, S.Datastore_closure, S.Datastore_closure0, S.Datastore_loginWithGoogle_closure, S.Datastore_loginWithGoogle__closure, X.PythonCell_insert_closure, X.PythonCell_insert_closure0, X.PythonCell_insert_closure1, X.PythonCell_insert_closure2, X.PythonCell_onPythonDone_closure, X.PythonCell__shareCell_closure, X.PythonCell__shareCell_closure0, X.PythonCell_doContextMenu_closure, U.EffectsChain_closure, U.EffectsChain_closure0, U.EffectsChain_closure1, U.EffectsChain_closure2, U.EffectsChain_closure3, U.EffectsChain_closure4, U.EffectsChain_closure5, U.EffectsChain_playAudio_closure, U.EffectsChain_playSlice_closure, U.EffectsChain_loadSoundEffects_closure, U.EffectsChain_loadSoundEffects_closure0, Q.RecordingStudio_show_closure, Q.RecordingStudio_loadUserRecordings_closure, Q.RecordingStudio_uploadAudioFile_closure, Q.RecordingStudio__registerEvents_closure, Q.RecordingStudio__registerEvents_closure0, Q.RecordingStudio__registerEvents_closure1, Q.RecordingStudio__registerEvents_closure2, Q.RecordingStudio__registerEvents_closure3, Q.RecordingStudio__registerEvents_closure4, Q.RecordingStudio__registerEvents_closure5, Q.RecordingStudio__registerEvents_closure6, Q.RecordingStudio__registerEvents_closure7, Q.RecordingStudio__registerEvents_closure8, Q.RecordingStudio__registerEvents_closure9, Q.RecordingStudio__registerEvents_closure10, Q.RecordingStudio__registerEvents_closure11, Q.RecordingStudio__registerEvents_closure12, Q.RecordingStudio__registerRowEvents_closure, Q.RecordingStudio__registerRowEvents_closure0, Q.RecordingStudio__registerRowEvents_closure1, Q.RecordingStudio__registerRowEvents_closure2, Q.RecordingStudio__playPreview_closure, Q.RecordingStudio__playPreview_closure0, Q.RecordingStudio__playPreview_closure1, V.WaveformTrace__buildClipLine_closure, V.WaveformTrace__buildClipLine_closure0, V.WaveformTrace__buildClipLine_closure1, L.TextCell_insert_closure, L.TextCell__doContextMenu_closure, D.Timeline_setInstrument_closure, D.Timeline_insert_closure, D.Timeline__render_closure, D.Timeline__render_closure0, D.Timeline__registerTouchEvents_closure, D.Timeline__registerTouchEvents_closure0, D.Timeline__registerTouchEvents_closure1, D.Timeline__registerTouchEvents_closure2, D.Timeline__renderNote_closure, D.Timeline__renderNote_closure0, D.Timeline__renderNote_closure1, D.Timeline__renderNote_closure2, R.PythonTrack_insert_closure, R.PythonTrack_insert_closure0, R.PythonTrack_insert_closure1, R.PythonTrack_insert_closure2, R.PythonTrack_insert_closure3, R.PythonTrack_insert_closure4, R.PythonTrack_insert_closure5, R.PythonTrack_insert_closure6, R.PythonTrack_insert_closure7, R.PythonTrack_insert_closure8, R.PythonTrack_insert_closure9, R.PythonTrack_insert_closure10, R.PythonTrack_insert_closure11, R.PythonTrack_onPythonDone_closure, R.PythonTrack__initVoiceMenu_closure, R.PythonTrack__setInstrument_closure, R.PythonTrack__setInstrument_closure0, R.PythonTrack__shareTrack_closure, R.PythonTrack__shareTrack_closure0, R.PythonTrack_doContextMenu_closure, R.PythonTrack__initMidi_closure, R.PythonTrack_toggleContextMenu_closure, B.UserList_closure, B.UserList_closure0, V.EffectsDial_buildUI_closure, V.EffectsDial_buildUI_closure0, V.EffectsDial_buildUI_closure1, V.ToggleButton_buildUI_closure, V.ToggleButton_buildUI_closure0, V.ToggleButton_buildUI_closure1, V.ToggleButton_buildUI_closure2, E.Dialog_message_closure, E.Dialog_hideLoader_closure, E.Dialog_closeModal_closure, E.Dialog__showModal_closure, E.Dialog__showModal_closure0, E.Dialog__showModal_closure1, E.Dialog__showModal_closure2, D.DropdownMenu_armMenu_closure, D.DropdownMenu_armMenu_closure0, D.DropdownMenu_closeAllMenus_closure, D.DropdownMenu__toggleMenu_closure, A.Dropbook_closure, A.Dropbook_closure0, A.Dropbook_playAll_closure, A.Dropbook_pauseAll_closure, A.Dropbook__registerEvents_closure, A.Dropbook__registerEvents__closure0, A.Dropbook__registerEvents_closure0, A.Dropbook__registerEvents_closure1, A.Dropbook__registerEvents_closure2, A.Dropbook__registerEvents_closure3, A.Dropbook__registerEvents_closure4, A.Dropbook__registerEvents_closure5, A.Dropbook__registerEvents_closure6, A.Dropbook__registerEvents_closure7, A.Dropbook__registerEvents_closure8, A.Dropbook__registerEvents_closure9, A.Dropbook__registerEvents_closure10, A.Dropbook__registerEvents_closure11, A.Dropbook__registerEvents_closure12, A.Dropbook__registerEvents_closure13, A.Dropbook__registerEvents_closure14, A.Dropbook__registerEvents_closure15, A.Dropbook__registerEvents_closure16, A.Dropbook__registerEvents_closure17, A.Dropbook__registerEvents_closure18, A.Dropbook__registerEvents_closure19, A.Dropbook__registerEvents_closure20, A.Dropbook__registerEvents_closure21, A.Dropbook__registerEvents_closure22, A.Dropbook__registerEvents_closure23, A.Dropbook__registerEvents_closure24, A.Dropbook__registerEvents_closure25, A.Dropbook__registerEvents_closure26, A.Dropbook__registerEvents_closure27, A.Dropbook__registerEvents_closure28, A.Dropbook__registerEvents_closure29, A.Dropbook__registerEvents_closure30, A.Dropbook__registerEvents_closure31, A.Dropbook__registerEvents_closure32, A.Dropbook__registerEvents_closure33, A.Dropbook__registerEvents__closure, A.Dropbook__bindSpinnerButton_closure, A.Dropbook__bindSpinnerButton_closure0, A.Dropbook__bindSpinnerButton__closure, A.Dropbook__bindSpinnerButton___closure, A.Dropbook__toggleContextMenu_closure, O.TrackLibrary_show_closure, O.TrackLibrary_show__closure, O.TrackLibrary_show__closure0, O.TrackLibrary_show___closure, O.TrackLibrary_show_closure0, O.TrackLibrary__buildTrack_closure, O.TrackLibrary__buildTrack_closure0, O.TrackLibrary__buildTrack_closure1, O.TrackLibrary__buildTrack_closure2, O.TrackLibrary__buildTrack_closure3, O.TrackLibrary__buildTrack_closure4, O.TrackLibrary__playTrackPreview_closure, O.TrackLibrary__playTrackPreview_closure0, O.TrackLibrary__playTrackPreview_closure1, F.main_closure, F.main_closure0, F.main_closure1, F.main_closure2, F.main_closure3, F.main_closure4, F._showWelcomeMessage_closure, F._showWelcomeMessage_closure0, F._showProjectList_closure, Z.OutlineView_loadProject_closure, Z.OutlineView_loadProject__closure, Z.OutlineView_createItem_closure, Z.OutlineView_createItem_closure0, Z.OutlineView_createItem_closure1, Z.OutlineView_createItem_closure2, Z.OutlineView_updateItem_closure, Z.OutlineView__reorder_closure, Z.OutlineView__reorder_closure0, G.ProjectList_show_closure, G.ProjectList__buildItem_closure, G.ProjectList__buildItem_closure0, G.ProjectList__buildItem_closure1, G.ProjectList__buildProjectBadge_closure, G.ProjectList__buildProjectBadge_closure0, G.ProjectList__buildProjectBadge_closure1, G.ProjectList__playPreview_closure, G.ProjectList__playPreview_closure0, G.ProjectList__playPreview_closure1]);
     _inheritMany(P.Error, [H.NullError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, P.AssertionError, H._Error, P.JsonUnsupportedObjectError, P.NullThrownError, P.ArgumentError, P.NoSuchMethodError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
     _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
     _inherit(H._AssertionError, P.AssertionError);
@@ -32782,7 +32997,7 @@
     mangledNames: {},
     getTypeFromName: getGlobalFromName,
     metadata: [],
-    types: ["Null(MouseEvent)", "Null()", "Null(Event)", "~()", "~(DatastoreEvent)", "Null(@,@)", "~(KeyboardEvent)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "Null(Element)", "bool(String)", "Null(KeyboardEvent)", "~(@)", "~(Object[StackTrace])", "~(String,@)", "~(String,String)", "~(String)", "~(ClockSubscriber)", "Future<Null>(ProgressEvent)", "~(~())", "~(num)", "~(Map<@,@>)", "~(SynthNode)", "~(ProgressEvent)", "Null(SynthNode)", "Null(TunePadCell)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "~(Event)", "bool(NodeValidator)", "~(Object)", "~(Set<String>)", "Null(Symbol0,@)", "Null(SequencerButton)", "int(String)", "String(int)", "~(Metronome)", "Null(Timer)", "Null(AudioProcessingEvent)", "bool(Element,String,String,_Html5NodeValidator)", "bool(Node)", "Null(DomException)", "Future<Null>(@)", "JsFunction(@)", "@(String)", "Null(NavigatorUserMediaError)", "JsArray<@>(@)", "JsObject(@)", "Null(AudioBuffer)", "Null(@[StackTrace])", "@(@,String)", "Null(~())", "~(CssClassSetImpl)", "~(Element)", "~(PianoKey)", "Null(SequencerRow)", "@(CssClassSetImpl)", "Object(@)", "Null(int,@)", "Null(num)", "Null(String,@)", "Future<List<@>>()", "String(String)", "double(@)", "num(@)", "~(Node,Node)", "Future<@>()", "@(@,@)", "bool(Event)", "bool(Set<String>)", "String(HttpRequest)", "CssClassSet(Element)", "Null(ProgressEvent)", "Null(BeforeUnloadEvent)", "~(Recording)", "Future<Null>(Event)", "~(SynthEvent)", "Node(SvgElement)", "Null(NoteEvent)", "Null(MIDIEvent)", "Null(@,StackTrace)", "~(Timer)", "Element(Node)", "Null(List<Gadget>)", "Null(Gadget)", "Null(MediaStream)", "@(Event)", "_Future<@>(@)"],
+    types: ["Null(MouseEvent)", "Null()", "Null(Event)", "~()", "~(DatastoreEvent)", "Null(@,@)", "~(KeyboardEvent)", "Future<Null>(MouseEvent)", "Null(@)", "@(@)", "Null(Element)", "bool(String)", "Future<Null>(ProgressEvent)", "Null(KeyboardEvent)", "~(@)", "~(Object[StackTrace])", "~(String,@)", "~(String,String)", "~(String)", "~(ClockSubscriber)", "~(~())", "~(num)", "~(Map<@,@>)", "~(SynthNode)", "~(ProgressEvent)", "Null(SynthNode)", "Null(TunePadCell)", "Null(String,String)", "bool(bool,CssClassSetImpl)", "~(Event)", "bool(NodeValidator)", "~(Object)", "~(Set<String>)", "Null(Symbol0,@)", "Null(SequencerButton)", "int(String)", "String(int)", "~(Metronome)", "Null(Timer)", "Null(AudioProcessingEvent)", "bool(Element,String,String,_Html5NodeValidator)", "bool(Node)", "Null(DomException)", "Future<Null>(@)", "JsFunction(@)", "@(String)", "Null(NavigatorUserMediaError)", "JsArray<@>(@)", "JsObject(@)", "Null(AudioBuffer)", "Null(@[StackTrace])", "@(@,String)", "Null(~())", "~(CssClassSetImpl)", "~(Element)", "~(PianoKey)", "Null(SequencerRow)", "@(CssClassSetImpl)", "Object(@)", "Null(int,@)", "Null(num)", "Null(String,@)", "Future<List<@>>()", "String(String)", "double(@)", "num(@)", "~(Node,Node)", "Future<@>()", "@(@,@)", "bool(Event)", "bool(Set<String>)", "String(HttpRequest)", "CssClassSet(Element)", "Null(ProgressEvent)", "Null(BeforeUnloadEvent)", "~(Recording)", "Future<Null>(Event)", "~(SynthEvent)", "Node(SvgElement)", "Null(NoteEvent)", "Null(MIDIEvent)", "Null(@,StackTrace)", "~(Timer)", "Element(Node)", "Null(List<Gadget>)", "Null(Gadget)", "Null(MediaStream)", "@(Event)", "_Future<@>(@)"],
     interceptorsByTag: null,
     leafTags: null,
     arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
@@ -32955,6 +33170,7 @@
       Request: findType("Request"),
       Rti: findType("Rti"),
       ScriptElement: findType("ScriptElement0"),
+      SelectElement: findType("SelectElement"),
       SequencerButton: findType("SequencerButton"),
       SequencerRow: findType("SequencerRow"),
       Set_String: findType("Set<String>"),
@@ -33095,6 +33311,7 @@
     C.Storage_methods = W.Storage.prototype;
     C.SvgSvgElement_methods = P.SvgSvgElement.prototype;
     C.TableElement_methods = W.TableElement.prototype;
+    C.TextAreaElement_methods = W.TextAreaElement.prototype;
     C.TextElement_methods = P.TextElement.prototype;
     C.UListElement_methods = W.UListElement.prototype;
     C.UnknownJavaScriptObject_methods = J.UnknownJavaScriptObject.prototype;

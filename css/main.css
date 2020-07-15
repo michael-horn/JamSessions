@@ -642,3 +642,99 @@ nav.cell-nav {
   background-color: var(--definitions-color);
   background-image: url(../images/instruments/definitions.svg);
 }
+
+.project-details-form {
+  margin: 4em;
+  background-color: white;
+  width: 75%;
+  padding: 3em;
+  box-shadow: 3px 3px 10px #0002;
+  border-radius: 5px;
+  display: flex;
+}
+.project-details-form .left-column,
+.project-details-form .right-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 1em;
+}
+#project-details-artwork {
+  width: 100%;
+  padding-top: 100%;
+  background-color: #555;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  background-image: url(../images/project_art.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.project-details-form label {
+  font-weight: bold;
+  margin: 1em 0 0 0;
+}
+.project-details-form input,
+.project-details-form select,
+.project-details-form textarea {
+  max-width: 25em;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #999;
+  border-radius: 3px;
+  font-family: var(--main-font);
+  background-color: #f0e6e144;
+  font-size: 100%;
+}
+.project-details-form .hint {
+  font-size: 85%;
+  margin-top: 10px;
+  margin-bottom: 1em;
+}
+#project-details-modified {
+  font-weight: bold;
+  margin-top: 2em;
+}
+#project-details-tags {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  flex-wrap: wrap;
+}
+#project-details-tags li {
+  background-color: var(--bass-color);
+  color: white;
+  font-weight: bold;
+  margin: 0 0.7em 0 0;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+}
+#project-share-url,
+#project-remix-url {
+  font-weight: bold;
+  color: var(--piano-color);
+}
+#project-artwork-upload-button {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  padding: 0;
+  line-height: 50px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+#project-artwork-upload-button:hover {
+  opacity: 0.8;
+}
+#project-artwork-upload-button:active {
+  opacity: 1.0;
+}
+#artwork-file-input {
+  display: none;
+}

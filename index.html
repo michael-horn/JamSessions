@@ -86,7 +86,7 @@
   <input id="project-name">
 
   <div class="tabs">
-    <button id="about-tab-button">About</button>
+    <button id="about-tab-button">Settings</button>
     <button id="tracks-tab-button">Tracks</button>
     <button id="code-tab-button" class="selected">Code</button>
     <button id="mixer-tab-button">Mixer</button>
@@ -199,6 +199,49 @@
   </section>
 
   <section class="tab hidden" id="about-tab">
+    <div class="project-details-form">
+      <div class="left-column">
+
+        <label for="project-details-name">Project Name</label>
+        <input value="Project Name" id="project-details-name" type="text">
+
+        <label for="project-details-description">Descriptio</label>
+        <textarea id="project-details-description" placeholder="Briefly describe your project..."></textarea>
+
+        <label for="project-details-tags">Tags</label>
+        <ul id="project-details-tags"></ul>
+
+        <label for="project-details-public">Shared?</label>
+        <select id="project-details-public">
+          <option value="true">Shared</option>
+          <option value="false">Not Shared</option>
+        </select>
+        <div class="hint">
+          When a project is <b>shared</b>, anyone with the link can edit it.<br>
+          <a id="project-share-url" href="#"></a>
+        </div>
+
+        <label for="project-details-remix">Remixable?</label>
+        <select id="project-details-remix">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        <div class="hint" >
+          When a project is <b>remixable</b>, other people with the remix link
+          can make copies of it.<br>
+          <a id="project-remix-url" href="#"></a>
+        </div>
+      </div>
+      <div class="right-column">
+        <div id="project-details-artwork">
+          <button id="project-artwork-upload-button" class="far fa-image"></button>
+        </div>
+        <input type="file" id="artwork-file-input">
+        <div id="project-details-music">4/4 time</div>
+        <div id="project-details-modified"></div>
+      </div>
+    </div>
+    <br>
   </section>
 
   <section class="tab hidden" id="mixer-tab">

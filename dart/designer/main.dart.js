@@ -5557,6 +5557,7 @@
       _.bars = 20;
       _.summary = _.description = "";
       _.color = "black";
+      _.artwork = null;
       _.deleted = _.$public = false;
       _.remix_parent = null;
       _.tags = t1;
@@ -14605,7 +14606,7 @@
       t5 = t2._bpm;
       t2 = t2._meter;
       t6 = type$.dynamic;
-      result = P.LinkedHashMap_LinkedHashMap$_literal(["id", t1, "type", t3, "name", t4, "bpm", t5, "meter", t2, "bars", _this.bars, "color", _this.color, "summary", _this.summary, "description", _this.description, "tags", [], "tracks", [], "remix_parent", _this.remix_parent, "pucks", _this.settings, "public", _this.$public, "deleted", _this.deleted, "created", _this.created.toString$0(0), "modified", _this.modified.toString$0(0)], t6, t6);
+      result = P.LinkedHashMap_LinkedHashMap$_literal(["id", t1, "type", t3, "name", t4, "bpm", t5, "meter", t2, "bars", _this.bars, "color", _this.color, "artwork", _this.artwork, "summary", _this.summary, "description", _this.description, "tags", [], "tracks", [], "remix_parent", _this.remix_parent, "pucks", _this.settings, "public", _this.$public, "deleted", _this.deleted, "created", _this.created.toString$0(0), "modified", _this.modified.toString$0(0)], t6, t6);
       for (t1 = _this.tags, t2 = t1.length, _i = 0; _i < t1.length; t1.length === t2 || (0, H.throwConcurrentModificationError)(t1), ++_i) {
         tag = t1[_i];
         J.add$1$ax(result.$index(0, "tags"), tag);
@@ -14613,11 +14614,11 @@
       return result;
     },
     load$1: function(_, data) {
-      var t2, t3, _this = this, _s5_ = "pucks",
+      var t2, t3, _this = this, _null = null, _s5_ = "pucks",
         _s8_ = "username",
         t1 = _this.id;
       if (t1 == null || J.$lt$n(t1, 0))
-        _this.id = B.toInt(J.$index$asx(data, "id"), null);
+        _this.id = B.toInt(J.$index$asx(data, "id"), _null);
       t1 = J.getInterceptor$asx(data);
       if (t1.$index(data, _s5_) == null || !type$.Map_dynamic_dynamic._is(t1.$index(data, _s5_))) {
         t2 = type$.dynamic;
@@ -14639,13 +14640,12 @@
       t3 = t1.$index(data, "color");
       _this.color = t3 == null ? "#5bc6fc" : J.toString$0$(t3);
       t2 = t1.$index(data, "artwork");
-      if (t2 != null)
-        J.toString$0$(t2);
+      _this.artwork = t2 == null ? _null : J.toString$0$(t2);
       t2 = t1.$index(data, _s8_);
       if (t2 != null)
         J.toString$0$(t2);
       t2 = t1.$index(data, _s8_);
-      _this.username = t2 == null ? null : J.toString$0$(t2);
+      _this.username = t2 == null ? _null : J.toString$0$(t2);
       t2 = t1.$index(data, "preview");
       if (t2 != null)
         J.toString$0$(t2);
@@ -14653,7 +14653,7 @@
       _this.summary = t2 == null ? "" : J.toString$0$(t2);
       t2 = t1.$index(data, "description");
       _this.description = t2 == null ? "" : J.toString$0$(t2);
-      _this.remix_parent = B.toInt(t1.$index(data, "remix_parent"), null);
+      _this.remix_parent = B.toInt(t1.$index(data, "remix_parent"), _null);
       _this.$public = B.toBool(t1.$index(data, "public"), false);
       _this.deleted = B.toBool(t1.$index(data, "deleted"), false);
       _this.created = B.toDateTime(t1.$index(data, "created"));

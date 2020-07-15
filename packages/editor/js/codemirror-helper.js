@@ -62,6 +62,7 @@ function codemirror(selector, content) {
     _cmEditors[selector] = editor;
     _errorLines[selector] = [ ];
     _traceLine[selector] = null;
+
   }
 }
 
